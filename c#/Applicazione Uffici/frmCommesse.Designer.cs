@@ -40,6 +40,7 @@ namespace Applicazione_Uffici
             this.label5 = new System.Windows.Forms.Label();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.btnCreateCommessa = new System.Windows.Forms.Button();
+            this.btnAvviaCommessa = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -146,11 +147,22 @@ namespace Applicazione_Uffici
             this.btnCreateCommessa.UseVisualStyleBackColor = true;
             this.btnCreateCommessa.Click += new System.EventHandler(this.btnCreateCommessa_Click);
             // 
+            // btnAvviaCommessa
+            // 
+            this.btnAvviaCommessa.Location = new System.Drawing.Point(1342, 524);
+            this.btnAvviaCommessa.Name = "btnAvviaCommessa";
+            this.btnAvviaCommessa.Size = new System.Drawing.Size(148, 30);
+            this.btnAvviaCommessa.TabIndex = 11;
+            this.btnAvviaCommessa.Text = "AVVIA COMMESSA";
+            this.btnAvviaCommessa.UseVisualStyleBackColor = true;
+            this.btnAvviaCommessa.Click += new System.EventHandler(this.button1_Click);
+            // 
             // frmCommesse
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1672, 654);
+            this.Controls.Add(this.btnAvviaCommessa);
             this.Controls.Add(this.btnCreateCommessa);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.textBox3);
@@ -185,5 +197,6 @@ namespace Applicazione_Uffici
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Button btnCreateCommessa;
+        private System.Windows.Forms.Button btnAvviaCommessa;
     }
 }
