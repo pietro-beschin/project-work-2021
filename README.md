@@ -1,7 +1,7 @@
 # project-work-2021
 
 To-Do
-# PLC
-  [ ] Progetto PLC
+- PLC
+- -[ ] Programma PLC
   [ ] Interfaccia PLC <-> C#
   [ ]
