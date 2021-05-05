@@ -19,7 +19,25 @@ namespace Applicazione_Uffici
 
         private void frmControlli_Load(object sender, EventArgs e)
         {
-            NodeLabelEditEventArgs;
+            
+        }
+
+        private void btnBraccioAvanti_Click(object sender, EventArgs e)
+        {
+            btnBraccioIndietro.Enabled = false;
+            btnBraccioAvanti.Enabled = false;
+            //quando il plc invia il segnale che è arrivato a fine corsa
+                btnBraccioIndietro.Enabled = true;
+                btnBraccioAvanti.Enabled = true;
+        }
+
+        private void btnBraccioIndietro_Click(object sender, EventArgs e)
+        {
+            btnBraccioIndietro.Enabled = false;
+            btnBraccioAvanti.Enabled = false;
+            //quando il plc invia il segnale che è arrivato a fine corsa
+                btnBraccioIndietro.Enabled = true;
+                btnBraccioAvanti.Enabled = true;
         }
     }
 }
