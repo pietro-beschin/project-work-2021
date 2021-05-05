@@ -51,7 +51,7 @@ namespace Applicazione_Uffici
             // 
             // txtWatchDog
             // 
-            this.txtWatchDog.Location = new System.Drawing.Point(282, 292);
+            this.txtWatchDog.Location = new System.Drawing.Point(282, 293);
             this.txtWatchDog.Margin = new System.Windows.Forms.Padding(4);
             this.txtWatchDog.Name = "txtWatchDog";
             this.txtWatchDog.Size = new System.Drawing.Size(345, 22);
