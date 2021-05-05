@@ -1,8 +1,8 @@
 const moment = require('moment');
 const fs = require('fs');
-const file = require('../../db.json');
+const file = '../../db.json';
 
-module.exports.list = async (query) => {
-    const products = await fs.readFile(file);
+module.exports.list = async () => {
+    const products = require(file);
     return products;
 }
