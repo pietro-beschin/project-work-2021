@@ -6,7 +6,7 @@ $(document).ready(() => {
 const fetchData = (() => {
     $.ajax({
         type: 'GET',
-        url: 'backend/src/db.json',
+        url: '127.0.0.1:3000/api/history',
     }).then(result => {
         $('#accordion-commesse').empty();
         result.forEach(commessa => addCommessaToList(commessa));
