@@ -6,4 +6,4 @@ To-Do
   - [ ] Interfaccia PLC <-> C#
   - [ ] 
 
-Link GDrive Carlotto https://drive.google.com/drive/folders/1DPHMcjLKVf3CJp8K-kF_-Czgzh5OWetc
+Link GDrive Carlotto: https://drive.google.com/drive/folders/1DPHMcjLKVf3CJp8K-kF_-Czgzh5OWetc
