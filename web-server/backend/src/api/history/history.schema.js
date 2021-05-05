@@ -6,8 +6,7 @@ const prodottiSchema = mongoose.Schema({
     quantita_prevista : Number,
     data_consegna : Date,
     quantita_prodotta : Number,
-    quantita_scarto : Number,
-    
+    quantita_scarto : Number
 });
 
 module.exports = mongoose.model('prodotti', prodottiSchema);
