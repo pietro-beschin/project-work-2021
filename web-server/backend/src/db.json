@@ -1,6 +1,6 @@
 [
     {
-        "id_ commessa" : "004",
+        "id_commessa" : "004",
         "articolo" : "tappo",
         "quantita prevista" : "3",
         "data consegna" : "2021-05-01T18:25:43.511Z",
@@ -8,7 +8,7 @@
         "quantita scarto" : "0"
     },
     {
-        "id_ commessa" : "005",
+        "id_commessa" : "005",
         "articolo" : "flacone",
         "quantita prevista" : "9",
         "data consegna" : "2021-05-05T20:25:43.511Z",
@@ -16,7 +16,7 @@
         "quantita scarto" : "0"
     },
     {
-        "id_ commessa" : "006",
+        "id_commessa" : "006",
         "articolo" : "tappo",
         "quantita prevista" : "15",
         "data consegna" : "2021-05-05T21:25:43.511Z",
@@ -24,7 +24,7 @@
         "quantita scarto" : "1"
     },
     {
-        "id_ commessa" : "007",
+        "id_commessa" : "007",
         "articolo" : "flacone trasparente",
         "quantita prevista" : "10",
         "data consegna" : "2021-05-07T10:25:43.511Z",
