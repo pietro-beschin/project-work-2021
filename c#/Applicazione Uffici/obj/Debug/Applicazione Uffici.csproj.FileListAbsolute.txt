@@ -22,3 +22,4 @@ C:\Users\corso10\Google Drive\ITS\PROJECT WORK GRUPPO 1\c#\Applicazione Uffici\o
 C:\Users\corso10\Google Drive\ITS\PROJECT WORK GRUPPO 1\c#\Applicazione Uffici\obj\Debug\Applicazione Uffici.csproj.CoreCompileInputs.cache
 C:\Users\corso10\Google Drive\ITS\PROJECT WORK GRUPPO 1\c#\Applicazione Uffici\obj\Debug\Applicazione Uffici.exe
 C:\Users\corso10\Google Drive\ITS\PROJECT WORK GRUPPO 1\c#\Applicazione Uffici\obj\Debug\Applicazione Uffici.pdb
+C:\Users\corso10\Google Drive\ITS\PROJECT WORK GRUPPO 1\c#\Applicazione Uffici\obj\Debug\Applicazione_Uffici.frmImpostazioni.resources
