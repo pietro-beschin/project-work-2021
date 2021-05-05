@@ -2,33 +2,33 @@
     {
         "id_commessa" : "004",
         "articolo" : "tappo",
-        "quantita prevista" : "3",
-        "data consegna" : "2021-05-01T18:25:43.511Z",
-        "quantita prodotta" : "1",
-        "quantita scarto" : "0"
+        "quantita_prevista" : "3",
+        "data_consegna" : "2021-05-01T18:25:43.511Z",
+        "quantita_prodotta" : "1",
+        "quantita_scarto" : "0"
     },
     {
         "id_commessa" : "005",
         "articolo" : "flacone",
-        "quantita prevista" : "9",
-        "data consegna" : "2021-05-05T20:25:43.511Z",
-        "quantita prodotta" : "7",
-        "quantita scarto" : "0"
+        "quantita_prevista" : "9",
+        "data_consegna" : "2021-05-05T20:25:43.511Z",
+        "quantita_prodotta" : "7",
+        "quantita_scarto" : "0"
     },
     {
         "id_commessa" : "006",
         "articolo" : "tappo",
-        "quantita prevista" : "15",
-        "data consegna" : "2021-05-05T21:25:43.511Z",
-        "quantita prodotta" : "1",
-        "quantita scarto" : "1"
+        "quantita_prevista" : "15",
+        "data_consegna" : "2021-05-05T21:25:43.511Z",
+        "quantita_prodotta" : "1",
+        "quantita_scarto" : "1"
     },
     {
         "id_commessa" : "007",
         "articolo" : "flacone trasparente",
-        "quantita prevista" : "10",
-        "data consegna" : "2021-05-07T10:25:43.511Z",
-        "quantita prodotta" : "7",
-        "quantita scarto" : "3"
+        "quantita_prevista" : "10",
+        "data_consegna" : "2021-05-07T10:25:43.511Z",
+        "quantita_prodotta" : "7",
+        "quantita_scarto" : "3"
     }
 ]
