@@ -19,7 +19,7 @@ namespace Applicazione_Uffici
 
         private void frmControlli_Load(object sender, EventArgs e)
         {
-
+            NodeLabelEditEventArgs;
         }
     }
 }
