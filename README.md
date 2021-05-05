@@ -2,6 +2,6 @@
 
 To-Do
 - PLC
-- - [ ] Programma PLC
-- - [ ] Interfaccia PLC <-> C#
-- - [ ]
+-- [ ] Programma PLC
+-- [ ] Interfaccia PLC <-> C#
+-- [ ]
