@@ -16,5 +16,10 @@ namespace Applicazione_Uffici
         {
             InitializeComponent();
         }
+
+        private void frmCommesse_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
