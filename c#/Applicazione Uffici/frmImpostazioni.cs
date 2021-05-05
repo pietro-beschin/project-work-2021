@@ -10,21 +10,11 @@ using System.Windows.Forms;
 
 namespace Applicazione_Uffici
 {
-    public partial class frmCommesse : Form
+    public partial class frmImpostazioni : Form
     {
-        public frmCommesse()
+        public frmImpostazioni()
         {
             InitializeComponent();
-        }
-
-        private void frmCommesse_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnCreateCommessa_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

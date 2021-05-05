@@ -24,18 +24,18 @@ namespace Applicazione_Uffici
 
         private void btnBraccioAvanti_Click(object sender, EventArgs e)
         {
-            btnBraccioIndietro.Enabled = false;
-            btnBraccioAvanti.Enabled = false;
-            //quando il plc invia il segnale che è arrivato a fine corsa
-                btnBraccioIndietro.Enabled = true;
-                btnBraccioAvanti.Enabled = true;
+            BraccioUI();
         }
 
         private void btnBraccioIndietro_Click(object sender, EventArgs e)
         {
+            BraccioUI();
+        }
+        private void BraccioUI()
+        {
             btnBraccioIndietro.Enabled = false;
             btnBraccioAvanti.Enabled = false;
-            //quando il plc invia il segnale che è arrivato a fine corsa
+            //quando il plc invia il segnale che è arrivato a inizio/fine corsa
                 btnBraccioIndietro.Enabled = true;
                 btnBraccioAvanti.Enabled = true;
         }
