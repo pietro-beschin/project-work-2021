@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 let statusSchema = mongoose.Schema({
-    lavorazione : Boolean,
+    lavorazione : String,
     attiva : Boolean,
     progresso_lavorazione : Number,
     errori : [String]

@@ -2,7 +2,7 @@
   "_id": {
     "$oid": "6093c3016de25e3efde571a3"
   },
-  "lavorazione": false,
+  "lavorazione": "flacone",
   "attiva": false,
   "progresso": 54,
   "errori": [

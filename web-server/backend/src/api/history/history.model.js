@@ -2,7 +2,6 @@ const moment = require('moment');
 const history = require('./history.schema');
 
 
-
 module.exports.list = async (query) => {
     const q = {};
     if(query.articolo){
@@ -17,8 +16,9 @@ module.exports.list = async (query) => {
     if(query.to){
         q.data_consegna.$lte = moment(new Date(query.to).setHours(23,59,59,999)).utcOffset(0, true);
     }
-    if (query.showCompleted === 'false') {
-        q.completed = false;
+    if(query.showCompleted === 'false'){
+        //q.completed = {$ne: true};
+        return await history.find( { completed: { $ne: true } } )
     }
     return await history.find(q);
 }

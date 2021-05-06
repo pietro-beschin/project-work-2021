@@ -10,10 +10,11 @@ let historySchema = mongoose.Schema({
     quantita_scarto : Number,
 },
 {
-    collection : 'history' },
-{
     toJSON: {virtuals: true},
     toObject: {virtuals: true}
+},
+{
+    collection : 'history'
 });
 
 historySchema.virtual('completed')
