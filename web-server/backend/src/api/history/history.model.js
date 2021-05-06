@@ -1,8 +1,7 @@
 const moment = require('moment');
-const fs = require('fs');
-const file = '../../db.json';
+const historySchema = require('./history.schema');
+const history = require('./history.schema');
 
 module.exports.list = async () => {
-    const products = require(file);
-    return products;
+    return await historySchema.find();
 }
