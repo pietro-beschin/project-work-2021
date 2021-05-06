@@ -1,0 +1,41 @@
+[{
+  "_id": {
+    "$oid": "609394a4b2b05f29fccfd6a4"
+  },
+  "id_commessa": "004",
+  "articolo": "tappo",
+  "quantita_prevista": "3",
+  "data_consegna": "2021-05-01T18:25:43.511Z",
+  "quantita_prodotta": "1",
+  "quantita_scarto": "0"
+},{
+  "_id": {
+    "$oid": "609394a4b2b05f29fccfd6a5"
+  },
+  "id_commessa": "005",
+  "articolo": "flacone",
+  "quantita_prevista": "9",
+  "data_consegna": "2021-05-05T20:25:43.511Z",
+  "quantita_prodotta": "7",
+  "quantita_scarto": "0"
+},{
+  "_id": {
+    "$oid": "609394a4b2b05f29fccfd6a6"
+  },
+  "id_commessa": "006",
+  "articolo": "tappo",
+  "quantita_prevista": "15",
+  "data_consegna": "2021-05-05T21:25:43.511Z",
+  "quantita_prodotta": "1",
+  "quantita_scarto": "1"
+},{
+  "_id": {
+    "$oid": "609394a4b2b05f29fccfd6a7"
+  },
+  "id_commessa": "007",
+  "articolo": "flacone trasparente",
+  "quantita_prevista": "10",
+  "data_consegna": "2021-05-07T10:25:43.511Z",
+  "quantita_prodotta": "7",
+  "quantita_scarto": "3"
+}]
