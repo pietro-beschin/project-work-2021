@@ -1,15 +1,13 @@
 const mongoose = require('mongoose');
 
 
-
-const storicoSchema = mongoose.Schema({
-    _id : Number,       //id_commessa
+let historySchema = mongoose.Schema({
+    codice_commessa : String,
     articolo : String,
     quantita_prevista : Number,
     data_consegna : Date,
     quantita_prodotta : Number,
     quantita_scarto : Number,
-    
 },
 {
     collection : 'history' },
@@ -18,9 +16,9 @@ const storicoSchema = mongoose.Schema({
     toObject: {virtuals: true}
 });
 
-storicoSchema.virtual('completed')
+historySchema.virtual('completed')
     .get(function() {
-        return this.quantita_prevista > this.quantita_prodotta;
+        return this.quantita_prodotta >= this.quantita_prevista;
     });
 
-module.exports = mongoose.model('storico', storicoSchema);
+module.exports = mongoose.model('history', historySchema);
