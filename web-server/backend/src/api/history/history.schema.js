@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 
+
+
 const storicoSchema = mongoose.Schema({
     _id : Number,       //id_commessa
     articolo : String,
@@ -7,7 +9,10 @@ const storicoSchema = mongoose.Schema({
     data_consegna : Date,
     quantita_prodotta : Number,
     quantita_scarto : Number,
+    
 },
+{
+    collection : 'history' },
 {
     toJSON: {virtuals: true},
     toObject: {virtuals: true}

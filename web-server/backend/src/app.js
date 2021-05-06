@@ -5,10 +5,8 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 const cors = require('cors');
 
-
-mongoose.set('debug', true);        //per settare il debug globalmente
-                                    //i connect sono inseriti nei controller così che
-                                    //history e status si colleghino a collection diverse
+mongoose.connect('mongodb://localhost:27017/project-work-2021', {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.set('debug', true);
 
 app.use(morgan('tiny'));
 app.use(cors());
