@@ -2,40 +2,56 @@
   "_id": {
     "$oid": "609394a4b2b05f29fccfd6a4"
   },
-  "codice_commessa": "004",
   "articolo": "tappo",
   "quantita_prevista": "3",
   "data_consegna": "2021-05-01T18:25:43.511Z",
   "quantita_prodotta": "1",
-  "quantita_scarto": "0"
+  "quantita_scarto": "0",
+  "__v": "0",
+  "codice_commessa": "004"
 },{
   "_id": {
     "$oid": "609394a4b2b05f29fccfd6a5"
   },
-  "codice_commessa": "005",
   "articolo": "flacone",
   "quantita_prevista": "9",
   "data_consegna": "2021-05-05T20:25:43.511Z",
-  "quantita_prodotta": "7",
-  "quantita_scarto": "0"
+  "quantita_prodotta": "9",
+  "quantita_scarto": "0",
+  "__v": "0",
+  "codice_commessa": "005"
 },{
   "_id": {
     "$oid": "609394a4b2b05f29fccfd6a6"
   },
-  "codice_commessa": "006",
   "articolo": "tappo",
   "quantita_prevista": "15",
   "data_consegna": "2021-05-05T21:25:43.511Z",
   "quantita_prodotta": "1",
-  "quantita_scarto": "1"
+  "quantita_scarto": "1",
+  "codice_commessa": "006"
 },{
   "_id": {
     "$oid": "609394a4b2b05f29fccfd6a7"
   },
-  "codice_commessa": "007",
   "articolo": "flacone trasparente",
   "quantita_prevista": "10",
   "data_consegna": "2021-05-07T10:25:43.511Z",
   "quantita_prodotta": "7",
-  "quantita_scarto": "3"
+  "quantita_scarto": "3",
+  "__v": 0,
+  "codice_commessa": "007"
+},{
+  "_id": {
+    "$oid": "6093b67c12edb5210858acc4"
+  },
+  "articolo": "tappo",
+  "quantita_prevista": 3,
+  "data_consegna": {
+    "$date": "2021-05-03T18:25:43.511Z"
+  },
+  "quantita_prodotta": 3,
+  "quantita_scarto": 0,
+  "__v": 0,
+  "codice_commessa": 8
 }]
