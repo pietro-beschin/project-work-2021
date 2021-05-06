@@ -1,5 +1,5 @@
 const moment = require('moment');
-const historySchema = require('./history.schema');
+const history = require('./history.schema');
 
 
 module.exports.list = async (query) => {
@@ -16,8 +16,8 @@ module.exports.list = async (query) => {
     if(query.to){
         q.data_consegna.$lte = moment(new Date(query.to).setHours(23,59,59,999)).utcOffset(0, true);
     }
-    if(query.showCompleted === 'false'){
-        q.completed = {$ne: true};
+    if(query.hideCompleted === 'true'){
+        q.$where = "Number(this.quantita_prodotta) < Number(this.quantita_prevista)";
     }
-    return await historySchema.find(q);
+    return await history.find(q);
 }

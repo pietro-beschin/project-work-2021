@@ -4,7 +4,9 @@ let statusSchema = mongoose.Schema({
     lavorazione : String,
     attiva : Boolean,
     progresso_lavorazione : Number,
-    errori : [String]
+    errori : [String],
+    velocita : Number,
+    avviso_da_op : String
 },
 {
     collection : 'status'
