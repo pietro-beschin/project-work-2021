@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>commesse</title>
+        <title>dashboard commesse</title>
         <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     </head>
@@ -13,42 +13,54 @@
                 </div>
             </div>
             <div class="container">
-                <div class="row mt-5">
-                    <div class="col">
-                        <div id="card-lavorazione" class="jumbotron">
-                            <h1 class="display-4">flacone</h1>
-                            <hr>
-                            <div class="lead">prodotto in lavorazione</div>
+                <div class="jumbrotron bg-secondary mt-5 rounded">
+                    <h1 class="display-4 ml-3">stato macchina</h1>
+                    <hr>
+                    <div class="container">
+                        <div class="row mt-5">
+                            <div class="col">
+                                <div id="card-lavorazione" class="jumbotron">
+                                    <h1 class="display-4">flacone</h1>
+                                    <hr>
+                                    <div class="lead">prodotto in lavorazione</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col md-auto">
+                                <div id="card-stato" class="jumbotron">
+                                    <h1 class="display-4">completato</h1>
+                                    <hr>
+                                    <div class="lead">stato</div>
+                                </div>
+                            </div>
+                            <div class="col md-auto">
+                                <div id="card-progresso" class="jumbotron">
+                                    <h1 class="display-4">2222/2222</h1>
+                                    <hr>
+                                    <div class="lead">pezzi prodotti</div>
+                                </div>
+                            </div>
+                            <div class="col md-auto">
+                                <div id="card-errori" class="jumbotron">
+                                    <h1 class="display-4">nope</h1>
+                                    <hr>
+                                    <div class="lead">errori</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col md-auto">
-                        <div id="card-stato" class="jumbotron">
-                            <h1 class="display-4">completato</h1>
-                            <hr>
-                            <div class="lead">stato</div>
-                        </div>
-                    </div>
-                    <div class="col md-auto">
-                        <div id="card-progresso" class="jumbotron">
-                            <h1 class="display-4">2222/2222</h1>
-                            <hr>
-                            <div class="lead">pezzi prodotti</div>
-                        </div>
-                    </div>
-                    <div class="col md-auto">
-                        <div id="card-errori" class="jumbotron">
-                            <h1 class="display-4">nope</h1>
-                            <hr>
-                            <div class="lead">errori</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt-5 mb-5">
-                    <div class="col">
-                        <div id="accordion-commesse" class="accordion md-accordion" role="tablist">
-
+                <div class="jumbrotron bg-secondary mt-5 mb-5 rounded">
+                    <h1 class="display-4 ml-3">storico commesse</h1>
+                    <hr>
+                    <div class="container">
+                        <div class="row mt-5">
+                            <div class="col mb-4">
+                                <div id="accordion-commesse" class="accordion md-accordion" role="tablist">
+        
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
