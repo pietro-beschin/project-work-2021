@@ -8,9 +8,10 @@
     "$date": "2021-05-01T18:25:43.511Z"
   },
   "quantita_prodotta": "1",
-  "quantita_scarto": "0",
-  "__v": "0",
-  "codice_commessa": "004"
+  "quantita_scarto_difettoso" : 0,
+  "quantita_scarto_pieno" : 0,
+  "__v": 0,
+  "codice_commessa": "pressa_tappi"
 },{
   "_id": {
     "$oid": "609394a4b2b05f29fccfd6a5"
@@ -21,9 +22,10 @@
     "$date": "2021-05-05T20:25:43.511Z"
   },
   "quantita_prodotta": "9",
-  "quantita_scarto": "0",
-  "__v": "0",
-  "codice_commessa": "005"
+  "quantita_scarto_difettoso" : 1,
+  "quantita_scarto_pieno" : 0,
+  "__v": 0,
+  "codice_commessa": "stampo_flaconi"
 },{
   "_id": {
     "$oid": "609394a4b2b05f29fccfd6a6"
@@ -34,8 +36,10 @@
     "$date": "2021-05-05T21:25:43.511Z"
   },
   "quantita_prodotta": "1",
-  "quantita_scarto": "1",
-  "codice_commessa": "006"
+  "quantita_scarto_difettoso" : 2,
+  "quantita_scarto_pieno" : 1,
+  "__v": 0,
+  "codice_commessa": "stampo_flaconi"
 },{
   "_id": {
     "$oid": "609394a4b2b05f29fccfd6a7"
@@ -46,9 +50,10 @@
     "$date": "2021-05-07T10:25:43.511Z"
   },
   "quantita_prodotta": "7",
-  "quantita_scarto": "3",
+  "quantita_scarto_difettoso" : 0,
+  "quantita_scarto_pieno" : 1,
   "__v": 0,
-  "codice_commessa": "007"
+  "codice_commessa": "lavaggio"
 },{
   "_id": {
     "$oid": "6093b67c12edb5210858acc4"
@@ -59,7 +64,8 @@
     "$date": "2021-05-03T18:25:43.511Z"
   },
   "quantita_prodotta": 3,
-  "quantita_scarto": 0,
+  "quantita_scarto_difettoso" : 0,
+  "quantita_scarto_pieno" : 0,
   "__v": 0,
-  "codice_commessa": 8
+  "codice_commessa": "raccolta"
 }]
