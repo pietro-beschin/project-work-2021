@@ -1,5 +1,5 @@
 const status = require('./status.schema');
 
 module.exports.getStatus = async () => {
-    return await status.find();
+    return await status.findOne();
 }
