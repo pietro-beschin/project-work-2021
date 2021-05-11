@@ -13,6 +13,7 @@ module.exports.list = async (req, res, next) => {
 module.exports.store = async (req, res, next) => {
     try{
         const result = await historyModel.store(req.body);
+        console.log(result);
         res.json(result);
     }catch(err){
         next(err);
