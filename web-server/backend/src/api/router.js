@@ -5,5 +5,7 @@ const statusController = require('./status/status.controller');
 
 router.get('/history', historyController.list);
 router.get('/status', statusController.getStatus);
+router.post('/history', historyController.store);
+router.post('/status', statusController.store);
 
 module.exports = router;
