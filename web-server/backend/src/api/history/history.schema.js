@@ -14,8 +14,8 @@ let historySchema = mongoose.Schema({
     collection : 'history'
 });
 
-//mongoose.set('toJSON', {virtuals: true});
-//mongoose.set('toObject', {virtuals: true});
+mongoose.set('toJSON', {virtuals: true});
+mongoose.set('toObject', {virtuals: true});
 
 historySchema.virtual('completed')
     .get(function() {
