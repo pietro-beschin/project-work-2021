@@ -2,7 +2,6 @@ const history = require('./history.schema');
 
 
 module.exports.list = async (query) => {
-    try{
         const q = {};
         if(query.articolo){
             q.articolo = query.articolo;
@@ -20,17 +19,10 @@ module.exports.list = async (query) => {
             q.$where = "Number(this.quantita_prodotta) < Number(this.quantita_prevista)";
         }
         return await history.find(q);
-    }catch(err){
-        next(err);
-    }
 }
 
 module.exports.store = async (data) => {
-    try{
         const created = await history.create(data);
         console.log('created : ' + created);
         return created;
-    }catch(err){
-        next(err);
-    }
 }
