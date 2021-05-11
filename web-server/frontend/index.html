@@ -13,13 +13,13 @@
                 </div>
             </div>
             <div class="container">
-                <div class="jumbrotron bg-secondary mt-5 rounded">
-                    <h1 class="display-4 ml-3">stato macchina</h1>
+                <div class="jumbrotron bg-secondary mt-5 rounded shadow-lg">
+                    <h1 class="display-4 ml-3 text-light">stato macchina</h1>
                     <hr>
                     <div class="container">
                         <div class="row mt-5">
                             <div class="col">
-                                <div id="card-lavorazione" class="jumbotron">
+                                <div id="card-lavorazione" class="jumbotron shadow">
                                     <h1 class="display-4">flacone</h1>
                                     <hr>
                                     <div class="lead">prodotto in lavorazione</div>
@@ -28,21 +28,21 @@
                         </div>
                         <div class="row">
                             <div class="col md-auto">
-                                <div id="card-stato" class="jumbotron">
+                                <div id="card-stato" class="jumbotron shadow">
                                     <h1 class="display-4">completato</h1>
                                     <hr>
                                     <div class="lead">stato</div>
                                 </div>
                             </div>
                             <div class="col md-auto">
-                                <div id="card-progresso" class="jumbotron">
+                                <div id="card-progresso" class="jumbotron shadow">
                                     <h1 class="display-4">2222/2222</h1>
                                     <hr>
                                     <div class="lead">pezzi prodotti</div>
                                 </div>
                             </div>
                             <div class="col md-auto">
-                                <div id="card-errori" class="jumbotron">
+                                <div id="card-errori" class="jumbotron shadow">
                                     <h1 class="display-4">nope</h1>
                                     <hr>
                                     <div class="lead">errori</div>
@@ -51,9 +51,42 @@
                         </div>
                     </div>
                 </div>
-                <div class="jumbrotron bg-secondary mt-5 mb-5 rounded">
-                    <h1 class="display-4 ml-3">storico commesse</h1>
+                <div class="jumbrotron bg-secondary mt-5 mb-5 rounded shadow-lg">
+                    <h1 class="display-4 ml-3 text-light">storico commesse</h1>
                     <hr>
+                    <div class="container">
+                        <div class="lead text-light ml-2 mb-3">Filtra i risultati</div>
+                        <form id="form-filtri" class="form-inline d-flex justify-content-around">
+                            <div class="row">
+                                <div class="col-4">
+                                    <input id="nome-articolo" type="text" class="form-control" name="commessa">
+                                </div>
+                                <div class="col-3">
+                                    <input id="dtp-inizio" type="datetime-local" class="form-control" name="startDate">
+                                </div>
+                                <div class="col-3">
+                                    <input id="dtp-fine" type="datetime-local" class="form-control" name="endDate">
+                                </div>
+                                <div class="col">
+                                    <button id="btnCerca" type="submit" class="btn btn-primary">Cerca</button>
+                                </div>
+                            </div>
+                            <div class="row text-light">
+                                <div class="col-4 ml-1">
+                                    <small class="form-text">Articolo</small>
+                                </div>
+                                <div class="col-3">
+                                    <small class="form-text">Data di inizio</small>
+                                </div>
+                                <div class="col-3">
+                                    <small class="form-text">Data di fine</small>
+                                </div>
+                                <div class="col">
+                                    <small class="form-text"></small>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                     <div class="container">
                         <div class="row mt-5">
                             <div class="col mb-4">

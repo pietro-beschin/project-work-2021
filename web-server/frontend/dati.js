@@ -1,10 +1,106 @@
 $(document).ready(() => {
     const urlParams = new URLSearchParams(window.location.search);
     
-    fetchData();
+    fetchAllData();
+    
+    fetchFilteredData();
 });
 
-const fetchData = () => {
+const fetchFilteredData = () => {
+    $('#btnCerca').click(() => {
+        let nomeArticolo = $("#nome-articolo").val();
+        let startDate = $("#dtp-inizio").val();
+        let endDate = $("#dtp-fine").val();
+
+        console.log(nomeArticolo)
+        console.log(startDate)
+        console.log(endDate)
+
+        if(!nomeArticolo && !startDate && !endDate) {
+            event.preventDefault();
+            fetchAllData();
+        };
+        if(!nomeArticolo) {
+            event.preventDefault();
+            $.ajax({
+                type: 'GET',
+                url: `http://localhost:3000/api/history?from=${startDate}&to=${endDate}`,
+            }).then(result => {
+                $('#accordion-commesse').empty();
+                result.forEach(commessa => addCommessaToList(commessa));
+            });
+        }
+        if(!startDate && !endDate) {
+            event.preventDefault();
+            $.ajax({
+                type: 'GET',
+                url: `http://localhost:3000/api/history?articolo=${nomeArticolo}`,
+            }).then(result => {
+                $('#accordion-commesse').empty();
+                result.forEach(commessa => addCommessaToList(commessa));
+            });
+        }
+        if(nomeArticolo && startDate && endDate) {
+            event.preventDefault();
+            $.ajax({
+                type: 'GET',
+                url: `http://localhost:3000/api/history?articolo=${nomeArticolo}&from=${startDate}&to=${endDate}`,
+            }).then(result => {
+                $('#accordion-commesse').empty();
+                result.forEach(commessa => addCommessaToList(commessa));
+            });
+        };
+    });
+
+    /*
+    form.submit((event) => {
+        let nomeArticolo = $("#nome-articolo").val();
+        let startDate = $("#dtp-inizio").val();
+        let endDate = $("#dtp-fine").val();
+        
+        console.log(nomeArticolo)
+        console.log(startDate)
+        console.log(endDate)
+
+        if(!nomeArticolo && !startDate && !endDate) {
+            event.preventDefault();
+            fetchAllData();
+        };
+        if(!nomeArticolo) {
+            event.preventDefault();
+            $.ajax({
+                type: 'GET',
+                url: `http://localhost:3000/api/history?from=${startDate}&to=${endDate}`,
+            }).then(result => {
+                $('#accordion-commesse').empty();
+                result.forEach(commessa => addCommessaToList(commessa));
+            });
+        }
+        if(!startDate && !endDate) {
+            event.preventDefault();
+            $.ajax({
+                type: 'GET',
+                url: `http://localhost:3000/api/history?articolo=${nomeArticolo}`,
+            }).then(result => {
+                $('#accordion-commesse').empty();
+                result.forEach(commessa => addCommessaToList(commessa));
+            });
+        }
+        if(nomeArticolo && startDate && endDate) {
+            event.preventDefault();
+            $.ajax({
+                type: 'GET',
+                url: `http://localhost:3000/api/history?articolo=${nomeArticolo}&from=${startDate}&to=${endDate}`,
+            }).then(result => {
+                $('#accordion-commesse').empty();
+                result.forEach(commessa => addCommessaToList(commessa));
+            });
+        };
+    });
+    */
+};
+
+const fetchAllData = () => {
     $.ajax({
         type: 'GET',
         url: 'http://localhost:3000/api/history',
@@ -12,7 +108,7 @@ const fetchData = () => {
         $('#accordion-commesse').empty();
         result.forEach(commessa => addCommessaToList(commessa));
     });
-};
+}
 
 const addCommessaToList = (commessa) => {
     const template = $(`
