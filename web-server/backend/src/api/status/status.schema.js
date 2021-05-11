@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 
 let statusSchema = mongoose.Schema({
-    //lavorazione : String,
     attiva : Boolean,
     progresso_lavorazione : Number,
-    stato : String
+    stato : String,
+    velocita : Number
 },
 {
     collection : 'status'
