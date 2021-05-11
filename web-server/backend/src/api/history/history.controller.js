@@ -2,6 +2,7 @@ const historyModel = require('./history.model');
 
 module.exports.list = async (req, res, next) => {
     try{
+        console.log("STA LISTANDO");
         const list = await historyModel.list(req.query);
         res.json(list);
     }catch(err){
