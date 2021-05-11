@@ -7,7 +7,7 @@ const cors = require('cors');
 
 //mongoose.connect('mongodb://localhost:27017/project-work-2021', {useNewUrlParser: true, useUnifiedTopology: true}); //password : i2XjAmcFr8NM
 //10.0.25.201
-mongoose.connect('mongodb://admin:i2XjAmcFr8NM@10.0.25.201:27017/project-work-2021', {useNewUrlParser: true});
+mongoose.connect('mongodb://admin:i2XjAmcFr8NM@10.0.25.201:27017/project-work-2021', {useNewUrlParser: true, useUnifiedTopology: true});
 mongoose.set('debug', true);
 
 app.use(morgan('tiny'));
