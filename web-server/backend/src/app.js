@@ -14,7 +14,7 @@ mongoose.set('debug', true);
 app.use(morgan('tiny'));
 app.use(cors());
 //body parser
-app.use(express.json({extended : true}));
+app.use(express);//.json({extended : true}));
 app.use('/api', routes);
 
 module.exports = app;
