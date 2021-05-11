@@ -1,14 +1,13 @@
 const statusModel = require('./status.model');
-const mongoose = require('mongoose');
 
 module.exports.getStatus = async (req, res, next) => {
     try{
-        const status = await statusModel.getStatus();
-        res.json(status);
+        const result = await statusModel.getStatus();
+        console.log(result);
+        res.json(result);
     }catch(err){
         next(err);
     }
-    
 }
 
 module.exports.store = async (req, res, next) => {
@@ -17,6 +16,5 @@ module.exports.store = async (req, res, next) => {
         res.json(result);
     }catch(err){
         next(err);
-    }
-    
+    }  
 }
