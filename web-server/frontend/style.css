@@ -1,0 +1,13 @@
+.dark-back {
+    background-color: #19114B;
+}
+
+.lighter-back {
+    background-color: #474382;
+}
+
+.border-lighter {
+    border-width: 2px;
+    border-style: solid;
+    border-color: #474382;
+};
