@@ -5,7 +5,7 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 const cors = require('cors');
 
-mongoose.connect('mongodb://10.0.25.201:27017/project-work-2021?w=1', {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect('mongodb://10.0.25.201:27017/project-work-2021?w=1', {useNewUrlParser: false, useUnifiedTopology: true});
 mongoose.set('debug', true);
 
 app.use(morgan('tiny'));
