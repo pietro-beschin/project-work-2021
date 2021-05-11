@@ -4,7 +4,7 @@ module.exports.list = async (req, res, next) => {
     try{
         console.log("STA LISTANDO");
         const list = await historyModel.list(req.query);
-        res.send(list);
+        res.json(list);
     }catch(err){
         next(err);
     }
@@ -14,7 +14,6 @@ module.exports.list = async (req, res, next) => {
 module.exports.store = async (req, res, next) => {
     try{
         const result = await historyModel.store(req.body);
-        console.log(result);
         res.json(result);
     }catch(err){
         next(err);
