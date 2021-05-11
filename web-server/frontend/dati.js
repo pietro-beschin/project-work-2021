@@ -6,6 +6,8 @@ $(document).ready(() => {
     fetchFilteredData();
 });
 
+const baseURL = 'http://localhost:3000/api/';
+
 const fetchFilteredData = () => {
     $('#btnCerca').click(() => {
         let nomeArticolo = $("#nome-articolo").val();
@@ -20,7 +22,7 @@ const fetchFilteredData = () => {
         if(!nomeArticolo) {
             $.ajax({
                 type: 'GET',
-                url: `http://localhost:3000/api/history?from=${startDate}&to=${endDate}`,
+                url: `${baseURL}history?from=${startDate}&to=${endDate}`,
             }).then(result => {
                 $('#accordion-commesse').empty();
                 result.forEach(commessa => addCommessaToList(commessa));
@@ -29,7 +31,7 @@ const fetchFilteredData = () => {
         if(!startDate && !endDate) {
             $.ajax({
                 type: 'GET',
-                url: `http://localhost:3000/api/history?articolo=${nomeArticolo}`,
+                url: `${baseURL}history?articolo=${nomeArticolo}`,
             }).then(result => {
                 $('#accordion-commesse').empty();
                 result.forEach(commessa => addCommessaToList(commessa));
@@ -38,7 +40,7 @@ const fetchFilteredData = () => {
         if(nomeArticolo && startDate && endDate) {
             $.ajax({
                 type: 'GET',
-                url: `http://localhost:3000/api/history?articolo=${nomeArticolo}&from=${startDate}&to=${endDate}`,
+                url: `${baseURL}history?articolo=${nomeArticolo}&from=${startDate}&to=${endDate}`,
             }).then(result => {
                 $('#accordion-commesse').empty();
                 result.forEach(commessa => addCommessaToList(commessa));
@@ -50,7 +52,7 @@ const fetchFilteredData = () => {
 const fetchAllData = () => {
     $.ajax({
         type: 'GET',
-        url: 'http://localhost:3000/api/history',
+        url: '${baseURL}history',
     }).then(result => {
         $('#accordion-commesse').empty();
         result.forEach(commessa => addCommessaToList(commessa));
