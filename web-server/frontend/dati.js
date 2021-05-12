@@ -12,12 +12,11 @@ const baseURL = 'http://54.85.250.76:3000/api/';
 
 const fetchFilteredData = () => {
     $('#btnCerca').click(() => {
-        $('dt-commesse').DataTable().destroy()
-
-
         let nomeArticolo = $("#nome-articolo").val();
         let startDate = $("#dtp-inizio").val();
         let endDate = $("#dtp-fine").val();
+
+        $('#dt-commesse').DataTable().destroy()
 
         event.preventDefault(); 
         
@@ -41,6 +40,7 @@ const fetchFilteredData = () => {
             }).then(result => {
                 $('#accordion-commesse').empty();
                 result.forEach(commessa => addCommessaToList(commessa));
+                //alert('test');
                 loadTable();
             });
         }
@@ -78,9 +78,10 @@ const fetchCurrentData = () => {
 };
 
 const loadTable = (function() {
+    $('#dt-commesse').DataTable().destroy()
     $('#dt-commesse').DataTable({
         "serverSide": false,
-        "iDisplayLength": 10,
+        "iDisplayLength": 5,
         //"sPaginationType": "full_numbers",
         "paging": true,
         "lengthChange": true,
@@ -88,7 +89,10 @@ const loadTable = (function() {
         "ordering": false,
         "info": true,
         "autoWidth": true,
-        
+        lengthMenu: [
+            [  5, 10, 25, -1 ],
+            [ '5', '10', '25', 'Tutti' ]
+        ],
         "language": {
             "lengthMenu": "Mostra _MENU_ risultati per pagina",
             "info": "Pagina _PAGE_ di _PAGES_",
