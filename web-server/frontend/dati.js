@@ -6,13 +6,16 @@ $(document).ready(() => {
     fetchFilteredData();
 });
 
-const baseURL = 'http://localhost:3000/api/';
+const baseURL = 'http://54.85.250.76:3000/api/';
 
 const fetchFilteredData = () => {
     $('#btnCerca').click(() => {
         let nomeArticolo = $("#nome-articolo").val();
         let startDate = $("#dtp-inizio").val();
         let endDate = $("#dtp-fine").val();
+
+        console.log(`${baseURL}history?from=${startDate}&to=${endDate}`)
+    
         
         event.preventDefault();
 
@@ -52,7 +55,7 @@ const fetchFilteredData = () => {
 const fetchAllData = () => {
     $.ajax({
         type: 'GET',
-        url: '${baseURL}history',
+        url: `${baseURL}history`,
     }).then(result => {
         $('#accordion-commesse').empty();
         result.forEach(commessa => addCommessaToList(commessa));
@@ -71,7 +74,7 @@ const addCommessaToList = (commessa) => {
                     </div>
                 </a>
             </div>
-            <div id="collapse_${commessa._id}" class="collapse dark-back" role="tabpanel" aria-labelledby="heading_${commessa._id}" data-parent="accordion-commesse">
+            <div id="collapse_${commessa._id}" class="collapse med-back" role="tabpanel" aria-labelledby="heading_${commessa._id}" data-parent="accordion-commesse">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-auto"></div>
