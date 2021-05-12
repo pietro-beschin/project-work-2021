@@ -20,7 +20,8 @@ module.exports.store = async (req, res, next) => {
 
 module.exports.getLastCommessa = async(req, res, next) => {
     try{
-        return await historyModel.getLastCommessa();
+        const result = await historyModel.getLastCommessa();
+        res.json(result);
     }catch(err){
         next(err);
     }
