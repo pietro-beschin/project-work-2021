@@ -1,4 +1,5 @@
 const moment = require('moment');
+const { find, findByIdAndUpdate } = require('./history.schema');
 const historySchema = require('./history.schema');
 
 module.exports.list = async (query) => {
@@ -22,8 +23,12 @@ module.exports.list = async (query) => {
 }
 
 module.exports.store = async (data) => {
-        const created = await historySchema.create(data);
-        return created;
+    let created;
+    if(result = historySchema.findOne({codice_commessa : data.codice_commessa })){
+        created = await findByIdAndUpdate(result._id, data);
+    }
+    created = await historySchema.create(data);
+    return created;
 }
 
 module.exports.getLastCommessa = async () => {
