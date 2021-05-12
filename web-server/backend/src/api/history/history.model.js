@@ -23,14 +23,11 @@ module.exports.list = async (query) => {
 }
 
 module.exports.store = async (data) => {
-    let created;
     if(result = await historySchema.findOne({codice_commessa : data.codice_commessa })){
         console.log(result);
-        created = await historySchema.findByIdAndUpdate(result._id, data);
-        console.log("ID DEL RESULT: " + result._id);
+        return await historySchema.findByIdAndUpdate(result._id, data);
     }
-    created = await historySchema.create(data);
-    return created;
+    return await historySchema.create(data);
 }
 
 module.exports.getLastCommessa = async () => {
