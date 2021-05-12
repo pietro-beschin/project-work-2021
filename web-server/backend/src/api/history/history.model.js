@@ -25,3 +25,5 @@ module.exports.store = async (data) => {
         const created = await history.create(data);
         return created;
 }
+
+module.exports.getLast
