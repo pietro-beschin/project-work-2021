@@ -1,4 +1,3 @@
-const history = require('./history.schema');
 const moment = require('moment');
 const historySchema = require('./history.schema');
 
@@ -19,14 +18,15 @@ module.exports.list = async (query) => {
         if(query.hideCompleted === 'true'){
             q.$where = "Number(this.quantita_prodotta) < Number(this.quantita_prevista)";
         }
-        return await history.find(q);
+        return await historySchema.find(q);
 }
 
 module.exports.store = async (data) => {
-        const created = await history.create(data);
+        const created = await historySchema.create(data);
         return created;
 }
 
 module.exports.getLastCommessa = async () => {
+    const 
     return await historySchema.findOne();
 }
