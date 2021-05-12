@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const historyModel = require('../history/history.model');
+const async = require('async');
 
 let statusSchema = mongoose.Schema({
     id : false,
