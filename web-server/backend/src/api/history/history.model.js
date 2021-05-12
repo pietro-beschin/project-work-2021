@@ -23,6 +23,5 @@ module.exports.list = async (query) => {
 
 module.exports.store = async (data) => {
         const created = await history.create(data);
-        console.log('created : ' + created);
         return created;
 }

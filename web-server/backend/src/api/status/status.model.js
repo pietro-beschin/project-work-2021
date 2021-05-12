@@ -1,9 +1,12 @@
-const status = require('./status.schema');
+const statusSchema = require('./status.schema');
 
 module.exports.getStatus = async () => {
-    return await status.findOne();
+    return await statusSchema.findOne();
 }
 
 module.exports.store = async (data) => {
-    return await status.findOneAndUpdate(data);
+    if(await statusSchema.findOne()){
+        return await statusSchema.findOneAndUpdate(data);
+    }
+    return await statusSchema.create(data);
 }
