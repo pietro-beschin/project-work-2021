@@ -40,7 +40,6 @@ const fetchFilteredData = () => {
             }).then(result => {
                 $('#accordion-commesse').empty();
                 result.forEach(commessa => addCommessaToList(commessa));
-                //alert('test');
                 loadTable();
             });
         }
@@ -82,7 +81,6 @@ const loadTable = (function() {
     $('#dt-commesse').DataTable({
         "serverSide": false,
         "iDisplayLength": 5,
-        //"sPaginationType": "full_numbers",
         "paging": true,
         "lengthChange": true,
         "searching": false,
