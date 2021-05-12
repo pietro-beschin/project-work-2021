@@ -2,9 +2,9 @@ const statusModel = require('./status.model');
 
 module.exports.getStatus = async (req, res, next) => {
     try{
-        const result = await statusModel.getStatus();
-        console.log(result);
-        res.json(result);
+        let queried = await statusModel.getStatus();
+        
+        res.json(queried);
     }catch(err){
         next(err);
     }
@@ -12,8 +12,8 @@ module.exports.getStatus = async (req, res, next) => {
 
 module.exports.store = async (req, res, next) => {
     try{
-        const result = await statusModel.store(req.body);
-        res.json(result);
+        const queried = await statusModel.store(req.body);
+        res.json(queried);
     }catch(err){
         next(err);
     }  

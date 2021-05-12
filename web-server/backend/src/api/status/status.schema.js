@@ -13,7 +13,7 @@ let statusSchema = mongoose.Schema({
 mongoose.set('toJSON', {virtuals: true});
 mongoose.set('toObject', {virtuals: true});
 
-historySchema.virtual('progresso_lavorazione')
+statusSchema.virtual('progresso_lavorazione')
     .get(function() {
         const lastElement = historySchema.findOne();
         return (lastElement.quantita_prodotta / lastElement.quantita_prevista) * 100;
