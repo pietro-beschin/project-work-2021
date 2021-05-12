@@ -29,7 +29,6 @@ module.exports.store = async (data) => {
     //    console.log("ID DEL RESULT: " + result._id);
     //}
     created = await historySchema.create(data);
-    console.log("INSERITO");
     return created;
 }
 
