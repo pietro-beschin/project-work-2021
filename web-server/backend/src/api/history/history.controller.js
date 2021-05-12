@@ -7,7 +7,6 @@ module.exports.list = async (req, res, next) => {
     }catch(err){
         next(err);
     }
-    
 }
 
 module.exports.store = async (req, res, next) => {
@@ -17,5 +16,12 @@ module.exports.store = async (req, res, next) => {
     }catch(err){
         next(err);
     }
-    
+}
+
+module.exports.getLastCommessa = async(req, res, next) => {
+    try{
+        return await historyModel.getLastCommessa();
+    }catch(err){
+        next(err);
+    }
 }

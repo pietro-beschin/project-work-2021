@@ -1,5 +1,6 @@
 const history = require('./history.schema');
 const moment = require('moment');
+const historySchema = require('./history.schema');
 
 module.exports.list = async (query) => {
         const q = {};
@@ -26,4 +27,6 @@ module.exports.store = async (data) => {
         return created;
 }
 
-module.exports.getLast
+module.exports.getLastCommessa = async () => {
+    return await historySchema.findOne();
+}
