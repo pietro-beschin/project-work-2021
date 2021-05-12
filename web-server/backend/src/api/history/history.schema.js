@@ -5,7 +5,11 @@ let historySchema = mongoose.Schema({
     //fallita : Boolean,
     id : false,
     versionKey : false,
-    codice_commessa : String,
+    codice_commessa : {
+        type: String,
+        unique: true,
+        required: true
+    },
     articolo : String,
     quantita_prevista : Number,
     data_consegna : Date,
