@@ -27,6 +27,5 @@ module.exports.store = async (data) => {
 }
 
 module.exports.getLastCommessa = async () => {
-    console.log("LAST COMMESSA!");
-    return await historySchema.findOne();
+    return await historySchema.findOne().sort({'_id' : -1});
 }
