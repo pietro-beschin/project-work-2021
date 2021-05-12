@@ -26,7 +26,7 @@ module.exports.store = async (data) => {
     let created;
     if(result = await historySchema.findOne({codice_commessa : data.codice_commessa })){
         console.log(result);
-        created = await findByIdAndUpdate(result._id, data);
+        created = await historySchema.findByIdAndUpdate(result._id, data);
         console.log("ID DEL RESULT: " + result._id);
     }
     created = await historySchema.create(data);
