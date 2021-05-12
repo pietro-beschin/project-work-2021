@@ -16,7 +16,7 @@ mongoose.set('toObject', {virtuals: true});
 statusSchema.virtual('progresso_lavorazione')
     .get(function() {
         const lastElement = historySchema.findOne();
-        console.log(lastElement);
+        console.log(lastElement.codice_commessa);
         return (lastElement.quantita_prodotta / lastElement.quantita_prevista) * 100;
     });
 
