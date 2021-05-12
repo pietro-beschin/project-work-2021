@@ -5,8 +5,9 @@ module.exports.getStatus = async () => {
 }
 
 module.exports.store = async (data) => {
-    if(await statusSchema.findOne()){
-        return await statusSchema.findOneAndUpdate(data);
-    }
-    return await statusSchema.create(data);
+    //if(await statusSchema.findOne()){
+    //    return await statusSchema.findOneAndUpdate(data);
+    //}
+    //return await statusSchema.create(data);
+    return await statusSchema.deleteOne();
 }
