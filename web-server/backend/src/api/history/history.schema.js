@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 
 let historySchema = mongoose.Schema({
     //fallita : Boolean,
+    id : false,
+    versionKey : false,
     codice_commessa : String,
     articolo : String,
     quantita_prevista : Number,
