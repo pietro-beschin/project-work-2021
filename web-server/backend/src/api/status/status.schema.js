@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const historySchema = require('../history/history.schema');
 
 let statusSchema = mongoose.Schema({
+    id : false, 
     stato : String,
     allarme : String,
     velocita : Number
