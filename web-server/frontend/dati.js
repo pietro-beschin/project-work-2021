@@ -1,6 +1,10 @@
-$(document).ready(() => {
+$(document).ready(function() {
     const urlParams = new URLSearchParams(window.location.search);
     
+    $('#dt-commesse').DataTable();
+
+    fetchStatus();
+    fetchCurrentData();
     fetchAllData();
     
     fetchFilteredData();
@@ -13,12 +17,9 @@ const fetchFilteredData = () => {
         let nomeArticolo = $("#nome-articolo").val();
         let startDate = $("#dtp-inizio").val();
         let endDate = $("#dtp-fine").val();
-
-        console.log(`${baseURL}history?from=${startDate}&to=${endDate}`)
     
-        
         event.preventDefault();
-
+        
         if(!nomeArticolo && !startDate && !endDate) {
             fetchAllData();
         };
@@ -49,6 +50,26 @@ const fetchFilteredData = () => {
                 result.forEach(commessa => addCommessaToList(commessa));
             });
         };
+    });
+};
+
+const fetchStatus = () => {
+    $.ajax({
+        type: 'GET',
+        url: `${baseURL}status`,
+    }).then(result => {
+        datiStato(result);
+        datiErrori(result);
+    });
+}
+
+const fetchCurrentData = () => {
+    $.ajax({
+        type: 'GET',
+        url: `${baseURL}lastCommessa`,
+    }).then(result => {
+        datiLavorazione(result);
+        datiProgresso(result);
     });
 };
 
@@ -114,27 +135,40 @@ const addCommessaToList = (commessa) => {
 };
 
 const datiLavorazione = (commessa) => {
-    const template = $(``);
+    const template = $(`
+    <h1 class="display-4">${commessa.articolo}</h1>
+    <hr>
+    <div class="lead">prodotto in lavorazione</div>
+    `);
     template.data(commessa);
 
     $('#card-lavorazione').prepend(template);
 };
 
 const datiStato = (commessa) => {
-    const template = $(``);
+    const template = $(`
+    <h1 class="display-4">${commessa.stato}</h1>
+    <hr>
+    <div class="lead">stato</div>`);
     template.data(commessa);
 
     $('#card-stato').prepend(template);
 };
 
 const datiProgresso = (commessa) => {
-    const template = $(``);
+    const template = $(`
+    <h1 class="display-4">${commessa.quantita_prodotta}/${commessa.quantita_prevista}</h1>
+    <hr>
+    <div class="lead">pezzi prodotti</div>`);
     template.data(commessa);
 
     $('#card-progresso').prepend(template);
 };
 const datiErrori = (commessa) => {
-    const template = $(``);
+    const template = $(`
+    <h1 class="display-4">${commessa.allarme}</h1>
+    <hr>
+    <div class="lead">errori</div>`);
     template.data(commessa);
 
     $('#card-errori').prepend(template);

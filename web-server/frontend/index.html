@@ -4,7 +4,15 @@
         <title>dashboard commesse</title>
         <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+        <link href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css" rel="stylesheet">
         <link rel="stylesheet" href="style.css">
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js" integrity="sha512-LGXaggshOkD/at6PFNcp2V2unf9LzFq6LE+sChH7ceMTDP0g2kn6Vxwgg7wkPP7AAtX+lmPqPdxB47A0Nz0cMQ==" crossorigin="anonymous"></script>
+        <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+        <script src="dati.js"></script>
     </head>
     <body class="dark-back">
         <form>
@@ -19,38 +27,30 @@
                 <div class="row">
                     <div class="col-xl-6">
                         <div class="container text-white rounded-lg">
-                            <div class="jumbrotron mt-5 med-back border-lighter rounded-lg shadow-lg">
+                            <div id="display-status" class="jumbrotron mt-5 med-back border-lighter rounded-lg shadow-lg">
                                 <h1 class="display-4 mt-3 ml-3">stato macchina</h1>
                                 <div class="container">
                                     <div class="row mt-4">
                                         <div class="col-lg">
                                             <div id="card-lavorazione" class="jumbotron lighter-back rounded-lg shadow-lg">
-                                                <h1 class="display-4">flacone</h1>
-                                                <hr>
-                                                <div class="lead">prodotto in lavorazione</div>
+                                                
                                             </div>
                                         </div>
                                         <div class="col-lg">
                                             <div id="card-stato" class="jumbotron lighter-back rounded-lg shadow">
-                                                <h1 class="display-4">completato</h1>
-                                                <hr>
-                                                <div class="lead">stato</div>
+                                                
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg">
                                             <div id="card-progresso" class="jumbotron lighter-back rounded-lg shadow">
-                                                <h1 class="display-4">2222/2222</h1>
-                                                <hr>
-                                                <div class="lead">pezzi prodotti</div>
+                                                
                                             </div>
                                         </div>
                                         <div class="col-lg">
                                             <div id="card-errori" class="jumbotron lighter-back rounded-lg shadow">
-                                                <h1 class="display-4">nope</h1>
-                                                <hr>
-                                                <div class="lead">errori</div>
+                                                
                                             </div>
                                         </div>
                                     </div>
@@ -94,9 +94,19 @@
                             <div class="container">
                                 <div class="row mt-2">
                                     <div class="col mb-4">
-                                        <div id="accordion-commesse" class="accordion md-accordion" role="tablist">
-                
-                                        </div>
+                                        <table id="dt-commesse" width="100%" cellspacing="0">
+                                            <thead><tr><th></th></tr></thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <div id="accordion-commesse" class="accordion md-accordion" role="tablist">
+
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                            <tfoot><tr><th></th></tr></tfoot>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
@@ -105,9 +115,9 @@
                 </div>
             </div>
         </form>
-        
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
-        <script src="dati.js"></script>
     </body>
 </html>
+
+<!--<div id="accordion-commesse" class="accordion md-accordion" role="tablist">
+                
+</div>-->
