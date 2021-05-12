@@ -13,8 +13,7 @@ let statusSchema = mongoose.Schema({
     collection : 'status'
 });
 
-mongoose.set('toJSON', {virtuals: true});
-mongoose.set('toObject', {virtuals: true});
+
 
 statusSchema.virtual('progresso_lavorazione')
     .get (async function() {
@@ -23,5 +22,7 @@ statusSchema.virtual('progresso_lavorazione')
         return (lastElement.quantita_prodotta / lastElement.quantita_prevista) * 100;
     });
 
+mongoose.set('toJSON', {virtuals: true});
+mongoose.set('toObject', {virtuals: true});
 
 module.exports = mongoose.model('status', statusSchema);
