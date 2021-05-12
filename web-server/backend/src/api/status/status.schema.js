@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const historySchema = require('../history/history.schema');
+const historyModel = require('../history/history.model');
 
 let statusSchema = mongoose.Schema({
     id : false,
@@ -17,7 +17,7 @@ mongoose.set('toObject', {virtuals: true});
 
 statusSchema.virtual('progresso_lavorazione')
     .get(function() {
-        const lastElement = historySchema.findOne();
+        const lastElement = historyModel.getLastCommessa();
         console.log(lastElement.codice_commessa);
         return (lastElement.quantita_prodotta / lastElement.quantita_prevista) * 100;
     });
