@@ -24,7 +24,6 @@ module.exports.list = async (query) => {
 
 module.exports.store = async (data) => {
     if(result = await historySchema.findOne({codice_commessa : data.codice_commessa })){
-        console.log(result);
         return await historySchema.findByIdAndUpdate(result._id, data);
     }
     return await historySchema.create(data);
