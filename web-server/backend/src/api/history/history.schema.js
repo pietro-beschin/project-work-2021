@@ -25,9 +25,9 @@ const lastInserted = async () => {
 
 historySchema.virtual('completed')
     .get(function() {
-        console.log(await lastInserted);
+        console.log(await lastInserted());
         if(this.quantita_prodotta < this.quantita_prevista){
-            if(this._id == await lastInserted._id){
+            if(this._id == await lastInserted()._id){
                 return "in esecuzione";
             }
             return "fallita";
