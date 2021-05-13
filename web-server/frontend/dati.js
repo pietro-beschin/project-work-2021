@@ -29,7 +29,16 @@ const fetchFilteredData = () => {
                 url: `${baseURL}history?from=${startDate}&to=${endDate}`,
             }).then(result => {
                 $('#accordion-commesse').empty();
-                result.forEach(commessa => addCommessaToList(commessa));
+                result.forEach(commessa => {
+                    if($('#switch-completato').is(":checked") === true){
+                        if(commessa.completed === 'false') {
+                            addCommessaToList(commessa)
+                            console.log(test)
+                        }
+                    } else {
+                        addCommessaToList(commessa)
+                    }
+                });
                 loadTable();
             });
         }
@@ -39,7 +48,16 @@ const fetchFilteredData = () => {
                 url: `${baseURL}history?articolo=${nomeArticolo}`,
             }).then(result => {
                 $('#accordion-commesse').empty();
-                result.forEach(commessa => addCommessaToList(commessa));
+                result.forEach(commessa => {
+                    if($('#switch-completato').is(":checked") === true){
+                        if(commessa.completed === 'false') {
+                            addCommessaToList(commessa)
+                            console.log(test)
+                        }
+                    } else {
+                        addCommessaToList(commessa)
+                    }
+                });
                 loadTable();
             });
         }
@@ -49,7 +67,16 @@ const fetchFilteredData = () => {
                 url: `${baseURL}history?articolo=${nomeArticolo}&from=${startDate}&to=${endDate}`,
             }).then(result => {
                 $('#accordion-commesse').empty();
-                result.forEach(commessa => addCommessaToList(commessa));
+                result.forEach(commessa => {
+                    if($('#switch-completato').is(":checked") === true){
+                        if(commessa.completed === 'false') {
+                            addCommessaToList(commessa)
+                            console.log(test)
+                        }
+                    } else {
+                        addCommessaToList(commessa)
+                    }
+                });
                 loadTable();
             });
         };
@@ -84,7 +111,7 @@ const loadTable = (function() {
         "paging": true,
         "lengthChange": true,
         "searching": false,
-        "ordering": false,
+        "ordering": true,
         "info": true,
         "autoWidth": true,
         lengthMenu: [
@@ -114,7 +141,16 @@ const fetchAllData = () => {
     })
     .then(result => {
         $('#accordion-commesse').empty();
-        result.forEach(commessa => addCommessaToList(commessa));
+        result.forEach(commessa => {
+            console.log($('#switch-completato').is(":checked"))
+            if($('#switch-completato').is(":checked") === true){
+                if(commessa.completed === 'false') {
+                    addCommessaToList(commessa)
+                }
+            } else {
+                addCommessaToList(commessa)
+            }
+        });
         loadTable();
     });
 };
