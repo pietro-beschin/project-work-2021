@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const async = require('async');
 
 
 let historySchema = mongoose.Schema({
