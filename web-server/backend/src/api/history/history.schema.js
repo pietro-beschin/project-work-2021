@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const historyModel = require('./history.model');
-const lastInsertedId = await (historyModel.getLastCommessa)._id;
+const lastInsertedId = async () => {
+    return await (historyModel.getLastCommessa)._id;
+}
 
 let historySchema = mongoose.Schema({
     //fallita : Boolean,
