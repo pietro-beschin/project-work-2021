@@ -27,7 +27,7 @@ historySchema.virtual('completed')
     .get(function() {
         if(this.quantita_prodotta < this.quantita_prevista){
             if(this._id === lastInserted._id){
-                console.log(lastInserted);
+                console.log(lastInserted._id);
                 return "non completata";
             }
             return "fallita";
