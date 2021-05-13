@@ -29,7 +29,16 @@ const fetchFilteredData = () => {
                 url: `${baseURL}history?from=${startDate}&to=${endDate}`,
             }).then(result => {
                 $('#accordion-commesse').empty();
-                result.forEach(commessa => addCommessaToList(commessa));
+                result.forEach(commessa => {
+                    if($('#switch-completato').is(":checked") === true){
+                        if(commessa.completed === 'false') {
+                            addCommessaToList(commessa)
+                            console.log(test)
+                        }
+                    } else {
+                        addCommessaToList(commessa)
+                    }
+                });
                 loadTable();
             });
         }
@@ -39,7 +48,16 @@ const fetchFilteredData = () => {
                 url: `${baseURL}history?articolo=${nomeArticolo}`,
             }).then(result => {
                 $('#accordion-commesse').empty();
-                result.forEach(commessa => addCommessaToList(commessa));
+                result.forEach(commessa => {
+                    if($('#switch-completato').is(":checked") === true){
+                        if(commessa.completed === 'false') {
+                            addCommessaToList(commessa)
+                            console.log(test)
+                        }
+                    } else {
+                        addCommessaToList(commessa)
+                    }
+                });
                 loadTable();
             });
         }
@@ -49,7 +67,16 @@ const fetchFilteredData = () => {
                 url: `${baseURL}history?articolo=${nomeArticolo}&from=${startDate}&to=${endDate}`,
             }).then(result => {
                 $('#accordion-commesse').empty();
-                result.forEach(commessa => addCommessaToList(commessa));
+                result.forEach(commessa => {
+                    if($('#switch-completato').is(":checked") === true){
+                        if(commessa.completed === 'false') {
+                            addCommessaToList(commessa)
+                            console.log(test)
+                        }
+                    } else {
+                        addCommessaToList(commessa)
+                    }
+                });
                 loadTable();
             });
         };
@@ -84,7 +111,7 @@ const loadTable = (function() {
         "paging": true,
         "lengthChange": true,
         "searching": false,
-        "ordering": false,
+        "ordering": true,
         "info": true,
         "autoWidth": true,
         lengthMenu: [
@@ -96,7 +123,7 @@ const loadTable = (function() {
             "info": "Pagina _PAGE_ di _PAGES_",
             "infoEmpty": "",
             "infoFiltered": " - Filtrato da _MAX_ risultati",
-            "emptyTable": "Nessun risultato :(",
+            "emptyTable": "Nessun risultato",
             "paginate": {
                 "first": "Prima",
                 "last": "Ultima",
@@ -114,7 +141,16 @@ const fetchAllData = () => {
     })
     .then(result => {
         $('#accordion-commesse').empty();
-        result.forEach(commessa => addCommessaToList(commessa));
+        result.forEach(commessa => {
+            console.log($('#switch-completato').is(":checked"))
+            if($('#switch-completato').is(":checked") === true){
+                if(commessa.completed === 'false') {
+                    addCommessaToList(commessa)
+                }
+            } else {
+                addCommessaToList(commessa)
+            }
+        });
         loadTable();
     });
 };
@@ -178,7 +214,7 @@ const addCommessaToList = (commessa) => {
 
 const datiLavorazione = (commessa) => {
     const template = $(`
-    <h1 class="display-4">${commessa.articolo}</h1>
+    <h1 class="display-5">${commessa.articolo}</h1>
     <hr>
     <div class="lead">prodotto in lavorazione</div>
     `);
@@ -189,7 +225,7 @@ const datiLavorazione = (commessa) => {
 
 const datiStato = (commessa) => {
     const template = $(`
-    <h1 class="display-4">${commessa.stato}</h1>
+    <h1 class="display-5">${commessa.stato}</h1>
     <hr>
     <div class="lead">stato</div>`);
     template.data(commessa);
@@ -199,7 +235,14 @@ const datiStato = (commessa) => {
 
 const datiProgresso = (commessa) => {
     const template = $(`
-    <h1 class="display-4">${commessa.quantita_prodotta}/${commessa.quantita_prevista}</h1>
+    <div class="row d-flex justify-content-between">
+        <div class="col">
+            <h1 class="display-5">${commessa.quantita_prodotta}/${commessa.quantita_prevista}</h1>
+        </div>
+        <div class="col">
+            <h1 class="display-7">${((commessa.quantita_prodotta*100)/commessa.quantita_prevista).toFixed(1)}%</h1>
+        </div>
+    </div>
     <hr>
     <div class="lead">pezzi prodotti</div>`);
     template.data(commessa);
@@ -208,7 +251,7 @@ const datiProgresso = (commessa) => {
 };
 const datiErrori = (commessa) => {
     const template = $(`
-    <h1 class="display-4">${commessa.allarme}</h1>
+    <h1 class="display-5">${commessa.allarme}</h1>
     <hr>
     <div class="lead">errori</div>`);
     template.data(commessa);
