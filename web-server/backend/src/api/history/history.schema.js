@@ -24,15 +24,8 @@ async function lastInserted() {
 const last = historyModel.getFirstId();
 
 historySchema.virtual('completed')
-    .get(async function() {
-        console.log(last);
-        if(this.quantita_prodotta < this.quantita_prevista){
-            if(this._id == last){
-                return "in esecuzione";
-            }
-            return "fallita";
-        }
-        return "completata";
+    .get(function() {
+        return this.quantita_prodotta >= quantita_prevista;
     });
 
 mongoose.set('toJSON', {virtuals: true});
