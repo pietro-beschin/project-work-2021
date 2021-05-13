@@ -22,13 +22,10 @@ let historySchema = mongoose.Schema({
 
 
 historySchema.virtual('completed')
-    .get(function() {
-        const lastInserted = async () => {
-            return await this.findOne();
-        }
-        console.log(lastInserted);
+    .get(async function() {
+        console.log(await this.findOne());
         if(this.quantita_prodotta < this.quantita_prevista){
-            if(this._id == lastInserted._id){
+            if(this._id == "ciao"/*._id*/){
                 return "in esecuzione";
             }
             return "fallita";
