@@ -21,7 +21,7 @@ async function lastInserted() {
     return await historySchema.findOne();
 }
 
-const last = await historyModel.getFirstId();
+const last = historyModel.getFirstId();
 
 historySchema.virtual('completed')
     .get(async function() {
