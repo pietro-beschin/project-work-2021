@@ -18,11 +18,13 @@ let historySchema = mongoose.Schema({
     collection : 'history'
 });
 
+let lastInserted = await historySchema.findOne();
+
 historySchema.virtual('completed')
-    .get(async () => {
+    .get(function() {
         if(this.quantita_prodotta < this.quantita_prevista){
-            if(this._id === await historySchema.findOne()._id){
-                console.log(await historySchema.findOne());
+            if(this._id === lastInserted._id){
+                console.log(lastInserted);
                 return "non completata";
             }
             return "fallita";
