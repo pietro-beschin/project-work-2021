@@ -21,8 +21,8 @@ let historySchema = mongoose.Schema({
 
 historySchema.virtual('completed')
     .get(async function() {
-        const lastInsertedId = historyModel.getLastCommessa();
-        console.log(await lastInsertedId()._id);
+        const lastInsertedId = await historyModel.getLastCommessa();
+        console.log(lastInsertedId()._id);
         if(this.quantita_prodotta < this.quantita_prevista){
             if(this._id == lastInsertedId){
                 return "in esecuzione";
