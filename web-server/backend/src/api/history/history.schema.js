@@ -19,7 +19,7 @@ let historySchema = mongoose.Schema({
 
 historySchema.virtual('completed')
     .get(function() {
-        return this.quantita_prodotta >= quantita_prevista;
+        return this.quantita_prodotta >= this.quantita_prevista;
     });
 
 mongoose.set('toJSON', {virtuals: true});
