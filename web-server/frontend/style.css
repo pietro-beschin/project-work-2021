@@ -33,3 +33,9 @@
     background-color: #0e0831 !important;
     border-color: #0b062c !important; 
 }
+
+.display-5 {
+    font-size:3rem;
+    font-weight:300;
+    line-height:1.2
+}
