@@ -5,16 +5,12 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 const cors = require('cors');
 
-
-//mongoose.connect('mongodb://localhost:27017/project-work-2021', {useNewUrlParser: true, useUnifiedTopology: true}); //password : i2XjAmcFr8NM
-//10.0.25.201
 mongoose.connect("mongodb://10.0.25.202:27017/project-work-2021", {useNewUrlParser: true, useUnifiedTopology: true});
 mongoose.set('debug', true);
 mongoose.set('useFindAndModify', false);
 
 app.use(morgan('tiny'));
 app.use(cors());
-//body parser
 app.use(express.json({extended : true}));
 app.use('/api', routes);
 
