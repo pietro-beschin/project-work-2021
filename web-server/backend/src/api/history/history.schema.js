@@ -23,7 +23,7 @@ let historySchema = mongoose.Schema({
 
 historySchema.virtual('completed')
     .get(async function() {
-        console.log(await this.findOne());
+        console.log(await historySchema.findOne());
         if(this.quantita_prodotta < this.quantita_prevista){
             if(this._id == "ciao"/*._id*/){
                 return "in esecuzione";
