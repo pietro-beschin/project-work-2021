@@ -17,12 +17,6 @@ let historySchema = mongoose.Schema({
     collection : 'history'
 });
 
-async function lastInserted() {
-    return await historySchema.findOne();
-}
-
-const last = historyModel.getFirstId();
-
 historySchema.virtual('completed')
     .get(function() {
         return this.quantita_prodotta >= quantita_prevista;
