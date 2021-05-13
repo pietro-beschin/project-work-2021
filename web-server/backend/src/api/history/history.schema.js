@@ -17,11 +17,10 @@ let historySchema = mongoose.Schema({
     collection : 'history'
 });
 
-
 historySchema.virtual('completed')
     .get(async () => {
         if(this.quantita_prodotta < this.quantita_prevista){
-            if(this._id === await historySchema.findOne()._id){
+            if(this._id === await historySchema){
                 return 'non completata';
             }else{
                 return 'fallita';

@@ -32,7 +32,3 @@ module.exports.store = async (data) => {
 module.exports.getLastCommessa = async () => {
     return await historySchema.findOne().sort({'_id' : -1});
 }
-
-module.exports.getWorkingCommessa = async () => {
-    return await historySchema.findOne({stat})
-}
