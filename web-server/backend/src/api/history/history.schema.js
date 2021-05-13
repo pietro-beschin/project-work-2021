@@ -19,7 +19,7 @@ let historySchema = mongoose.Schema({
 });
 
 const lastInserted = async () => {
-    return await historyModel.getLastCommessa();
+    return await this.findOne();
 }
 
 
