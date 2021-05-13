@@ -19,15 +19,15 @@ let historySchema = mongoose.Schema({
 });
 
 historySchema.virtual('completed')
-    .set(async () => {
+    .get(async () => {
         if(this.quantita_prodotta < this.quantita_prevista){
             if(this._id === await historySchema.findOne()){
                 console.log(await historySchema.findOne());
-                this.set('non completata');
+                return "non completata";
             }
-            this.set('fallita');
+            return "fallita";
         }
-        this.set('completata');
+        return "completata";
     });
 
 mongoose.set('toJSON', {virtuals: true});
