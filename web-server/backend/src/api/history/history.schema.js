@@ -11,7 +11,8 @@ let historySchema = mongoose.Schema({
     data_consegna : Date,
     quantita_prodotta : Number,
     quantita_scarto_difettoso : Number,
-    quantita_scarto_pieno : Number
+    quantita_scarto_pieno : Number,
+    completed: String
 },
 {
     collection : 'history'
@@ -22,8 +23,8 @@ async function lastInserted() {
 }
 
 historySchema.virtual('completed')
-    .get(function() {
-        const last = lastInserted()._id;
+    .get(async function() {
+        const last = await historyModel.getFirstId();
         console.log(last);
         if(this.quantita_prodotta < this.quantita_prevista){
             if(this._id == last){
