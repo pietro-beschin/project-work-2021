@@ -18,7 +18,10 @@ let historySchema = mongoose.Schema({
     collection : 'history'
 });
 
-let lastInserted = await historySchema.findOne();
+const lastInserted = async () =>{
+    return lastInserted = await historySchema.findOne();
+}
+
 
 historySchema.virtual('completed')
     .get(function() {
