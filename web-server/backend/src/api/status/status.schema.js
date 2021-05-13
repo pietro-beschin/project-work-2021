@@ -13,15 +13,6 @@ let statusSchema = mongoose.Schema({
     collection : 'status'
 });
 
-
-
-statusSchema.virtual('progresso_lavorazione')
-    .get (async function() {
-        const lastElement = await historyModel.getLastCommessa();
-        console.log(lastElement.codice_commessa);
-        return (lastElement.quantita_prodotta / lastElement.quantita_prevista) * 100;
-    });
-
 mongoose.set('toJSON', {virtuals: true});
 mongoose.set('toObject', {virtuals: true});
 
