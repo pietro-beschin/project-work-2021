@@ -33,7 +33,6 @@ const fetchFilteredData = () => {
                     if($('#switch-completato').is(":checked") === true){
                         if(commessa.completed === 'false') {
                             addCommessaToList(commessa)
-                            console.log(test)
                         }
                     } else {
                         addCommessaToList(commessa)
@@ -52,7 +51,6 @@ const fetchFilteredData = () => {
                     if($('#switch-completato').is(":checked") === true){
                         if(commessa.completed === 'false') {
                             addCommessaToList(commessa)
-                            console.log(test)
                         }
                     } else {
                         addCommessaToList(commessa)
@@ -71,7 +69,6 @@ const fetchFilteredData = () => {
                     if($('#switch-completato').is(":checked") === true){
                         if(commessa.completed === 'false') {
                             addCommessaToList(commessa)
-                            console.log(test)
                         }
                     } else {
                         addCommessaToList(commessa)
@@ -142,7 +139,6 @@ const fetchAllData = () => {
     .then(result => {
         $('#accordion-commesse').empty();
         result.forEach(commessa => {
-            console.log($('#switch-completato').is(":checked"))
             if($('#switch-completato').is(":checked") === true){
                 if(commessa.completed === 'false') {
                     addCommessaToList(commessa)
@@ -240,7 +236,7 @@ const datiProgresso = (commessa) => {
             <h1 class="display-5">${commessa.quantita_prodotta}/${commessa.quantita_prevista}</h1>
         </div>
         <div class="col">
-            <h1 class="display-7">${((commessa.quantita_prodotta*100)/commessa.quantita_prevista).toFixed(1)}%</h1>
+            <h1 class="display-7">${((commessa.quantita_prodotta * 100) / commessa.quantita_prevista).toFixed(1)}%</h1>
         </div>
     </div>
     <hr>
@@ -251,7 +247,7 @@ const datiProgresso = (commessa) => {
 };
 const datiErrori = (commessa) => {
     const template = $(`
-    <h1 class="display-5">${commessa.allarme}</h1>
+    <h1 class="display-6">${commessa.allarme}</h1>
     <hr>
     <div class="lead">errori</div>`);
     template.data(commessa);
