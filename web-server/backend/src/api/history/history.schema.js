@@ -18,16 +18,17 @@ let historySchema = mongoose.Schema({
     collection : 'history'
 });
 
-const lastInserted = async () => {
-    return await this.findOne();
-}
+
 
 
 historySchema.virtual('completed')
     .get(function() {
-        console.log(await lastInserted());
+        const lastInserted = async () => {
+            return await this.findOne();
+        }
+        console.log(lastInserted);
         if(this.quantita_prodotta < this.quantita_prevista){
-            if(this._id == await lastInserted()._id){
+            if(this._id == lastInserted._id){
                 return "in esecuzione";
             }
             return "fallita";
