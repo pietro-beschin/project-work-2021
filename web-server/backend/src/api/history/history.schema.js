@@ -21,9 +21,10 @@ async function lastInserted() {
     return await historySchema.findOne();
 }
 
+const last = await historyModel.getFirstId();
+
 historySchema.virtual('completed')
     .get(async function() {
-        const last = await historyModel.getFirstId();
         console.log(last);
         if(this.quantita_prodotta < this.quantita_prevista){
             if(this._id == last){
