@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const async = require('async');
+const historyModel = require('./history.model');
 
 
 let historySchema = mongoose.Schema({
@@ -19,7 +19,7 @@ let historySchema = mongoose.Schema({
 });
 
 const lastInserted = async () => {
-    return await historySchema.findOne().sort({'_id' : -1});
+    return await historyModel.getLastCommessa();
 }
 
 
