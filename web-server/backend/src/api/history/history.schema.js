@@ -20,8 +20,10 @@ let historySchema = mongoose.Schema({
 
 
 historySchema.virtual('completed')
-    .get(async function() {
-        const lastInserted = await historySchema.findOne();
+    .get(function() {
+        const lastInserted = async () => {
+            return await historySchema.findOne();
+        }
         console.log(await lastInserted()._id);
         if(this.quantita_prodotta < this.quantita_prevista){
             if(this._id == await lastInsertedId()._id){
