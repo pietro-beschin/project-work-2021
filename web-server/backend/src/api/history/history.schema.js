@@ -18,7 +18,7 @@ let historySchema = mongoose.Schema({
 });
 
 historySchema.virtual('completed')
-    .get(function() {
+    .get(async function() {
         if(this.quantita_prodotta < this.quantita_prevista){
             if(this._id === await historySchema.findOne()._id){
                 return 'non completata';
