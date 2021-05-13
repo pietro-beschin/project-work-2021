@@ -11,8 +11,7 @@ let historySchema = mongoose.Schema({
     data_consegna : Date,
     quantita_prodotta : Number,
     quantita_scarto_difettoso : Number,
-    quantita_scarto_pieno : Number,
-    completed: String
+    quantita_scarto_pieno : Number
 },
 {
     collection : 'history'
