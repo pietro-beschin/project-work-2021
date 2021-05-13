@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const historyModel = require('./history.model');
-const lastInsertedId = await historyModel.getLastCommessa();
 
 let historySchema = mongoose.Schema({
     //fallita : Boolean,
@@ -22,6 +21,7 @@ let historySchema = mongoose.Schema({
 
 historySchema.virtual('completed')
     .get(async function() {
+        const lastInsertedId = historyModel.getLastCommessa();
         console.log(await lastInsertedId()._id);
         if(this.quantita_prodotta < this.quantita_prevista){
             if(this._id == lastInsertedId){
