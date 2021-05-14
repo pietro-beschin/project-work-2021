@@ -1,83 +1,87 @@
-$(document).ready(function() {
+$(document).ready(function () {
     const urlParams = new URLSearchParams(window.location.search);
 
     fetchStatus();
     fetchCurrentData();
     fetchAllData();
-    
-    fetchFilteredData();
+
+    $('#btnCerca').click(() => {
+        fetchFilteredData();
+    });
+
+    $('input[name="switch-completato"]').change(() => {
+        fetchFilteredData();
+    })
 });
 
 const baseURL = 'http://54.85.250.76:3000/api/';
 
 const fetchFilteredData = () => {
-    $('#btnCerca').click(() => {
-        let nomeArticolo = $("#nome-articolo").val();
-        let startDate = $("#dtp-inizio").val();
-        let endDate = $("#dtp-fine").val();
+    let nomeArticolo = $("#nome-articolo").val();
+    let startDate = $("#dtp-inizio").val();
+    let endDate = $("#dtp-fine").val();
 
-        $('#dt-commesse').DataTable().destroy()
+    $('#dt-commesse').DataTable().destroy()
 
-        event.preventDefault(); 
-        
-        if(!nomeArticolo && !startDate && !endDate) {
-            fetchAllData();
-        };
-        if(!nomeArticolo) {
-            $.ajax({
-                type: 'GET',
-                url: `${baseURL}history?from=${startDate}&to=${endDate}`,
-            }).then(result => {
-                $('#accordion-commesse').empty();
-                result.forEach(commessa => {
-                    if($('#switch-completato').is(":checked") === true){
-                        if(commessa.completed === 'false') {
-                            addCommessaToList(commessa)
-                        }
-                    } else {
+    event.preventDefault();
+
+    if (!nomeArticolo && !startDate && !endDate) {
+        fetchAllData();
+    };
+    if (!nomeArticolo) {
+        $.ajax({
+            type: 'GET',
+            url: `${baseURL}history?from=${startDate}&to=${endDate}`,
+        }).then(result => {
+            $('#accordion-commesse').empty();
+            result.forEach(commessa => {
+                if ($('#switch-completato').is(":checked") === true) {
+                    if (commessa.completed === 'false') {
                         addCommessaToList(commessa)
                     }
-                });
-                loadTable();
+                } else {
+                    addCommessaToList(commessa)
+                }
             });
-        }
-        if(!startDate && !endDate) {
-            $.ajax({
-                type: 'GET',
-                url: `${baseURL}history?articolo=${nomeArticolo}`,
-            }).then(result => {
-                $('#accordion-commesse').empty();
-                result.forEach(commessa => {
-                    if($('#switch-completato').is(":checked") === true){
-                        if(commessa.completed === 'false') {
-                            addCommessaToList(commessa)
-                        }
-                    } else {
+            loadTable();
+        });
+    }
+    if (!startDate && !endDate) {
+        $.ajax({
+            type: 'GET',
+            url: `${baseURL}history?articolo=${nomeArticolo}`,
+        }).then(result => {
+            $('#accordion-commesse').empty();
+            result.forEach(commessa => {
+                if ($('#switch-completato').is(":checked") === true) {
+                    if (commessa.completed === 'false') {
                         addCommessaToList(commessa)
                     }
-                });
-                loadTable();
+                } else {
+                    addCommessaToList(commessa)
+                }
             });
-        }
-        if(nomeArticolo && startDate && endDate) {
-            $.ajax({
-                type: 'GET',
-                url: `${baseURL}history?articolo=${nomeArticolo}&from=${startDate}&to=${endDate}`,
-            }).then(result => {
-                $('#accordion-commesse').empty();
-                result.forEach(commessa => {
-                    if($('#switch-completato').is(":checked") === true){
-                        if(commessa.completed === 'false') {
-                            addCommessaToList(commessa)
-                        }
-                    } else {
+            loadTable();
+        });
+    }
+    if (nomeArticolo && startDate && endDate) {
+        $.ajax({
+            type: 'GET',
+            url: `${baseURL}history?articolo=${nomeArticolo}&from=${startDate}&to=${endDate}`,
+        }).then(result => {
+            $('#accordion-commesse').empty();
+            result.forEach(commessa => {
+                if ($('#switch-completato').is(":checked") === true) {
+                    if (commessa.completed === 'false') {
                         addCommessaToList(commessa)
                     }
-                });
-                loadTable();
+                } else {
+                    addCommessaToList(commessa)
+                }
             });
-        };
-    });
+            loadTable();
+        });
+    };
 };
 
 const fetchStatus = () => {
@@ -100,20 +104,30 @@ const fetchCurrentData = () => {
     });
 };
 
-const loadTable = (function() {
-    $('#dt-commesse').DataTable().destroy()
-    $('#dt-commesse').DataTable({
+const loadTable = (function () {
+    let table = $('#dt-commesse');
+    let rowCount = table.DataTable().data().count()
+
+    table.DataTable().destroy()
+    table.DataTable({
         "serverSide": false,
         "iDisplayLength": 5,
         "paging": true,
-        "lengthChange": true,
+        //"lengthChange": true,
+        "lengthChange": (function () {
+            if (rowCount == 0) {
+                return false;
+            } else {
+                return true;
+            };
+        }),
         "searching": false,
         "ordering": true,
         "info": true,
         "autoWidth": true,
         lengthMenu: [
-            [  5, 10, 25, -1 ],
-            [ '5', '10', '25', 'Tutti' ]
+            [5, 10, 25, -1],
+            ['5', '10', '25', 'Tutti']
         ],
         "language": {
             "lengthMenu": "Mostra _MENU_ risultati per pagina",
@@ -129,6 +143,8 @@ const loadTable = (function() {
             }
         }
     });
+
+    //console.log(rowCount)
 });
 
 const fetchAllData = () => {
@@ -136,19 +152,19 @@ const fetchAllData = () => {
         type: 'GET',
         url: `${baseURL}history`,
     })
-    .then(result => {
-        $('#accordion-commesse').empty();
-        result.forEach(commessa => {
-            if($('#switch-completato').is(":checked") === true){
-                if(commessa.completed === 'false') {
+        .then(result => {
+            $('#accordion-commesse').empty();
+            result.forEach(commessa => {
+                if ($('#switch-completato').is(":checked") === true) {
+                    if (commessa.completed === 'false') {
+                        addCommessaToList(commessa)
+                    }
+                } else {
                     addCommessaToList(commessa)
                 }
-            } else {
-                addCommessaToList(commessa)
-            }
+            });
+            loadTable();
         });
-        loadTable();
-    });
 };
 
 const addCommessaToList = (commessa) => {
@@ -161,7 +177,7 @@ const addCommessaToList = (commessa) => {
                         <a data-toggle="collapse" data-parent="#accordion-commesse" href="#collapse_${commessa._id}" aria-expanded="false" aria-controls="collapse_${commessa._id}">
                             <div class="row">
                                 <div class="col-md-auto"></div>
-                                <div class="col-lg-8 h4 text-light mt-2">${commessa.codice_commessa}</div>
+                                <div class="col-lg-7 h4 text-light mt-2">${commessa.codice_commessa}</div>
                                 <div class="col-md-auto text-light mt-2">${dateFormat(commessa.data_consegna)}</div>       
                             </div>
                         </a>
