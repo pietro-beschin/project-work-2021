@@ -9,6 +9,7 @@ let historySchema = mongoose.Schema({
     articolo : String,
     quantita_prevista : Number,
     data_consegna : Date,
+    data_esecuzione : Date,
     quantita_prodotta : Number,
     quantita_scarto_difettoso : Number,
     quantita_scarto_pieno : Number,

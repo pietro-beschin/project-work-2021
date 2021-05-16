@@ -22,8 +22,6 @@ module.exports.list = async (query) => {
 }
 
 module.exports.store = async (data) => {
-    
-    
     if(result = await historySchema.findOne({codice_commessa : data.codice_commessa })){    //se esista già
         //la aggiorno
         if(this.quantita_prodotta >= this.quantita_prevista){
