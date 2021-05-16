@@ -14,6 +14,7 @@ $(document).ready(function () {
     })
 });
 
+//const baseURL = 'http://localhost:3000/api/';
 const baseURL = 'http://54.85.250.76:3000/api/';
 
 const fetchFilteredData = () => {
@@ -237,12 +238,30 @@ const datiLavorazione = (commessa) => {
 
 const datiStato = (commessa) => {
     const template = $(`
-    <h1 class="display-5">${commessa.stato}</h1>
+    <div class="row d-flex justify-content-between">
+        <div class="col-sm-auto">
+            <h1 class="display-5">${commessa.stato}</h1>
+        </div>
+        <div class="col-sm-auto mt-3" id="indicatore-stato">
+            
+        </div>
+    </div>
     <hr>
     <div class="lead">stato</div>`);
+
     template.data(commessa);
 
     $('#card-stato').prepend(template);
+
+    if(commessa.stato === "completato") {
+        $('#indicatore-stato').prepend('<span class="stato-completato"></span>')
+    }
+    if(commessa.stato === "fallito") {
+        $('#indicatore-stato').prepend('<span class="stato-fallito"></span>')
+    }
+    if(commessa.stato === "in esecuzione") {
+        $('#indicatore-stato').prepend('<span class="spinner-border text-warning" role="status"></span>')
+    }
 };
 
 const datiProgresso = (commessa) => {
@@ -273,6 +292,8 @@ const datiErrori = (commessa) => {
 
 const dateFormat = (date) => {
     let newDate = new Date(date);
-    let formattedDate = newDate.toUTCString();
+    let giorni = ["Domenica", "Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabato"]
+    let mesi = ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"]
+    let formattedDate = `${giorni[newDate.getDay()]} ${("0" + newDate.getDate()).slice(-2)} ${mesi[newDate.getMonth()]} ${newDate.getFullYear()} ${("0" + newDate.getUTCHours()).slice(-2)}:${("0" + newDate.getUTCMinutes()).slice(-2)}:${("0" + newDate.getUTCSeconds()).slice(-2)}`
     return formattedDate;
 }

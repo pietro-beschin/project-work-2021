@@ -56,29 +56,29 @@ body {
     line-height:1.2
 }
 
-.morris-hover {
-    position:absolute;
-    z-index:1000;
-  }
+.apexcharts-tooltip {
+    background: #37336d;
+    color: #37336d;
+}
+
+.apexcharts-menu {
+    background-color: #37336d!important;
+    border: 0px;
+}
+
+.stato-completato {
+    height: 25px;
+    width: 25px;
+    background-color: #00F790;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.stato-fallito {
+    height: 25px;
+    width: 25px;
+    background-color: #eb5252;
+    border-radius: 50%;
+    display: inline-block;
+}
   
-  .morris-hover.morris-default-style {     border-radius:10px;
-    padding:6px;
-    color:#666;
-    background:rgba(255, 255, 255, 0.8);
-    border:solid 2px rgba(230, 230, 230, 0.8);
-    font-family:sans-serif;
-    font-size:12px;
-    text-align:center;
-  }
-  
-  .morris-hover.morris-default-style .morris-hover-row-label {
-    font-weight:bold;
-    margin:0.25em 0;
-  }
-  
-  .morris-hover.morris-default-style .morris-hover-point {
-    white-space:nowrap;
-    margin:0.1em 0;
-  }
-  
-  svg { width: 100%; }
