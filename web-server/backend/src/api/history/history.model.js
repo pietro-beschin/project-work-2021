@@ -22,16 +22,15 @@ module.exports.list = async (query) => {
 }
 
 module.exports.store = async (data) => {
-    if(result = await historySchema.findOne({codice_commessa : data.codice_commessa }) && !(data.codice_commessa == '')){   //se esiste già e codice commessa c'è
+    if(result = await historySchema.findOne({codice_commessa : data.codice_commessa }) /*&& !(data.codice_commessa == '')*/){   //se esiste già e codice commessa c'è
         return await historySchema.findByIdAndUpdate(result._id, data); //la aggiorno
     }else{
         let ultimaInserita = await historySchema.findOne().sort({'_id' : -1});
         console.log(ultimaInserita._id);
-        if(ultimaInserita.quantita_prodotta >= ultimaInserita.quantita_prevista){
-            await historySchema.findByIdAndUpdate(ultimaInserita._id, {"stato" : "completata"});
-        }else{
-            await historySchema.findByIdAndUpdate(ultimaInserita._id, {"stato" : "fallita"});
-        }
+        let stato = (ultimaInserita.quantita_prodotta >= ultimaInserita.quantita_prevista) ? "completata" : "fallita";
+        await historySchema.findByIdAndUpdate(ultimaInserita._id, {"stato" : stato});
+        if(data.codice_commessa == '')
+            return await historySchema.findById(ultimaInserita._id);
     }
     //la creo
     data.stato = 'in esecuzione';
@@ -41,4 +40,12 @@ module.exports.store = async (data) => {
 
 module.exports.getLastCommessa = async () => {
     return await historySchema.findOne().sort({'_id' : -1});
+}
+
+module.exports.delete = async (id) => {
+    await historySchema.findByIdAndDelete(id);
+}
+
+module.exports.clear = async () => {
+    await historySchema.remove();
 }

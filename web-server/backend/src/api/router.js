@@ -8,5 +8,7 @@ router.get('/lastCommessa', historyController.getLastCommessa);
 router.get('/status', statusController.getStatus);
 router.post('/history', historyController.store);
 router.post('/status', statusController.store);
+router.delete('/history/:id', historyController.delete);
+router.delete('/history', historyController.clear);
 
 module.exports = router;
