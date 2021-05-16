@@ -29,8 +29,8 @@ module.exports.store = async (data) => {
             return await historySchema.findByIdAndUpdate(result._id, data);
         }
     }else{
-        console.log("L'ID DI RESULT E' "+result._id);
         let ultimaInserita = await historySchema.findOne();
+        console.log(ultimaInserita._id);
         if(ultimaInserita.quantita_prodotta >= ultimaInserita.quantita_prevista){
             await historySchema.findByIdAndUpdate(ultimaInserita._id, {'stato' : 'completata'});
         }else{
