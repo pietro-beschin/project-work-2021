@@ -25,7 +25,6 @@ module.exports.store = async (data) => {
     if(result = await historySchema.findOne({codice_commessa : data.codice_commessa })){    //se esista già
         //la aggiorno
         if(result.quantita_prodotta >= result.quantita_prevista){
-            data.stato = 'completata';
             return await historySchema.findByIdAndUpdate(result._id, data);
         }
     }else{
