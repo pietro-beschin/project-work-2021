@@ -23,9 +23,23 @@ module.exports.list = async (query) => {
 }
 
 module.exports.store = async (data) => {
-    if(result = await historySchema.findOne({codice_commessa : data.codice_commessa })){
+    
+    
+    if(result = await historySchema.findOne({codice_commessa : data.codice_commessa })){    //se esista già
+        //la aggiorno
+        if(this.quantita_prodotta >= this.quantita_prevista){
+            data.stato = 'completata';
+        }else{
+            console.log("L'ID DI RESULT E' "+result._id);
+            if(await historySchema.findOne()._id == result._id){
+                data.stato = 'in esecuzione';
+            }else{
+                data.stato = 'fallita';
+            }
+        }
         return await historySchema.findByIdAndUpdate(result._id, data);
     }
+    //la creo
     return await historySchema.create(data);
 }
 

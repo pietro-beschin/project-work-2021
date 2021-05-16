@@ -11,16 +11,12 @@ let historySchema = mongoose.Schema({
     data_consegna : Date,
     quantita_prodotta : Number,
     quantita_scarto_difettoso : Number,
-    quantita_scarto_pieno : Number
+    quantita_scarto_pieno : Number,
+    stato: String
 },
 {
     collection : 'history'
 });
-
-historySchema.virtual('completed')
-    .get(function() {
-        return this.quantita_prodotta >= this.quantita_prevista;
-    });
 
 mongoose.set('toJSON', {virtuals: true});
 mongoose.set('toObject', {virtuals: true});
