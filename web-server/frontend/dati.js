@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    const urlParams = new URLSearchParams(window.location.search);
+    //const urlParams = new URLSearchParams(window.location.search);
 
     fetchStatus();
     fetchCurrentData();
@@ -37,7 +37,7 @@ const fetchFilteredData = () => {
             $('#accordion-commesse').empty();
             result.forEach(commessa => {
                 if ($('#switch-completato').is(":checked") === true) {
-                    if (commessa.completed === 'false') {
+                    if (commessa.stato === 'fallita') {
                         addCommessaToList(commessa)
                     }
                 } else {
@@ -55,7 +55,7 @@ const fetchFilteredData = () => {
             $('#accordion-commesse').empty();
             result.forEach(commessa => {
                 if ($('#switch-completato').is(":checked") === true) {
-                    if (commessa.completed === 'false') {
+                    if (commessa.stato === 'fallita') {
                         addCommessaToList(commessa)
                     }
                 } else {
@@ -73,7 +73,7 @@ const fetchFilteredData = () => {
             $('#accordion-commesse').empty();
             result.forEach(commessa => {
                 if ($('#switch-completato').is(":checked") === true) {
-                    if (commessa.completed === 'false') {
+                    if (commessa.stato === 'fallita') {
                         addCommessaToList(commessa)
                     }
                 } else {
@@ -157,7 +157,7 @@ const fetchAllData = () => {
             $('#accordion-commesse').empty();
             result.forEach(commessa => {
                 if ($('#switch-completato').is(":checked") === true) {
-                    if (commessa.completed === 'false') {
+                    if (commessa.stato === 'fallita') {
                         addCommessaToList(commessa)
                     }
                 } else {
@@ -253,13 +253,13 @@ const datiStato = (commessa) => {
 
     $('#card-stato').prepend(template);
 
-    if(commessa.stato === "completato") {
+    if (commessa.stato === "completata") {
         $('#indicatore-stato').prepend('<span class="stato-completato"></span>')
     }
-    if(commessa.stato === "fallito") {
+    if (commessa.stato === "fallita") {
         $('#indicatore-stato').prepend('<span class="stato-fallito"></span>')
     }
-    if(commessa.stato === "in esecuzione") {
+    if (commessa.stato === "in esecuzione") {
         $('#indicatore-stato').prepend('<span class="spinner-border text-warning" role="status"></span>')
     }
 };
