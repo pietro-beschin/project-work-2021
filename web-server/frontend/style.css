@@ -66,6 +66,10 @@ body {
     border: 0px;
 }
 
+.apexcharts-menu-item:hover {
+    background: #0e0831!important;
+}
+
 .stato-completato {
     height: 25px;
     width: 25px;

@@ -60,11 +60,11 @@ const graphDateFormat = (rawDate) => {
 const renderGraph = () => {
     var optionsLine = {
         chart: {
-            width: "100%",
+            width: "95%",
             foreColor: "#f8f9fa",
             background: "#0e0831",
             toolbar: {
-                show: false
+                show: true
             },
             height: "200%",
             type: 'line',
