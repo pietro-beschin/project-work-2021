@@ -1,5 +1,4 @@
 const moment = require('moment');
-const { find, findByIdAndUpdate } = require('./history.schema');
 const historySchema = require('./history.schema');
 
 module.exports.list = async (query) => {
@@ -29,17 +28,19 @@ module.exports.store = async (data) => {
         //la aggiorno
         if(this.quantita_prodotta >= this.quantita_prevista){
             data.stato = 'completata';
-        }else{
-            console.log("L'ID DI RESULT E' "+result._id);
-            if(await historySchema.findOne()._id == result._id){
-                data.stato = 'in esecuzione';
-            }else{
-                data.stato = 'fallita';
-            }
+            return await historySchema.findByIdAndUpdate(result._id, data);
         }
-        return await historySchema.findByIdAndUpdate(result._id, data);
+    }else{
+        console.log("L'ID DI RESULT E' "+result._id);
+        let ultimaInserita = await historySchema.findOne();
+        if(ultimaInserita.quantita_prodotta >= ultimaInserita.quantita_prevista){
+            await historySchema.findByIdAndUpdate(ultimaInserita._id, {'stato' : 'completata'});
+        }else{
+            await historySchema.findByIdAndUpdate(ultimaInserita._id, {'stato' : 'fallita'});
+        }
     }
     //la creo
+    data.stato = 'in esecuzione';
     return await historySchema.create(data);
 }
 

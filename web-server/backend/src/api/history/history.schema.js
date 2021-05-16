@@ -12,7 +12,10 @@ let historySchema = mongoose.Schema({
     quantita_prodotta : Number,
     quantita_scarto_difettoso : Number,
     quantita_scarto_pieno : Number,
-    stato: String
+    stato: {
+        type : String,
+        enum : ['completata', 'fallita', 'in esecuzione']
+    }
 },
 {
     collection : 'history'
