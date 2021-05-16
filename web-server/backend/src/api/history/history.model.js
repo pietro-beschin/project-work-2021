@@ -22,7 +22,7 @@ module.exports.list = async (query) => {
 }
 
 module.exports.store = async (data) => {
-    if(result = await historySchema.findOne({codice_commessa : data.codice_commessa }) || data.codice_commessa == ""){//se esiste già o codice commessa vuoto
+    if(result = await historySchema.findOne({codice_commessa : data.codice_commessa }) || data.codice_commessa === ''){//se esiste già o codice commessa vuoto
         //la aggiorno
         return await historySchema.findByIdAndUpdate(result._id, data);
     }else{
