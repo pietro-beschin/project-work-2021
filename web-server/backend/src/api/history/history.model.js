@@ -24,9 +24,7 @@ module.exports.list = async (query) => {
 module.exports.store = async (data) => {
     if(result = await historySchema.findOne({codice_commessa : data.codice_commessa })){    //se esista già
         //la aggiorno
-        if(result.quantita_prodotta >= result.quantita_prevista){
-            return await historySchema.findByIdAndUpdate(result._id, data);
-        }
+        return await historySchema.findByIdAndUpdate(result._id, data);
     }else{
         let ultimaInserita = await historySchema.findOne();
         console.log(ultimaInserita._id);
@@ -38,6 +36,7 @@ module.exports.store = async (data) => {
     }
     //la creo
     data.stato = 'in esecuzione';
+    console.log("NUOVO");
     return await historySchema.create(data);
 }
 
