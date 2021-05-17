@@ -4,5 +4,5 @@ const mergeJson = require('merge-json');
 
 module.exports.getHistoryStatus = async (req, res, next) => {
     const nullObj = "";
-    res.json(mergeJson.merge(await historyModel.list(nullObj), await statusModel.getStatus()));
+    res.json(await historyModel.list({}) + await statusModel.getStatus());
 }
