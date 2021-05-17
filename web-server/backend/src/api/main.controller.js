@@ -5,7 +5,7 @@ module.exports.getHistoryStatus = async (req, res, next) => {
     const result = {};
 
     result.status = await statusModel.getStatus();
-    result.history = await historyModel.list({});
+    result.history = await historyModel.getLastCommessa();
 
     res.json(result);
 }
