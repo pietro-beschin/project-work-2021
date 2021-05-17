@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const historyController = require('./history/history.controller');
-const historySchema = require('./history/history.schema');
 const statusController = require('./status/status.controller');
 
 router.get('/history', historyController.list);
@@ -12,11 +11,7 @@ router.post('/status', statusController.store);
 router.delete('/history/:id', historyController.delete);
 router.delete('/history', historyController.clear);
 router.get('/historyStatus', async (req, res, next) => {
-    try{
-        res.json(await historyController.list() + await statusController.getStatus());
-    }catch(err){
-        next(err);
-    }
+    res.json(await historyController.list() + await statusController.getStatus());
 });
 
 
