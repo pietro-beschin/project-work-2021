@@ -11,7 +11,7 @@ router.post('/status', statusController.store);
 router.delete('/history/:id', historyController.delete);
 router.delete('/history', historyController.clear);
 router.get('/historyStatus', async (req, res, next) => {
-    res.json(await historyController.list() + await statusController.getStatus());
+    res.json(await historyController.list({}) + await statusController.getStatus({}));
 });
 
 
