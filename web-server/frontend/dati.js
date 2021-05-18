@@ -1,17 +1,35 @@
 $(document).ready(function () {
-    //const urlParams = new URLSearchParams(window.location.search);
-
-    fetchStatus();
-    fetchCurrentData();
     fetchAllData();
 
     $('#btnCerca').click(() => {
         fetchFilteredData();
     });
 
+    $('#btnClearFilters').click(() => {
+        $('#nome-articolo').val('');
+        $('#dtp-inizio').val('');
+        $('#dtp-fine').val('');
+        fetchFilteredData();
+    });
+
     $('input[name="switch-completato"]').change(() => {
         fetchFilteredData();
-    })
+    });
+
+    /* setInterval(timingLoad, 3000);
+    function timingLoad() {
+        $.ajax({
+            type: 'GET',
+            url: `${baseURL}lastCommessaStatus`,
+        }).then(commessa => {
+            console.log(commessa);
+            $('#quadrante-lavorazione').html(`${commessa.history.articolo}`);
+            $('#quadrante-stato').html(`${commessa.status.stato}`);
+            $('#quadrante-progresso').html(`${commessa.history.quantita_prodotta}/${commessa.history.quantita_prevista}`);
+            $('#quadrante-progresso-percentuale').html(`${((commessa.history.quantita_prodotta * 100) / commessa.history.quantita_prevista).toFixed(1)}%`);
+            $('#quadrante-allarmi').html(`${commessa.status.allarme}`);
+        });
+    } */
 });
 
 //const baseURL = 'http://localhost:3000/api/';
@@ -27,7 +45,22 @@ const fetchFilteredData = () => {
     event.preventDefault();
 
     if (!nomeArticolo && !startDate && !endDate) {
-        fetchAllData();
+        $.ajax({
+            type: 'GET',
+            url: `${baseURL}history`,
+        }).then(result => {
+            $('#accordion-commesse').empty();
+            result.forEach(commessa => {
+                if ($('#switch-completato').is(":checked") === true) {
+                    if (commessa.stato === 'fallita') {
+                        addCommessaToList(commessa)
+                    }
+                } else {
+                    addCommessaToList(commessa)
+                }
+            });
+            loadTable();
+        });
     };
     if (!nomeArticolo) {
         $.ajax({
@@ -85,26 +118,6 @@ const fetchFilteredData = () => {
     };
 };
 
-const fetchStatus = () => {
-    $.ajax({
-        type: 'GET',
-        url: `${baseURL}status`,
-    }).then(result => {
-        datiStato(result);
-        datiErrori(result);
-    });
-}
-
-const fetchCurrentData = () => {
-    $.ajax({
-        type: 'GET',
-        url: `${baseURL}lastCommessa`,
-    }).then(result => {
-        datiLavorazione(result);
-        datiProgresso(result);
-    });
-};
-
 const loadTable = (function () {
     let table = $('#dt-commesse');
     let rowCount = table.DataTable().data().count()
@@ -112,7 +125,7 @@ const loadTable = (function () {
     table.DataTable().destroy()
     table.DataTable({
         "serverSide": false,
-        "iDisplayLength": 5,
+        "iDisplayLength": 10,
         "paging": true,
         //"lengthChange": true,
         "lengthChange": (function () {
@@ -151,19 +164,23 @@ const loadTable = (function () {
 const fetchAllData = () => {
     $.ajax({
         type: 'GET',
-        url: `${baseURL}history`,
+        url: `${baseURL}historyStatus`,
     })
         .then(result => {
             $('#accordion-commesse').empty();
-            result.forEach(commessa => {
+            result.history.forEach(commessa => {
                 if ($('#switch-completato').is(":checked") === true) {
-                    if (commessa.stato === 'fallita') {
+                    if (commessa.history.stato === 'fallita') {
                         addCommessaToList(commessa)
                     }
                 } else {
                     addCommessaToList(commessa)
                 }
             });
+            datiStato(result);
+            datiErrori(result);
+            datiLavorazione(result);
+            datiProgresso(result);
             loadTable();
         });
 };
@@ -227,7 +244,7 @@ const addCommessaToList = (commessa) => {
 
 const datiLavorazione = (commessa) => {
     const template = $(`
-    <h1 class="display-5">${commessa.articolo}</h1>
+    <h1 id="quadrante-lavorazione" class="display-5">${commessa.history.articolo}</h1>
     <hr>
     <div class="lead">prodotto in lavorazione</div>
     `);
@@ -240,7 +257,7 @@ const datiStato = (commessa) => {
     const template = $(`
     <div class="row d-flex justify-content-between">
         <div class="col-sm-auto">
-            <h1 class="display-5">${commessa.stato}</h1>
+            <h1 id="quadrante-stato" class="display-5">${commessa.status.stato}</h1>
         </div>
         <div class="col-sm-auto mt-3" id="indicatore-stato">
             
@@ -253,13 +270,13 @@ const datiStato = (commessa) => {
 
     $('#card-stato').prepend(template);
 
-    if (commessa.stato === "completata") {
+    if (commessa.history.stato === "completata") {
         $('#indicatore-stato').prepend('<span class="stato-completato"></span>')
     }
-    if (commessa.stato === "fallita") {
+    if (commessa.history.stato === "fallita") {
         $('#indicatore-stato').prepend('<span class="stato-fallito"></span>')
     }
-    if (commessa.stato === "in esecuzione") {
+    if (commessa.history.stato === "in esecuzione") {
         $('#indicatore-stato').prepend('<span class="spinner-border text-warning" role="status"></span>')
     }
 };
@@ -267,11 +284,11 @@ const datiStato = (commessa) => {
 const datiProgresso = (commessa) => {
     const template = $(`
     <div class="row d-flex justify-content-between">
-        <div class="col">
-            <h1 class="display-5">${commessa.quantita_prodotta}/${commessa.quantita_prevista}</h1>
+        <div id="div-progresso" class="col">
+            <h1 id="quadrante-progresso" class="display-5">${commessa.history.quantita_prodotta}/${commessa.history.quantita_prevista}</h1>
         </div>
         <div class="col">
-            <h1 class="display-7">${((commessa.quantita_prodotta * 100) / commessa.quantita_prevista).toFixed(1)}%</h1>
+            <h1 id="quadrante-progresso-percentuale" class="display-7">${((commessa.history.quantita_prodotta * 100) / commessa.history.quantita_prevista).toFixed(1)}%</h1>
         </div>
     </div>
     <hr>
@@ -282,7 +299,7 @@ const datiProgresso = (commessa) => {
 };
 const datiErrori = (commessa) => {
     const template = $(`
-    <h1 class="display-6">${commessa.allarme}</h1>
+    <h1 id="quadrante-allarmi" class="display-6">${commessa.status.allarme}</h1>
     <hr>
     <div class="lead">errori</div>`);
     template.data(commessa);
