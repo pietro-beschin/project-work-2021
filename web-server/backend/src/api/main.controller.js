@@ -14,7 +14,7 @@ module.exports.getHistoryStatus = async (req, res, next) => {
     let result = {};
 
     result.status = await statusModel.getStatus();
-    result.history = await historyModel.list();
+    result.history = await historyModel.list({});
 
     res.json(result);
 }
