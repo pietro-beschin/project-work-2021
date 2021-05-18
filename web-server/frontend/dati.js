@@ -244,7 +244,7 @@ const addCommessaToList = (commessa) => {
 
 const datiLavorazione = (commessa) => {
     const template = $(`
-    <h1 id="quadrante-lavorazione" class="display-5">${commessa.history.articolo}</h1>
+    <h1 id="quadrante-lavorazione" class="display-5">${commessa.history[commessa.history.length - 1].articolo}</h1>
     <hr>
     <div class="lead">prodotto in lavorazione</div>
     `);
@@ -282,13 +282,15 @@ const datiStato = (commessa) => {
 };
 
 const datiProgresso = (commessa) => {
+    let pos = commessa.history.length - 1;
+
     const template = $(`
     <div class="row d-flex justify-content-between">
         <div id="div-progresso" class="col">
-            <h1 id="quadrante-progresso" class="display-5">${commessa.history.quantita_prodotta}/${commessa.history.quantita_prevista}</h1>
+            <h1 id="quadrante-progresso" class="display-5">${commessa.history[pos].quantita_prodotta}/${commessa.history[pos].quantita_prevista}</h1>
         </div>
         <div class="col">
-            <h1 id="quadrante-progresso-percentuale" class="display-7">${((commessa.history.quantita_prodotta * 100) / commessa.history.quantita_prevista).toFixed(1)}%</h1>
+            <h1 id="quadrante-progresso-percentuale" class="display-7">${((commessa.history[pos].quantita_prodotta * 100) / commessa.history[pos].quantita_prevista).toFixed(1)}%</h1>
         </div>
     </div>
     <hr>
