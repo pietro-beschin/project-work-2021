@@ -5,8 +5,8 @@ module.exports.list = async (query) => {
         const q = {};
         if(query.articolo){
             //q.articolo = {$regex: regExpArticolo(query.articolo)};
-            //q.articolo = query.articolo;
-            q.articolo = {$regex: `.*${query.articolo}.*`, options: "i"};
+            q.articolo = query.articolo;
+            //q.articolo = {$regex: `.*${query.articolo}.*`, options: "i"};
         //{$regex: /.*m.*/}
         }
         if(query.from || query.to){
