@@ -16,19 +16,23 @@ $(document).ready(function () {
         fetchFilteredData();
     });
 
-    /* setInterval(timingLoad, 3000);
-    function timingLoad() {
+    setInterval(statusPolling, 1000);
+    function statusPolling() {
         $.ajax({
             type: 'GET',
             url: `${baseURL}lastCommessaStatus`,
         }).then(commessa => {
-            console.log(commessa);
             $('#quadrante-lavorazione').html(`${commessa.history.articolo}`);
             $('#quadrante-stato').html(`${commessa.status.stato}`);
             $('#quadrante-progresso').html(`${commessa.history.quantita_prodotta}/${commessa.history.quantita_prevista}`);
             $('#quadrante-progresso-percentuale').html(`${((commessa.history.quantita_prodotta * 100) / commessa.history.quantita_prevista).toFixed(1)}%`);
             $('#quadrante-allarmi').html(`${commessa.status.allarme}`);
         });
+    }
+
+    /* setInterval(historyPolling, 2000);
+    function historyPolling() {
+        fetchFilteredData();
     } */
 });
 
@@ -36,12 +40,35 @@ const baseURL = 'http://54.85.250.76:3000/api/';
 let nomeArticolo;
 let graphData;
 
+const fetchAllData = () => {
+    $.ajax({
+        type: 'GET',
+        url: `${baseURL}historyStatus`,
+    }).then(result => {
+        $('#accordion-commesse').empty();
+        result.history.forEach(commessa => {
+            if ($('#switch-completato').is(":checked") === true) {
+                if (commessa.stato === 'fallita') {
+                    addCommessaToList(commessa)
+                }
+            } else {
+                addCommessaToList(commessa)
+            }
+        });
+        datiStato(result);
+        datiErrori(result);
+        datiLavorazione(result);
+        datiProgresso(result);
+        loadTable();
+        graphData = formatGraphData(result.history);
+        renderGraph();
+    });
+};
+
 const fetchFilteredData = () => {
     nomeArticolo = document.getElementById("nome-articolo").value;
     let startDate = $("#dtp-inizio").val();
     let endDate = $("#dtp-fine").val();
-
-    console.log(nomeArticolo);
 
     $('#dt-commesse').DataTable().destroy()
 
@@ -109,32 +136,6 @@ const loadTable = (function () {
     //console.log(rowCount)
 });
 
-const fetchAllData = () => {
-    $.ajax({
-        type: 'GET',
-        url: `${baseURL}historyStatus`,
-    })
-        .then(result => {
-            $('#accordion-commesse').empty();
-            result.history.forEach(commessa => {
-                if ($('#switch-completato').is(":checked") === true) {
-                    if (commessa.history.stato === 'fallita') {
-                        addCommessaToList(commessa)
-                    }
-                } else {
-                    addCommessaToList(commessa)
-                }
-            });
-            datiStato(result);
-            datiErrori(result);
-            datiLavorazione(result);
-            datiProgresso(result);
-            loadTable();
-            graphData = formatGraphData(result.history);
-            renderGraph();
-        });
-};
-
 const addCommessaToList = (commessa) => {
     const template = $(`
     <tr>
@@ -144,7 +145,7 @@ const addCommessaToList = (commessa) => {
                     <div class="card-header" role="tab" id="heading_${commessa._id}">
                         <a data-toggle="collapse" data-parent="#accordion-commesse" href="#collapse_${commessa._id}" aria-expanded="false" aria-controls="collapse_${commessa._id}">
                             <div class="row">
-                                <div class="col-md-auto"></div>
+                                <div id="stato_${commessa._id}" class="col-md-auto mt-2"></div>
                                 <div class="col-lg-7 h4 text-light mt-2">${commessa.codice_commessa}</div>
                                 <div class="col-md-auto text-light mt-2">${dateFormat(commessa.data_esecuzione)}</div>       
                             </div>
@@ -165,6 +166,11 @@ const addCommessaToList = (commessa) => {
                                 <div class="col-md-auto"></div>
                                 <div class="col-sm-3"><strong>codice commessa</strong></div>
                                 <div class="col-md-auto">${commessa.codice_commessa}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-auto"></div>
+                                <div class="col-sm-3"><strong>stato commessa</strong></div>
+                                <div class="col-md-auto">${commessa.stato}</div>
                             </div>
                             <div class="row">
                                 <div class="col-md-auto"></div>
@@ -194,6 +200,16 @@ const addCommessaToList = (commessa) => {
     template.data(commessa);
 
     $('#accordion-commesse').append(template);
+
+    if (commessa.stato === "completata") {
+        $(`#stato_${commessa._id}`).prepend('<span class="stato-completato"></span>')
+    }
+    if (commessa.stato === "fallita") {
+        $(`#stato_${commessa._id}`).prepend('<span class="stato-fallito"></span>')
+    }
+    if (commessa.stato === "in esecuzione") {
+        $(`#stato_${commessa._id}`).prepend('<span class="spinner-border text-warning" style="height: 25px; width: 25px;" role="status"></span>')
+    }
 };
 
 const datiLavorazione = (commessa) => {
