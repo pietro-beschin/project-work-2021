@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    $('#div-nessun-risultato').hide()
     fetchAllData();
 
     $('#btnCerca').click(() => {
@@ -89,7 +90,15 @@ const fetchFilteredData = () => {
             }
         });
         document.getElementById("nome-articolo").value = nomeArticolo;
+
         loadTable();
+        if(!result.length) {
+            $('#dt-commesse_wrapper').hide()
+            $('#div-nessun-risultato').show()
+        } else {
+            $('#div-nessun-risultato').hide()
+            $('#dt-commesse_wrapper').show()
+        }
     });
 };
 
@@ -282,7 +291,7 @@ const datiErrori = (commessa) => {
 const dateFormat = (date) => {
     let newDate = new Date(date);
     let giorni = ["Domenica", "Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabato"]
-    let mesi = ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"]
+    //let mesi = ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"]
     let formattedDate = `${giorni[newDate.getDay()]} ${("0" + newDate.getDate()).slice(-2)}/${("0" + (newDate.getMonth() + 1)).slice(-2)}/${newDate.getFullYear()} ${("0" + newDate.getUTCHours()).slice(-2)}:${("0" + newDate.getUTCMinutes()).slice(-2)}:${("0" + newDate.getUTCSeconds()).slice(-2)}`
     return formattedDate;
 }
