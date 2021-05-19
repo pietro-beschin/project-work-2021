@@ -21,11 +21,12 @@ module.exports.list = async (query) => {
         return await historySchema.find(q);
 }
 
-module.exports.store = async (data) => {
-    if(result = await historySchema.findOne({codice_commessa : data.codice_commessa }) /*&& !(data.codice_commessa == '')*/){   //se esiste già e codice commessa c'è
+module.exports.store = async (data) => {    
+    if(result = await historySchema.findOne({codice_commessa : data.codice_commessa})){   //se esiste già e codice commessa c'è
+        console.log(result);
         return await historySchema.findByIdAndUpdate(result._id, data); //la aggiorno
-    }else{
-        let ultimaInserita = await historySchema.findOne().sort({'_id' : -1});
+        
+    }else if(ultimaInserita = await historySchema.findOne().sort({'_id' : -1}).then(() => {return true;}).catch(() => {return false;})){      //modifico precedente
         console.log(ultimaInserita._id);
         let stato = (ultimaInserita.quantita_prodotta >= ultimaInserita.quantita_prevista) ? "completata" : "fallita";
         await historySchema.findByIdAndUpdate(ultimaInserita._id, {"stato" : stato});
