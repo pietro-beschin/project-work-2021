@@ -23,7 +23,7 @@ module.exports.list = async (query) => {
 }
 
 module.exports.store = async (data) => {  
-    console.log("ricevuto: "+data.codice_commessa);
+    console.log("ricevuto: " + data.codice_commessa);
     if(data.codice_commessa == "" && (ultimaInserita = await historySchema.findOne().sort({'_id' : -1}))){
         let stato = (ultimaInserita.quantita_prodotta >= ultimaInserita.quantita_prevista) ? "completata" : "fallita";
         return await historySchema.findByIdAndUpdate(ultimaInserita._id, {"stato" : stato});
@@ -35,6 +35,9 @@ module.exports.store = async (data) => {
         let stato = (ultimaInserita.quantita_prodotta >= ultimaInserita.quantita_prevista) ? "completata" : "fallita";
         await historySchema.findByIdAndUpdate(ultimaInserita._id, {"stato" : stato});  
     }
+    data.stato = 'in esecuzione';   //la creo
+    console.log("NUOVO");
+    return await historySchema.create(data);
 }
     
     
