@@ -34,17 +34,20 @@ $(document).ready(function () {
 
 //const baseURL = 'http://localhost:3000/api/';
 const baseURL = 'http://54.85.250.76:3000/api/';
+let nomeArticolo;
 
 const fetchFilteredData = () => {
-    let nomeArticolo = $("#nome-articolo").val();
+    nomeArticolo = document.getElementById("nome-articolo").value;
     let startDate = $("#dtp-inizio").val();
     let endDate = $("#dtp-fine").val();
+
+    console.log(nomeArticolo);
 
     $('#dt-commesse').DataTable().destroy()
 
     event.preventDefault();
 
-    if (!nomeArticolo && !startDate && !endDate) {
+    /* if (!nomeArticolo && !startDate && !endDate) {
         $.ajax({
             type: 'GET',
             url: `${baseURL}history`,
@@ -115,7 +118,25 @@ const fetchFilteredData = () => {
             });
             loadTable();
         });
-    };
+    }; */
+
+    $.ajax({
+        type: 'GET',
+        url: `${baseURL}history?articolo=${nomeArticolo}&from=${startDate}&to=${endDate}`,
+    }).then(result => {
+        $('#accordion-commesse').empty();
+        result.forEach(commessa => {
+            if ($('#switch-completato').is(":checked") === true) {
+                if (commessa.stato === 'fallita') {
+                    addCommessaToList(commessa)
+                }
+            } else {
+                addCommessaToList(commessa)
+            }
+        });
+        loadTable();
+        document.getElementById("nome-articolo").value = nomeArticolo;
+    });
 };
 
 const loadTable = (function () {
