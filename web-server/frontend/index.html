@@ -20,7 +20,7 @@
         <script src="//cdn.jsdelivr.net/npm/element-ui@2.13.2/lib/index.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
         <script src="dati.js"></script>
-        <script src="grafico.js"></script>
+        <!-- <script src="grafico.js"></script> -->
     </head>
     <body class="dark-back">
         <form>
@@ -29,12 +29,12 @@
                     <h1 class="display-5 mb-2">commesse</h1>
                 </div>
             </div>
-            <div class="row mt-5"></div>
-            <div class="row mt-5"></div>
+            <div class="row mt-4"></div>
+            <div class="row mt-4"></div>
             <div class="container-fluid text-white rounded-lg">
                 <div class="row">
                     <div class="col-xl-6">
-                        <div class="container-fluid text-white rounded-lg" style="padding: 0px!important;">
+                        <div id="div-status" class="container-fluid text-white rounded-lg" style="padding: 0px!important;">
                             <div id="display-status" class="jumbrotron mt-5 med-back border-lighter rounded-lg shadow-lg">
                                 <h1 class="display-4 mt-3 ml-3">stato macchina</h1>
                                 <div class="container">
@@ -88,7 +88,7 @@
                                         <form id="form-filtri" class="form-inline">
                                             <div class="row">
                                                 <div class="col-xl-5 mb-4">
-                                                    <input id="nome-articolo" type="text" class="form-control" name="commessa">
+                                                    <input id="nome-articolo" type="text" class="form-control" name="nome-articolo">
                                                     <small class="form-text text-light ml-1">Articolo</small>
                                                 </div>
                                                 <div class="col-xl-3 mb-4">
@@ -103,19 +103,21 @@
                                         </form>
                                     </div>
                                 </div>
-                                <div class="row px-md-3">
-                                    <div class="col-lg-5 ml-lg-5"></div>
-                                    <div class="col">
+                                <div class="row d-flex">
+                                    <div class="col"></div>
+                                    <div class="col-md-auto">
                                         <div class="custom-control custom-switch mt-2 mb-4">
                                             <input type="checkbox" class="custom-control-input" name="switch-completato" id="switch-completato">
                                             <label class="custom-control-label" for="switch-completato">Mostra solo commesse fallite</label>
                                           </div>
                                     </div>
-                                    <div class="col-sm-2">
-                                        <div class="col-xl mb-4">
-                                            <button id="btnCerca" type="submit" class="btn btn-primary">Cerca</button>
-                                        </div>
+                                    <div class="col-md-auto mb-4">
+                                        <button id="btnClearFilters" type="submit" class="btn btn-secondary">Pulisci i filtri</button>
                                     </div>
+                                    <div class="col-lg-2 mb-4">
+                                        <button id="btnCerca" type="submit" class="btn btn-primary">Cerca</button>
+                                    </div>
+                                    <div class="col"></div>
                                 </div>
                             </div>
                             <div class="container">
