@@ -5,7 +5,10 @@ let historySchema = mongoose.Schema({
     //fallita : Boolean,
     id : false,
     versionKey : false,
-    codice_commessa : String,
+    codice_commessa : {
+        type : String,
+        required : true
+    },
     articolo : String,
     quantita_prevista : Number,
     data_consegna : Date,
@@ -22,7 +25,7 @@ let historySchema = mongoose.Schema({
     collection : 'history'
 });
 
-mongoose.set('toJSON', {virtuals: true});
-mongoose.set('toObject', {virtuals: true});
+/* mongoose.set('toJSON', {virtuals: true});
+mongoose.set('toObject', {virtuals: true}); */
 
 module.exports = mongoose.model('history', historySchema);

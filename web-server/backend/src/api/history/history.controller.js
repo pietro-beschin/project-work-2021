@@ -1,4 +1,6 @@
 const historyModel = require('./history.model');
+const historySchema = require('./history.schema');
+var schema = historySchema.schema.obj;
 
 module.exports.list = async (req, res, next) => {
     try{
@@ -10,12 +12,20 @@ module.exports.list = async (req, res, next) => {
 }
 
 module.exports.store = async (req, res, next) => {
-    try{
-        const result = await historyModel.store(req.body);
-        res.json(result);
-    }catch(err){
-        next(err);
+    if(await historySchema.validate(req.body)
+        .then(function() { return true; })
+        .catch(function() { return false; })
+    ){
+        try{
+            const result = await historyModel.store(req.body);
+            res.json(result);
+        }catch(err){
+            next(err);
+        }
+    }else{
+        res.json("Formato non valido");
     }
+
 }
 
 module.exports.getLastCommessa = async(req, res, next) => {
