@@ -8,6 +8,7 @@ const cors = require('cors');
 mongoose.connect("mongodb://10.0.25.202:27017/project-work-2021", {useNewUrlParser: true, useUnifiedTopology: true});
 mongoose.set('debug', true);
 mongoose.set('useFindAndModify', false);
+mongoose.Schema.Types.String.checkRequired();
 
 app.use(morgan('tiny'));
 app.use(cors());
