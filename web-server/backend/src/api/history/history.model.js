@@ -23,8 +23,9 @@ module.exports.list = async (query) => {
 
 module.exports.store = async (data) => {  
     if(data.codice_commessa == '' && (ultimaInserita = await historySchema.findOne().sort({'_id' : -1}))){
+        console.log("entrato");
         let stato = (ultimaInserita.quantita_prodotta >= ultimaInserita.quantita_prevista) ? "completata" : "fallita";
-        return await historySchema.findByIdAndUpdate(ultimaInserita._id, {"stato":stato});
+        return await historySchema.findByIdAndUpdate(ultimaInserita._id, {"stato" : stato});
     }
 
     if(result = await historySchema.findOne({codice_commessa : data.codice_commessa})){   //se esiste già e codice commessa c'è
