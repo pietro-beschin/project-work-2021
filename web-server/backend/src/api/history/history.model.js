@@ -25,7 +25,7 @@ module.exports.store = async (data) => {
     let last = async () => {
         try{
             return await historySchema.findOne({codice_commessa : data.codice_commessa});
-        }catch{
+        }catch(err){
             return false;
         }
     }
