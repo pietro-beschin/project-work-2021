@@ -30,7 +30,7 @@ module.exports.store = async (data) => {
         }
     }
     
-    if(result = last){   //se esiste già e codice commessa c'è
+    if(result = await last){   //se esiste già e codice commessa c'è
         return await historySchema.findByIdAndUpdate(result._id, data); //la aggiorno
     }else{
         let ultimaInserita = await historySchema.findOne().sort({'_id' : -1});
