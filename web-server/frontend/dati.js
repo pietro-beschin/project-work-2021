@@ -146,12 +146,16 @@ const addCommessaToList = (commessa) => {
                             <div class="row">
                                 <div class="col-md-auto"></div>
                                 <div class="col-lg-7 h4 text-light mt-2">${commessa.codice_commessa}</div>
-                                <div class="col-md-auto text-light mt-2">${dateFormat(commessa.data_consegna)}</div>       
+                                <div class="col-md-auto text-light mt-2">${dateFormat(commessa.data_esecuzione)}</div>       
                             </div>
                         </a>
                     </div>
                     <div id="collapse_${commessa._id}" class="collapse med-back" role="tabpanel" aria-labelledby="heading_${commessa._id}" data-parent="accordion-commesse">
                         <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-auto"></div><div class="col-sm-3"><strong>data ultima esecuzione</strong></div>
+                                <div class="col-md-auto">${dateFormat(commessa.data_esecuzione)}</div>
+                            </div>
                             <div class="row">
                                 <div class="col-md-auto"></div>
                                 <div class="col-sm-3"><strong>articolo</strong></div>
@@ -263,7 +267,7 @@ const dateFormat = (date) => {
     let newDate = new Date(date);
     let giorni = ["Domenica", "Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabato"]
     let mesi = ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"]
-    let formattedDate = `${giorni[newDate.getDay()]} ${("0" + newDate.getDate()).slice(-2)} ${mesi[newDate.getMonth()]} ${newDate.getFullYear()} ${("0" + newDate.getUTCHours()).slice(-2)}:${("0" + newDate.getUTCMinutes()).slice(-2)}:${("0" + newDate.getUTCSeconds()).slice(-2)}`
+    let formattedDate = `${giorni[newDate.getDay()]} ${("0" + newDate.getDate()).slice(-2)}/${("0" + (newDate.getMonth() + 1)).slice(-2)}/${newDate.getFullYear()} ${("0" + newDate.getUTCHours()).slice(-2)}:${("0" + newDate.getUTCMinutes()).slice(-2)}:${("0" + newDate.getUTCSeconds()).slice(-2)}`
     return formattedDate;
 }
 
@@ -271,7 +275,7 @@ const formatGraphData = (dati) => {
     let formattedGraphData = [];
 
     for (const x of dati) {
-        let data = formattedGraphData[graphDateFormat(x.data_consegna)];
+        let data = formattedGraphData[graphDateFormat(x.data_esecuzione)];
         let pezziTotali = x.quantita_prodotta;
         let pezziScartati = x.quantita_scarto_difettoso + x.quantita_scarto_pieno;
 
@@ -286,7 +290,7 @@ const formatGraphData = (dati) => {
                 "pezzi_scartati": pezziScartati + data.pezzi_scartati
             }
         }
-        formattedGraphData[graphDateFormat(x.data_consegna)] = data;
+        formattedGraphData[graphDateFormat(x.data_esecuzione)] = data;
     }
 
     let data_x = [];
@@ -382,76 +386,3 @@ const renderGraph = () => {
     var chartLine = new ApexCharts(document.querySelector('#graph'), optionsLine);
     chartLine.render();
 }
-
-/* if (!nomeArticolo && !startDate && !endDate) {
-        $.ajax({
-            type: 'GET',
-            url: `${baseURL}history`,
-        }).then(result => {
-            $('#accordion-commesse').empty();
-            result.forEach(commessa => {
-                if ($('#switch-completato').is(":checked") === true) {
-                    if (commessa.stato === 'fallita') {
-                        addCommessaToList(commessa)
-                    }
-                } else {
-                    addCommessaToList(commessa)
-                }
-            });
-            loadTable();
-        });
-    };
-    if (!nomeArticolo) {
-        $.ajax({
-            type: 'GET',
-            url: `${baseURL}history?from=${startDate}&to=${endDate}`,
-        }).then(result => {
-            $('#accordion-commesse').empty();
-            result.forEach(commessa => {
-                if ($('#switch-completato').is(":checked") === true) {
-                    if (commessa.stato === 'fallita') {
-                        addCommessaToList(commessa)
-                    }
-                } else {
-                    addCommessaToList(commessa)
-                }
-            });
-            loadTable();
-        });
-    }
-    if (!startDate && !endDate) {
-        $.ajax({
-            type: 'GET',
-            url: `${baseURL}history?articolo=${nomeArticolo}`,
-        }).then(result => {
-            $('#accordion-commesse').empty();
-            result.forEach(commessa => {
-                if ($('#switch-completato').is(":checked") === true) {
-                    if (commessa.stato === 'fallita') {
-                        addCommessaToList(commessa)
-                    }
-                } else {
-                    addCommessaToList(commessa)
-                }
-            });
-            loadTable();
-        });
-    }
-    if (nomeArticolo && startDate && endDate) {
-        $.ajax({
-            type: 'GET',
-            url: `${baseURL}history?articolo=${nomeArticolo}&from=${startDate}&to=${endDate}`,
-        }).then(result => {
-            $('#accordion-commesse').empty();
-            result.forEach(commessa => {
-                if ($('#switch-completato').is(":checked") === true) {
-                    if (commessa.stato === 'fallita') {
-                        addCommessaToList(commessa)
-                    }
-                } else {
-                    addCommessaToList(commessa)
-                }
-            });
-            loadTable();
-        });
-    }; */
