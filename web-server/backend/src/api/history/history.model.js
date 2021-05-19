@@ -22,15 +22,14 @@ module.exports.list = async (query) => {
 }
 
 module.exports.store = async (data) => {
-    let last = async () => {
-        try{
-            return await historySchema.findOne({codice_commessa : data.codice_commessa});
-        }catch(err){
-            return false;
-        }
+    let last;
+    try{
+        last = await historySchema.findOne({codice_commessa : data.codice_commessa});
+    }catch{
+        last = false;
     }
     
-    if(result = await last){   //se esiste già e codice commessa c'è
+    if(result = last){   //se esiste già e codice commessa c'è
         console.log(result);
         return await historySchema.findByIdAndUpdate(result._id, data); //la aggiorno
     }else{
