@@ -47,8 +47,6 @@ const fetchFilteredData = () => {
 
     event.preventDefault();
 
-    
-
     $.ajax({
         type: 'GET',
         url: `${baseURL}history?articolo=${nomeArticolo}&from=${startDate}&to=${endDate}`,
