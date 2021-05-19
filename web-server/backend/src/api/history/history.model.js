@@ -3,9 +3,10 @@ const historySchema = require('./history.schema');
 
 module.exports.list = async (query) => {
         const q = {};
-        /*if(query.articolo){
-            q.articolo = regExpArticolo(query.articolo);
-        }*/
+        if(query.articolo){
+            //q.articolo = {$regex: regExpArticolo(query.articolo)};
+            q.articolo = query.articolo;
+        }
         if(query.from || query.to){
             q.data_consegna = {};
         }
@@ -18,7 +19,7 @@ module.exports.list = async (query) => {
         if(query.hideCompleted === 'true'){
             q.$where = "Number(this.quantita_prodotta) < Number(this.quantita_prevista)";
         }
-        return await historySchema.find(q, {articolo: {$regex : regExpArticolo(query.articolo)}});
+        return await historySchema.find(q);
 }
 
 module.exports.store = async (data) => {  
