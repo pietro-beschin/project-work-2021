@@ -1,6 +1,5 @@
 const historyModel = require('./history.model');
 const historySchema = require('./history.schema');
-var schema = historySchema.schema.obj;
 
 module.exports.list = async (req, res, next) => {
     try{
@@ -40,7 +39,7 @@ module.exports.getLastCommessa = async(req, res, next) => {
         const result = await historyModel.getLastCommessa();
         res.json(result);
     }catch(err){
-        next(err);
+        throw new Error('Not found');
     }
 }
 
@@ -59,7 +58,6 @@ module.exports.clear = async (req, res, next) => {
         await historyModel.clear();
         res.json("HISTORY SVUOTATA!");
     }catch(err){
-        res.json("SVUOTAMENTO NON RIUSCITO");
         next(err);
     }
 }

@@ -4,10 +4,7 @@ const historySchema = require('./history.schema');
 module.exports.list = async (query) => {
         const q = {};
         if(query.articolo){
-            //q.articolo = {$regex: regExpArticolo(query.articolo)};
             q.articolo = query.articolo;
-            //q.articolo = {$regex: `.*${query.articolo}.*`, options: "i"};
-        //{$regex: /.*m.*/}
         }
         if(query.from || query.to){
             q.data_consegna = {};
@@ -21,7 +18,7 @@ module.exports.list = async (query) => {
         if(query.hideCompleted === 'true'){
             q.$where = "Number(this.quantita_prodotta) < Number(this.quantita_prevista)";
         }
-        return await historySchema.find(q);//{'articolo': {'$regex': '/query.articolo/i'}});
+        return await historySchema.find(q, {'articolo': {'$regex': `.*${query.articolo}.*`}});
 }
 
 module.exports.store = async (data) => {  
@@ -41,8 +38,7 @@ module.exports.store = async (data) => {
     console.log("NUOVO");
     return await historySchema.create(data);
 }
-    
-    
+
 
 /*     if(result = await historySchema.findOne({codice_commessa : data.codice_commessa})){   //se esiste già e codice commessa c'è
         return await historySchema.findByIdAndUpdate(result._id, data); //la aggiorno

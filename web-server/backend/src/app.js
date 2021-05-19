@@ -4,15 +4,16 @@ const routes = require('./api/router');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const errorHandlers = require('./api/errors');
 
 mongoose.connect("mongodb://10.0.25.202:27017/project-work-2021", {useNewUrlParser: true, useUnifiedTopology: true});
 mongoose.set('debug', true);
 mongoose.set('useFindAndModify', false);
-mongoose.Schema.Types.String.checkRequired();
 
 app.use(morgan('tiny'));
 app.use(cors());
 app.use(express.json({extended : true}));
 app.use('/api', routes);
+app.use(errorHandlers);
 
 module.exports = app;

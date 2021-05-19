@@ -3,7 +3,6 @@ const statusModel = require('./status.model');
 module.exports.getStatus = async (req, res, next) => {
     try{
         let queried = await statusModel.getStatus();
-        
         res.json(queried);
     }catch(err){
         next(err);
