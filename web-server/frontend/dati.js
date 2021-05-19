@@ -32,7 +32,6 @@ $(document).ready(function () {
     } */
 });
 
-//const baseURL = 'http://localhost:3000/api/';
 const baseURL = 'http://54.85.250.76:3000/api/';
 let nomeArticolo;
 let graphData;
@@ -47,8 +46,6 @@ const fetchFilteredData = () => {
     $('#dt-commesse').DataTable().destroy()
 
     event.preventDefault();
-
-    
 
     $.ajax({
         type: 'GET',
