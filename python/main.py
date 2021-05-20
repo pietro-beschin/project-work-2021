@@ -13,7 +13,7 @@ def convert_json_commessa_and_send(rjson, update):
     quantitaprodotta = str(rjson['quantita_prodotta'])
     quantitascartata = str(rjson['quantita_scarto_pieno'] + rjson['quantita_scarto_difettoso'])
     dataconsegna = modifica_data(rjson['data_consegna'])
-    dataesecuzione = 'non disponibile'  # rjson['data_esecuzione']
+    dataesecuzione = rjson['data_esecuzione']
     stato = rjson['stato']
 
     rtext = 'codice commessa: ' + codice + '\n' + 'articolo: ' + articolo + '\n' + 'quantità prevista: ' + quantitaprevista + '\n' + 'quantità prodotta: ' + quantitaprodotta + '\n' + 'quantità scartata: ' + quantitascartata + '\n' + 'data esecuzione: ' + dataesecuzione + '\n' + 'data consegna: ' + dataconsegna + '\n' + 'stato: ' + stato
