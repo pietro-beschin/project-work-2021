@@ -3,7 +3,10 @@ const mongoose = require('mongoose');
 let statusSchema = mongoose.Schema({
     id : false,
     versionKey : false,
-    stato : String,
+    stato : {
+        type : String,
+        required : true
+    },
     allarme : String,
     velocita : Number
 },

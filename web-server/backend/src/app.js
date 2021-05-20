@@ -5,7 +5,13 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const errorHandlers = require('./errors');
+const https = require('https');
+const fs = require('fs');
 
+const options = {
+    key : fs.readFileSync('/opt/bitnami/apache2/conf/bitnami/certs/server.key'),
+    cert : fs.readFileSync('/opt/bitnami/apache2/conf/bitnami/certs/server.crt')
+};
 mongoose.connect("mongodb://10.0.25.202:27017/project-work-2021", {useNewUrlParser: true, useUnifiedTopology: true});
 mongoose.set('debug', true);
 mongoose.set('useFindAndModify', false);
@@ -15,5 +21,7 @@ app.use(cors());
 app.use(express.json({extended : true}));
 app.use('/api', routes);
 app.use(errorHandlers);
+
+https.createServer(options, app).listen(8080);
 
 module.exports = app;
