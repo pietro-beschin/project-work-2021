@@ -18,7 +18,7 @@ module.exports.list = async (query) => {
         if(query.hideCompleted === 'true'){
             q.$where = "Number(this.quantita_prodotta) < Number(this.quantita_prevista)";
         }
-        return await historySchema.find(q, {articolo: regExpArticolo(query.articolo)});
+        return await historySchema.find(q, {articolo: newRegExp(`.*${query.articolo}.*`, 'i')});
 }
 
 module.exports.store = async (data) => {  
