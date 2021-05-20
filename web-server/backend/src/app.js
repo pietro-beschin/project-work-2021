@@ -10,7 +10,7 @@ const fs = require('fs');
 
 const options = {
     key : fs.readFileSync('/opt/bitnami/apache2/conf/privkey.pem'),
-    cert : fs.readFileSync('/opt/bitnami/apache2/conf/bitnami/certs/key-cert.pem')
+    cert : fs.readFileSync('/opt/bitnami/apache2/conf/bitnami/key-cert.pem')
 };
 mongoose.connect("mongodb://10.0.25.202:27017/project-work-2021", {useNewUrlParser: true, useUnifiedTopology: true});
 mongoose.set('debug', true);
