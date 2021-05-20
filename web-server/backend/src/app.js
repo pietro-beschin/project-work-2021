@@ -8,9 +8,10 @@ const errorHandlers = require('./errors');
 const https = require('https');
 const fs = require('fs');
 
-const options = {
+var options = {
     key : fs.readFileSync('/opt/bitnami/apache2/conf/privkey.pem'),
-    cert : fs.readFileSync('/opt/bitnami/apache2/conf/key-cert.pem')
+    cert : fs.readFileSync('/opt/bitnami/apache2/conf/key-cert.pem'),
+    passphrase : 'gruppo1gang'
 };
 mongoose.connect("mongodb://10.0.25.202:27017/project-work-2021", {useNewUrlParser: true, useUnifiedTopology: true});
 mongoose.set('debug', true);
