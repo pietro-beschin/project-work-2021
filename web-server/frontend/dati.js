@@ -1,20 +1,32 @@
+let datiCommesse;
 $(document).ready(function () {
     $('#div-nessun-risultato').hide()
+    initTable();
     fetchAllData();
 
-    $('#btnCerca').click(() => {
-        fetchFilteredData();
+    $('#btnCerca').click((event) => {
+        event.preventDefault();
+        let table = $('#dt-commesse').DataTable();
+        table.clear().draw();
+        datiCommesse = [];
+        fetchNewCommesse()
     });
 
     $('#btnClearFilters').click(() => {
         $('#nome-articolo').val('');
         $('#dtp-inizio').val('');
         $('#dtp-fine').val('');
-        fetchFilteredData();
+        let table = $('#dt-commesse').DataTable();
+        table.clear().draw();
+        datiCommesse = [];
+        fetchNewCommesse()
     });
 
     $('input[name="switch-completato"]').change(() => {
-        fetchFilteredData();
+        let table = $('#dt-commesse').DataTable();
+        table.clear().draw();
+        datiCommesse = [];
+        fetchNewCommesse()
     });
 
     setInterval(statusPolling, 1000);
@@ -31,21 +43,24 @@ $(document).ready(function () {
         });
     }
 
-    /* setInterval(historyPolling, 2000);
+    setInterval(historyPolling, 2000);
     function historyPolling() {
-        fetchFilteredData();
-    } */
+        fetchNewCommesse();
+    }
 });
 
 const baseURL = 'http://54.85.250.76:3000/api/';
 let nomeArticolo;
 let graphData;
 
+
 const fetchAllData = () => {
     $.ajax({
         type: 'GET',
         url: `${baseURL}historyStatus`,
     }).then(result => {
+        datiCommesse = result.history;
+
         $('#accordion-commesse').empty();
         result.history.forEach(commessa => {
             if ($('#switch-completato').is(":checked") === true) {
@@ -55,32 +70,37 @@ const fetchAllData = () => {
             } else {
                 addCommessaToList(commessa)
             }
+            updateTableRow(commessa);
         });
         datiStato(result);
         datiErrori(result);
         datiLavorazione(result);
         datiProgresso(result);
-        loadTable();
+
+        let table = $('#dt-commesse').DataTable();
+        table.rows().invalidate().draw(true);
+        
         graphData = formatGraphData(result.history);
         renderGraph();
     });
 };
 
-const fetchFilteredData = () => {
+const fetchNewCommesse = () => {
     nomeArticolo = document.getElementById("nome-articolo").value;
     let startDate = $("#dtp-inizio").val();
     let endDate = $("#dtp-fine").val();
 
-    $('#dt-commesse').DataTable().destroy()
-
-    event.preventDefault();
+    if (event && event.preventDefault) {
+        event.preventDefault();
+    }
 
     $.ajax({
         type: 'GET',
         url: `${baseURL}history?articolo=${nomeArticolo}&from=${startDate}&to=${endDate}`,
     }).then(result => {
-        $('#accordion-commesse').empty();
-        result.forEach(commessa => {
+        let diff = _.differenceBy(result, datiCommesse, '_id');
+
+        diff.forEach(commessa => {
             if ($('#switch-completato').is(":checked") === true) {
                 if (commessa.stato === 'fallita') {
                     addCommessaToList(commessa)
@@ -89,9 +109,11 @@ const fetchFilteredData = () => {
                 addCommessaToList(commessa)
             }
         });
+        result.forEach(commessa => {
+            updateTableRow(commessa);
+        });
         document.getElementById("nome-articolo").value = nomeArticolo;
-
-        loadTable();
+        
         if(!result.length) {
             $('#dt-commesse_wrapper').hide()
             $('#div-nessun-risultato').show()
@@ -99,26 +121,25 @@ const fetchFilteredData = () => {
             $('#div-nessun-risultato').hide()
             $('#dt-commesse_wrapper').show()
         }
+
+        datiCommesse = result;
     });
 };
 
-const loadTable = (function () {
+const initTable = (function () {
     let table = $('#dt-commesse');
-    let rowCount = table.DataTable().data().count()
 
     table.DataTable().destroy()
     table.DataTable({
+        "columnDefs":[{
+            type: 'item',
+            targets: 0
+        }],
+        "order": [[0, 'desc']],
         "serverSide": false,
         "iDisplayLength": 10,
         "paging": true,
-        //"lengthChange": true,
-        "lengthChange": (function () {
-            if (rowCount == 0) {
-                return false;
-            } else {
-                return true;
-            };
-        }),
+        "lengthChange": true,
         "searching": false,
         "ordering": true,
         "info": true,
@@ -132,7 +153,7 @@ const loadTable = (function () {
             "info": "Pagina _PAGE_ di _PAGES_",
             "infoEmpty": "",
             "infoFiltered": " - Filtrato da _MAX_ risultati",
-            "emptyTable": "Nessun risultato",
+            "emptyTable": " ",
             "paginate": {
                 "first": "Prima",
                 "last": "Ultima",
@@ -142,21 +163,72 @@ const loadTable = (function () {
         }
     });
 
-    //console.log(rowCount)
+    $.fn.dataTableExt.oSort["item-desc"] = function(a, b) {
+        a = $(a).attr('item-date');
+        b = $(b).attr('item-date');
+        a = new Date(a).getTime();
+        b = new Date(b).getTime();
+        if (a > b) {
+            return -1;
+        }
+        if (a < b) {
+            return 1;
+        }
+        return 0;
+    }
+
+    $.fn.dataTableExt.oSort["item-asc"] = function(a, b) {
+        a = $(a).attr('item-date');
+        b = $(b).attr('item-date');
+        a = new Date(a).getTime();
+        b = new Date(b).getTime();
+        if (a < b) {
+            return -1;
+        }
+        if (a > b) {
+            return 1;
+        }
+        return 0;
+    }
 });
+
+const updateTableRow = (commessa) => {
+    commessa.scarto = commessa.quantita_scarto_difettoso + commessa.quantita_scarto_pieno;
+    commessa.data_di_esecuzione = dateFormat(commessa.data_esecuzione);
+
+    _.forIn(commessa, (value, key) => {
+        if($(`#table_${commessa._id} .item-${key}`)) {
+            $(`#table_${commessa._id} .item-${key}`).html(value);
+        }
+    });
+    
+    $(`#table_${commessa._id}`).attr('item-date', commessa.data_esecuzione);
+    $(`#table_${commessa._id} .stato-container`).empty();
+
+    if (commessa.stato === "completata") {
+        $(`#table_${commessa._id} .stato-container`).prepend('<span class="stato-completato"></span>')
+    }
+    if (commessa.stato === "fallita") {
+        $(`#table_${commessa._id} .stato-container`).prepend('<span class="stato-fallito"></span>')
+    }
+    if (commessa.stato === "in esecuzione") {
+        $(`#table_${commessa._id} .stato-container`).prepend('<span class="spinner-border text-warning" style="height: 25px; width: 25px;" role="status"></span>')
+    }
+    $(`#table_${commessa._id}`).data(commessa);
+}
 
 const addCommessaToList = (commessa) => {
     const template = $(`
-    <tr>
+    <tr class="table-item">
         <td>
-            <div class="accordion md-accordion" role="tablist">
+            <div id="table_${commessa._id}" class="accordion md-accordion" role="tablist" item-date="${commessa.data_esecuzione}">
                 <div class="card lighter-back border-lighter">
                     <div class="card-header" role="tab" id="heading_${commessa._id}">
                         <a data-toggle="collapse" data-parent="#accordion-commesse" href="#collapse_${commessa._id}" aria-expanded="false" aria-controls="collapse_${commessa._id}">
                             <div class="row">
-                                <div id="stato_${commessa._id}" class="col-md-auto mt-2"></div>
+                                <div class="stato-container col-md-auto mt-2"></div>
                                 <div class="col-lg-7 h4 text-light mt-2">${commessa.codice_commessa}</div>
-                                <div class="col-md-auto text-light mt-2">${dateFormat(commessa.data_esecuzione)}</div>       
+                                <div class="col-md-auto text-light mt-2 item-data_di_esecuzione">${dateFormat(commessa.data_esecuzione)}</div>       
                             </div>
                         </a>
                     </div>
@@ -164,7 +236,7 @@ const addCommessaToList = (commessa) => {
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-auto"></div><div class="col-sm-3"><strong>data ultima esecuzione</strong></div>
-                                <div class="col-md-auto">${dateFormat(commessa.data_esecuzione)}</div>
+                                <div class="item-data-esecuzione col-md-auto item-data_di_esecuzione">${dateFormat(commessa.data_esecuzione)}</div>
                             </div>
                             <div class="row">
                                 <div class="col-md-auto"></div>
@@ -179,7 +251,7 @@ const addCommessaToList = (commessa) => {
                             <div class="row">
                                 <div class="col-md-auto"></div>
                                 <div class="col-sm-3"><strong>stato commessa</strong></div>
-                                <div class="col-md-auto">${commessa.stato}</div>
+                                <div class="col-md-auto item-stato">${commessa.stato}</div>
                             </div>
                             <div class="row">
                                 <div class="col-md-auto"></div>
@@ -193,12 +265,12 @@ const addCommessaToList = (commessa) => {
                             <div class="row">
                                 <div class="col-md-auto"></div>
                                 <div class="col-sm-3"><strong>quantità prodotta</strong></div>
-                                <div class="col-md-auto">${commessa.quantita_prodotta}</div>
+                                <div class="col-md-auto item-quantita_prodotta">${commessa.quantita_prodotta}</div>
                             </div>
                             <div class="row">
                                 <div class="col-md-auto"></div>
                                 <div class="col-sm-3"><strong>quantità di scarto</strong></div>
-                                <div class="col-md-auto">${commessa.quantita_scarto_difettoso + commessa.quantita_scarto_pieno}</div>
+                                <div class="col-md-auto item-scarto">${commessa.quantita_scarto_difettoso + commessa.quantita_scarto_pieno}</div>
                             </div>
                         </div>
                     </div>
@@ -206,19 +278,10 @@ const addCommessaToList = (commessa) => {
             </div>
         </td>
     </tr>`);
-    template.data(commessa);
-
-    $('#accordion-commesse').append(template);
-
-    if (commessa.stato === "completata") {
-        $(`#stato_${commessa._id}`).prepend('<span class="stato-completato"></span>')
-    }
-    if (commessa.stato === "fallita") {
-        $(`#stato_${commessa._id}`).prepend('<span class="stato-fallito"></span>')
-    }
-    if (commessa.stato === "in esecuzione") {
-        $(`#stato_${commessa._id}`).prepend('<span class="spinner-border text-warning" style="height: 25px; width: 25px;" role="status"></span>')
-    }
+    let table = $('#dt-commesse').DataTable();
+    
+    table.rows.add(template).data(commessa).draw();
+    $(`#table_${commessa._id}`).data(commessa);
 };
 
 const datiLavorazione = (commessa) => {
@@ -300,22 +363,22 @@ const formatGraphData = (dati) => {
     let formattedGraphData = [];
 
     for (const x of dati) {
-        let data = formattedGraphData[graphDateFormat(x.data_esecuzione)];
+        let data_grafico = formattedGraphData[graphDateFormat(x.data_esecuzione)];
         let pezziTotali = x.quantita_prodotta;
         let pezziScartati = x.quantita_scarto_difettoso + x.quantita_scarto_pieno;
 
-        if (data == undefined) {
-            data = {
+        if (data_grafico == undefined) {
+            data_grafico = {
                 "pezzi_totali": pezziTotali,
                 "pezzi_scartati": pezziScartati
             }
         } else {
-            data = {
-                "pezzi_totali": pezziTotali + data.pezzi_totali,
-                "pezzi_scartati": pezziScartati + data.pezzi_scartati
+            data_grafico = {
+                "pezzi_totali": pezziTotali + data_grafico.pezzi_totali,
+                "pezzi_scartati": pezziScartati + data_grafico.pezzi_scartati
             }
         }
-        formattedGraphData[graphDateFormat(x.data_esecuzione)] = data;
+        formattedGraphData[graphDateFormat(x.data_esecuzione)] = data_grafico;
     }
 
     let data_x = [];
