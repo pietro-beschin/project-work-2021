@@ -13,6 +13,7 @@ module.exports.store = async (req, res, next) => {
     try{
         const queried = await statusModel.store(req.body);
         res.json(queried);
+        res.status(201);
     }catch(err){
         next(err);
     }  

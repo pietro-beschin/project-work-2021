@@ -12,7 +12,6 @@ module.exports.getLastCommessaStatus = async (req, res, next) => {
 
 module.exports.getHistoryStatus = async (req, res, next) => {
     let result = {};
-
     result.status = await statusModel.getStatus();
     result.history = await historyModel.list({});
 
