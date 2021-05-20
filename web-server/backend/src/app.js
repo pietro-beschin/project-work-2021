@@ -4,7 +4,7 @@ const routes = require('./api/router');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const errorHandlers = require('./api/errors');
+const errorHandlers = require('./errors');
 
 mongoose.connect("mongodb://10.0.25.202:27017/project-work-2021", {useNewUrlParser: true, useUnifiedTopology: true});
 mongoose.set('debug', true);
