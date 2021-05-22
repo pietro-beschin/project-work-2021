@@ -82,6 +82,8 @@ const fetchAllData = () => {
         
         graphData = formatGraphData(result.history);
         renderGraph();
+
+        
     });
 };
 

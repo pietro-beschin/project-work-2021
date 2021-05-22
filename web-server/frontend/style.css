@@ -1,5 +1,15 @@
 body {
     font-family: 'Source Sans Pro', sans-serif;
+    position: relative;
+    padding-bottom: 64px;
+    min-height: 100vh;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 
 .dark-back {
