@@ -4,10 +4,7 @@ const historyModel = require('./history.model');
 let historySchema = mongoose.Schema({
     id : false,
     versionKey : false,
-    codice_commessa : {
-        type : String,
-        required : true
-    },
+    codice_commessa : String,
     articolo : String,
     quantita_prevista : Number,
     data_consegna : Date,
