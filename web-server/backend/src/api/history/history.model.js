@@ -36,7 +36,7 @@ module.exports.store = async (data) => {
         let data_fine = moment(Date.now().toString()).utcOffset(0, true);
         await historySchema.findByIdAndUpdate(ultimaInserita._id, {"stato" : stato, "data_fine" : data_fine});  
     }
-    let data_fine = moment(Date.now().toString()).utcOffset(0, true);
+    data.data_fine = moment(Date.now().toString()).utcOffset(0, true);
     data.stato = 'in esecuzione';   //la creo
     console.log("NUOVO");
     return await historySchema.create(data);
