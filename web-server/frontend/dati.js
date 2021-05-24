@@ -1,6 +1,6 @@
 let datiCommesse;
 $(document).ready(function () {
-    $('#div-nessun-risultato').hide()
+    $('#div-nessun-risultato').hide();
     initTable();
     fetchAllData();
 
@@ -41,18 +41,17 @@ $(document).ready(function () {
             $('#quadrante-progresso-percentuale').html(`${((commessa.history.quantita_prodotta * 100) / commessa.history.quantita_prevista).toFixed(1)}%`);
             $('#quadrante-allarmi').html(`${commessa.status.allarme}`);
         });
-    }
+    };
 
     setInterval(historyPolling, 2000);
     function historyPolling() {
         fetchNewCommesse();
-    }
+    };
 });
 
 const baseURL = 'http://54.85.250.76:3000/api/';
 let nomeArticolo;
 let graphData;
-
 
 const fetchAllData = () => {
     $.ajax({
@@ -72,18 +71,19 @@ const fetchAllData = () => {
             }
             updateTableRow(commessa);
         });
-        datiStato(result);
-        datiErrori(result);
-        datiLavorazione(result);
-        datiProgresso(result);
+
+        let pos = result.history.length - 1;
+        $('#quadrante-lavorazione').html(`${result.history[result.history.length - 1].articolo}`);
+        $('#quadrante-stato').html(`${result.status.stato}`);
+        $('#quadrante-progresso').html(`${result.history[pos].quantita_prodotta}/${result.history[pos].quantita_prevista}`);
+        $('#quadrante-progresso-percentuale').html(`${((result.history[pos].quantita_prodotta * 100) / result.history[pos].quantita_prevista).toFixed(1)}%`);
+        $('#quadrante-allarmi').html(`${result.status.allarme}`);
 
         let table = $('#dt-commesse').DataTable();
         table.rows().invalidate().draw(true);
         
         graphData = formatGraphData(result.history);
         renderGraph();
-
-        
     });
 };
 
@@ -94,7 +94,7 @@ const fetchNewCommesse = () => {
 
     if (event && event.preventDefault) {
         event.preventDefault();
-    }
+    };
 
     $.ajax({
         type: 'GET',
@@ -122,7 +122,7 @@ const fetchNewCommesse = () => {
         } else {
             $('#div-nessun-risultato').hide()
             $('#dt-commesse_wrapper').show()
-        }
+        };
 
         datiCommesse = result;
     });
@@ -177,7 +177,7 @@ const initTable = (function () {
             return 1;
         }
         return 0;
-    }
+    };
 
     $.fn.dataTableExt.oSort["item-asc"] = function(a, b) {
         a = $(a).attr('item-date');
@@ -217,14 +217,14 @@ const updateTableRow = (commessa) => {
         $(`#table_${commessa._id} .stato-container`).prepend('<span class="spinner-border text-warning" style="height: 25px; width: 25px;" role="status"></span>')
     }
     $(`#table_${commessa._id}`).data(commessa);
-}
+};
 
 const addCommessaToList = (commessa) => {
     const template = $(`
     <tr class="table-item">
         <td>
             <div id="table_${commessa._id}" class="accordion md-accordion" role="tablist" item-date="${commessa.data_esecuzione}">
-                <div class="card lighter-back border-lighter">
+                <div class="card lighter-back-dark-gradient border-lighter">
                     <div class="card-header" role="tab" id="heading_${commessa._id}">
                         <a data-toggle="collapse" data-parent="#accordion-commesse" href="#collapse_${commessa._id}" aria-expanded="false" aria-controls="collapse_${commessa._id}">
                             <div class="row">
@@ -286,80 +286,13 @@ const addCommessaToList = (commessa) => {
     $(`#table_${commessa._id}`).data(commessa);
 };
 
-const datiLavorazione = (commessa) => {
-    const template = $(`
-    <h1 id="quadrante-lavorazione" class="display-5">${commessa.history[commessa.history.length - 1].articolo}</h1>
-    <hr>
-    <div class="lead">prodotto in lavorazione</div>
-    `);
-    template.data(commessa);
-
-    $('#card-lavorazione').prepend(template);
-};
-
-const datiStato = (commessa) => {
-    const template = $(`
-    <div class="row d-flex justify-content-between">
-        <div class="col-sm-auto">
-            <h1 id="quadrante-stato" class="display-5">${commessa.status.stato}</h1>
-        </div>
-        <div class="col-sm-auto mt-3" id="indicatore-stato">
-            
-        </div>
-    </div>
-    <hr>
-    <div class="lead">stato</div>`);
-
-    template.data(commessa);
-
-    $('#card-stato').prepend(template);
-
-    if (commessa.history.stato === "completata") {
-        $('#indicatore-stato').prepend('<span class="stato-completato"></span>')
-    }
-    if (commessa.history.stato === "fallita") {
-        $('#indicatore-stato').prepend('<span class="stato-fallito"></span>')
-    }
-    if (commessa.history.stato === "in esecuzione") {
-        $('#indicatore-stato').prepend('<span class="spinner-border text-warning" role="status"></span>')
-    }
-};
-
-const datiProgresso = (commessa) => {
-    let pos = commessa.history.length - 1;
-
-    const template = $(`
-    <div class="row d-flex justify-content-between">
-        <div id="div-progresso" class="col">
-            <h1 id="quadrante-progresso" class="display-5">${commessa.history[pos].quantita_prodotta}/${commessa.history[pos].quantita_prevista}</h1>
-        </div>
-        <div class="col">
-            <h1 id="quadrante-progresso-percentuale" class="display-7">${((commessa.history[pos].quantita_prodotta * 100) / commessa.history[pos].quantita_prevista).toFixed(1)}%</h1>
-        </div>
-    </div>
-    <hr>
-    <div class="lead">pezzi prodotti</div>`);
-    template.data(commessa);
-
-    $('#card-progresso').prepend(template);
-};
-const datiErrori = (commessa) => {
-    const template = $(`
-    <h1 id="quadrante-allarmi" class="display-6">${commessa.status.allarme}</h1>
-    <hr>
-    <div class="lead">errori</div>`);
-    template.data(commessa);
-
-    $('#card-errori').prepend(template);
-};
-
 const dateFormat = (date) => {
     let newDate = new Date(date);
     let giorni = ["Domenica", "Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabato"]
     //let mesi = ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"]
     let formattedDate = `${giorni[newDate.getDay()]} ${("0" + newDate.getDate()).slice(-2)}/${("0" + (newDate.getMonth() + 1)).slice(-2)}/${newDate.getFullYear()} ${("0" + newDate.getUTCHours()).slice(-2)}:${("0" + newDate.getUTCMinutes()).slice(-2)}:${("0" + newDate.getUTCSeconds()).slice(-2)}`
     return formattedDate;
-}
+};
 
 const formatGraphData = (dati) => {
     let formattedGraphData = [];
@@ -368,6 +301,7 @@ const formatGraphData = (dati) => {
         let data_grafico = formattedGraphData[graphDateFormat(x.data_esecuzione)];
         let pezziTotali = x.quantita_prodotta;
         let pezziScartati = x.quantita_scarto_difettoso + x.quantita_scarto_pieno;
+        let commesseFallite;
 
         if (data_grafico == undefined) {
             data_grafico = {
@@ -394,20 +328,20 @@ const formatGraphData = (dati) => {
     });
 
     return [data_x, pezziTotaliGiornalieri, pezziScartatiGiornalieri];
-}
+};
 
 const graphDateFormat = (rawDate) => {
     let newDate = new Date(rawDate);
     let formattedDate = `${newDate.getFullYear()}-${("0" + (newDate.getMonth() + 1)).slice(-2)}-${("0" + newDate.getDate()).slice(-2)}`
     return formattedDate;
-}
+};
 
 const renderGraph = () => {
     var optionsLine = {
         chart: {
             width: "95%",
             foreColor: "#f8f9fa",
-            background: "#0e0831",
+            //background: "#0e0831",
             toolbar: {
                 show: true
             },
@@ -475,4 +409,4 @@ const renderGraph = () => {
 
     var chartLine = new ApexCharts(document.querySelector('#graph'), optionsLine);
     chartLine.render();
-}
+};
