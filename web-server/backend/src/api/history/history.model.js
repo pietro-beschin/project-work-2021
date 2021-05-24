@@ -31,6 +31,7 @@ module.exports.store = async (data) => {
     }
 
     if(result = await historySchema.findOne({codice_commessa : data.codice_commessa})){   //se esiste già e codice commessa c'è
+        data.data_fine = moment(Date.now()).utcOffset(0, true);
         return await historySchema.findByIdAndUpdate(result._id, data); //la aggiorno
     }else if(ultimaInserita = await historySchema.findOne().sort({'_id' : -1})){      //modifico precedente
         let stato = (ultimaInserita.quantita_prodotta >= ultimaInserita.quantita_prevista) ? "completata" : "fallita";
