@@ -30,8 +30,8 @@ module.exports.getLastCommessa = async(req, res, next) => {
 
 module.exports.delete = async (req, res, next) => {
     try{
-        await historyModel.delete(req.params.id);
-        res.json("RECORD CON ID " + req.params.id + "ELIMINATO!");
+        await historyModel.delete(req.params.codice_commessa);
+        res.json("RECORD CON CODICE_COMMESSA " + req.params.codice_commessa + "ELIMINATO!");
     }catch(err){
         throw new Error('Not Found');
     }
