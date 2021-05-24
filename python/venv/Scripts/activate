@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Users\corso3\Desktop\Python\venv"
+VIRTUAL_ENV="C:\Users\corso3\Desktop\project work\BotTelegram\venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

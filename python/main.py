@@ -1,4 +1,3 @@
-# coding=utf-8
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import requests
 
@@ -73,7 +72,7 @@ def view_info(update, context):
     quantitaprevista = r2json['quantita_prevista']
     quantitaprodotta = r2json['quantita_prodotta']
 
-    percentualeproduzione = str(100 * quantitaprodotta / quantitaprevista)
+    percentualeproduzione = str(round(100 * quantitaprodotta / quantitaprevista, 2))
 
     rtext = 'stato: '+stato+'\n'+'avanzamento: '+percentualeproduzione+'%'+'\n'+'pezzi/ora: '+velocita
 
