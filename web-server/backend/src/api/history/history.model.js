@@ -34,7 +34,7 @@ module.exports.store = async (data) => {
     }else if(ultimaInserita = await historySchema.findOne().sort({'_id' : -1})){      //modifico precedente
         let stato = (ultimaInserita.quantita_prodotta >= ultimaInserita.quantita_prevista) ? "completata" : "fallita";
         let data_fine = Date.now();
-        await historySchema.findByIdAndUpdate(ultimaInserita._id, {"stato" : stato});  
+        await historySchema.findByIdAndUpdate(ultimaInserita._id, {"stato" : stato, "data_fine" : data_fine});  
     }
     data.stato = 'in esecuzione';   //la creo
     console.log("NUOVO");
