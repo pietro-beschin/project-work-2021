@@ -62,9 +62,9 @@ module.exports.getLastCommessa = async () => {
     return await historySchema.findOne().sort({'_id' : -1});
 }
 
-module.exports.delete = async (codice_commessa) => {
+module.exports.delete = async (commessa) => {
     //await historySchema.findByIdAndDelete(id);
-    await historySchema.find({"codice_commessa" : codice_commessa});
+    await historySchema.remove({"codice_commessa" : commessa});
 }
 
 module.exports.clear = async () => {
