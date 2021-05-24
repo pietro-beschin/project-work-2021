@@ -25,7 +25,7 @@ module.exports.store = async (data) => {
     console.log("ricevuto: " + data.codice_commessa);
     if(data.codice_commessa == "" && (ultimaInserita = await historySchema.findOne().sort({'_id' : -1}))){
         let stato = (ultimaInserita.quantita_prodotta >= ultimaInserita.quantita_prevista) ? "completata" : "fallita";
-        let data_fine = Date.now().toString();
+        let data_fine = moment(Date.now().toString()).utcOffset(0, true);
         return await historySchema.findByIdAndUpdate(ultimaInserita._id, {"stato" : stato, "data_fine" : data_fine});
     }
 
@@ -33,10 +33,10 @@ module.exports.store = async (data) => {
         return await historySchema.findByIdAndUpdate(result._id, data); //la aggiorno
     }else if(ultimaInserita = await historySchema.findOne().sort({'_id' : -1})){      //modifico precedente
         let stato = (ultimaInserita.quantita_prodotta >= ultimaInserita.quantita_prevista) ? "completata" : "fallita";
-        let data_fine = Date.now().toString();
+        let data_fine = moment(Date.now().toString()).utcOffset(0, true);
         await historySchema.findByIdAndUpdate(ultimaInserita._id, {"stato" : stato, "data_fine" : data_fine});  
     }
-    data.data_fine = Date.now().toString();
+    let data_fine = moment(Date.now().toString()).utcOffset(0, true);
     data.stato = 'in esecuzione';   //la creo
     console.log("NUOVO");
     return await historySchema.create(data);
