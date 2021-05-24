@@ -64,7 +64,6 @@ module.exports.getLastCommessa = async () => {
 }
 
 module.exports.delete = async (commessa) => {
-    //await historySchema.findByIdAndDelete(id);
     await historySchema.remove({"codice_commessa" : commessa});
 }
 
