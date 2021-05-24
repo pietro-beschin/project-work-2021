@@ -25,13 +25,15 @@ module.exports.store = async (data) => {
     console.log("ricevuto: " + data.codice_commessa);
     if(data.codice_commessa == "" && (ultimaInserita = await historySchema.findOne().sort({'_id' : -1}))){
         let stato = (ultimaInserita.quantita_prodotta >= ultimaInserita.quantita_prevista) ? "completata" : "fallita";
-        return await historySchema.findByIdAndUpdate(ultimaInserita._id, {"stato" : stato});
+        let data_fine = Date.now();
+        return await historySchema.findByIdAndUpdate(ultimaInserita._id, {"stato" : stato, "data_fine" : data_fine});
     }
 
     if(result = await historySchema.findOne({codice_commessa : data.codice_commessa})){   //se esiste già e codice commessa c'è
         return await historySchema.findByIdAndUpdate(result._id, data); //la aggiorno
     }else if(ultimaInserita = await historySchema.findOne().sort({'_id' : -1})){      //modifico precedente
         let stato = (ultimaInserita.quantita_prodotta >= ultimaInserita.quantita_prevista) ? "completata" : "fallita";
+        let data_fine = Date.now();
         await historySchema.findByIdAndUpdate(ultimaInserita._id, {"stato" : stato});  
     }
     data.stato = 'in esecuzione';   //la creo
