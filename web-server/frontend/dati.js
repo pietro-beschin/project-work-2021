@@ -1,8 +1,9 @@
 let datiCommesse;
 $(document).ready(function () {
-    $('#div-nessun-risultato').hide()
+    renderGraph()
     initTable();
     fetchAllData();
+    //$('#div-nessun-risultato').show()
 
     $('#btnCerca').click((event) => {
         event.preventDefault();
@@ -35,11 +36,12 @@ $(document).ready(function () {
             type: 'GET',
             url: `${baseURL}lastCommessaStatus`,
         }).then(commessa => {
-            $('#quadrante-lavorazione').html(`${commessa.history.articolo}`);
+            /* $('#quadrante-lavorazione').html(`${commessa.history.articolo}`);
             $('#quadrante-stato').html(`${commessa.status.stato}`);
             $('#quadrante-progresso').html(`${commessa.history.quantita_prodotta}/${commessa.history.quantita_prevista}`);
             $('#quadrante-progresso-percentuale').html(`${((commessa.history.quantita_prodotta * 100) / commessa.history.quantita_prevista).toFixed(1)}%`);
-            $('#quadrante-allarmi').html(`${commessa.status.allarme}`);
+            $('#quadrante-allarmi').html(`${commessa.status.allarme}`); */
+            updateStatus(commessa);
         });
     }
 
@@ -52,6 +54,11 @@ $(document).ready(function () {
 const baseURL = 'http://54.85.250.76:3000/api/';
 let nomeArticolo;
 let graphData;
+let chartLine;
+
+const toggle404 = () => {
+
+}
 
 
 const fetchAllData = () => {
@@ -72,18 +79,29 @@ const fetchAllData = () => {
             }
             updateTableRow(commessa);
         });
-        datiStato(result);
-        datiErrori(result);
-        datiLavorazione(result);
-        datiProgresso(result);
+        //datiStato(result);
+        //datiErrori(result);
+        //datiLavorazione(result);
+        //datiProgresso(result);
+
+        updateStatus(result);
 
         let table = $('#dt-commesse').DataTable();
         table.rows().invalidate().draw(true);
         
         graphData = formatGraphData(result.history);
         renderGraph();
-
-        
+        chartLine.updateSeries([{
+            name: "pezzi prodotti",
+            data: graphData[1]
+        },
+        {
+            name: "pezzi scartati",
+            data: graphData[2]
+        }])
+        chartLine.updateOptions({
+            labels: graphData[0],
+        })
     });
 };
 
@@ -193,6 +211,24 @@ const initTable = (function () {
         return 0;
     }
 });
+
+const updateStatus = (commessa) => {
+    $('#quadrante-lavorazione').html(`${commessa.history.articolo}`);
+    $('#quadrante-stato').html(`${commessa.status.stato}`);
+    $('#quadrante-progresso').html(`${commessa.history.quantita_prodotta}/${commessa.history.quantita_prevista}`);
+    $('#quadrante-progresso-percentuale').html(`${((commessa.history.quantita_prodotta * 100) / commessa.history.quantita_prevista).toFixed(1)}%`);
+    $('#quadrante-allarmi').html(`${commessa.status.allarme}`);
+
+    if (commessa.history.stato === "completata") {
+        $('#indicatore-stato').toggleClass("stato-completato")
+    }
+    if (commessa.history.stato === "fallita") {
+        $('#indicatore-stato').prepend('<span class="stato-fallito"></span>')
+    }
+    if (commessa.history.stato === "in esecuzione") {
+        $('#indicatore-stato').prepend('<span class="spinner-border text-warning" role="status"></span>')
+    }
+}
 
 const updateTableRow = (commessa) => {
     commessa.scarto = commessa.quantita_scarto_difettoso + commessa.quantita_scarto_pieno;
@@ -403,7 +439,7 @@ const graphDateFormat = (rawDate) => {
 }
 
 const renderGraph = () => {
-    var optionsLine = {
+    let optionsLine = {
         chart: {
             width: "95%",
             foreColor: "#f8f9fa",
@@ -432,14 +468,14 @@ const renderGraph = () => {
             width: 2
         },
         colors: ["#00F790", '#F7AA00'],
-        series: [{
+        series: [/* {
             name: "pezzi prodotti",
             data: graphData[1]
         },
         {
             name: "pezzi scartati",
             data: graphData[2]
-        }
+        } */
         ],
         markers: {
             size: 6,
@@ -454,7 +490,10 @@ const renderGraph = () => {
                 bottom: 0
             }
         },
-        labels: graphData[0],
+        //labels: graphData[0],
+        noData: {
+            text: 'Nessun dato da visualizzare'
+        },
         xaxis: {
             tooltip: {
                 enabled: false
@@ -473,6 +512,6 @@ const renderGraph = () => {
         ]
     }
 
-    var chartLine = new ApexCharts(document.querySelector('#graph'), optionsLine);
+    let chartLine = new ApexCharts(document.querySelector('#graph'), optionsLine);
     chartLine.render();
 }
