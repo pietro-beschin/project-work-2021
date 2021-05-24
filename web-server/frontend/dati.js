@@ -1,4 +1,8 @@
+const baseURL = 'http://54.85.250.76:3000/api/';
 let datiCommesse;
+let nomeArticolo;
+let graphData;
+
 $(document).ready(function () {
     $('#div-nessun-risultato').hide();
     initTable();
@@ -48,10 +52,6 @@ $(document).ready(function () {
         fetchNewCommesse();
     };
 });
-
-const baseURL = 'http://54.85.250.76:3000/api/';
-let nomeArticolo;
-let graphData;
 
 const fetchAllData = () => {
     $.ajax({
@@ -194,31 +194,6 @@ const initTable = (function () {
     }
 });
 
-const updateTableRow = (commessa) => {
-    commessa.scarto = commessa.quantita_scarto_difettoso + commessa.quantita_scarto_pieno;
-    commessa.data_di_esecuzione = dateFormat(commessa.data_esecuzione);
-
-    _.forIn(commessa, (value, key) => {
-        if($(`#table_${commessa._id} .item-${key}`)) {
-            $(`#table_${commessa._id} .item-${key}`).html(value);
-        }
-    });
-    
-    $(`#table_${commessa._id}`).attr('item-date', commessa.data_esecuzione);
-    $(`#table_${commessa._id} .stato-container`).empty();
-
-    if (commessa.stato === "completata") {
-        $(`#table_${commessa._id} .stato-container`).prepend('<span class="stato-completato"></span>')
-    }
-    if (commessa.stato === "fallita") {
-        $(`#table_${commessa._id} .stato-container`).prepend('<span class="stato-fallito"></span>')
-    }
-    if (commessa.stato === "in esecuzione") {
-        $(`#table_${commessa._id} .stato-container`).prepend('<span class="spinner-border text-warning" style="height: 25px; width: 25px;" role="status"></span>')
-    }
-    $(`#table_${commessa._id}`).data(commessa);
-};
-
 const addCommessaToList = (commessa) => {
     const template = $(`
     <tr class="table-item">
@@ -286,53 +261,36 @@ const addCommessaToList = (commessa) => {
     $(`#table_${commessa._id}`).data(commessa);
 };
 
+const updateTableRow = (commessa) => {
+    commessa.scarto = commessa.quantita_scarto_difettoso + commessa.quantita_scarto_pieno;
+    commessa.data_di_esecuzione = dateFormat(commessa.data_esecuzione);
+
+    _.forIn(commessa, (value, key) => {
+        if($(`#table_${commessa._id} .item-${key}`)) {
+            $(`#table_${commessa._id} .item-${key}`).html(value);
+        }
+    });
+    
+    $(`#table_${commessa._id}`).attr('item-date', commessa.data_esecuzione);
+    $(`#table_${commessa._id} .stato-container`).empty();
+
+    if (commessa.stato === "completata") {
+        $(`#table_${commessa._id} .stato-container`).prepend('<span class="stato-completato"></span>')
+    }
+    if (commessa.stato === "fallita") {
+        $(`#table_${commessa._id} .stato-container`).prepend('<span class="stato-fallito"></span>')
+    }
+    if (commessa.stato === "in esecuzione") {
+        $(`#table_${commessa._id} .stato-container`).prepend('<span class="spinner-grow text-warning" style="height: 25px; width: 25px;" role="status"></span>')
+    }
+    $(`#table_${commessa._id}`).data(commessa);
+};
+
 const dateFormat = (date) => {
     let newDate = new Date(date);
     let giorni = ["Domenica", "Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabato"]
     //let mesi = ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"]
     let formattedDate = `${giorni[newDate.getDay()]} ${("0" + newDate.getDate()).slice(-2)}/${("0" + (newDate.getMonth() + 1)).slice(-2)}/${newDate.getFullYear()} ${("0" + newDate.getUTCHours()).slice(-2)}:${("0" + newDate.getUTCMinutes()).slice(-2)}:${("0" + newDate.getUTCSeconds()).slice(-2)}`
-    return formattedDate;
-};
-
-const formatGraphData = (dati) => {
-    let formattedGraphData = [];
-
-    for (const x of dati) {
-        let data_grafico = formattedGraphData[graphDateFormat(x.data_esecuzione)];
-        let pezziTotali = x.quantita_prodotta;
-        let pezziScartati = x.quantita_scarto_difettoso + x.quantita_scarto_pieno;
-        let commesseFallite;
-
-        if (data_grafico == undefined) {
-            data_grafico = {
-                "pezzi_totali": pezziTotali,
-                "pezzi_scartati": pezziScartati
-            }
-        } else {
-            data_grafico = {
-                "pezzi_totali": pezziTotali + data_grafico.pezzi_totali,
-                "pezzi_scartati": pezziScartati + data_grafico.pezzi_scartati
-            }
-        }
-        formattedGraphData[graphDateFormat(x.data_esecuzione)] = data_grafico;
-    }
-
-    let data_x = [];
-    let pezziTotaliGiornalieri = [];
-    let pezziScartatiGiornalieri = [];
-
-    Object.keys(formattedGraphData).forEach(function (key) {
-        data_x.push(key);
-        pezziTotaliGiornalieri.push(formattedGraphData[key].pezzi_totali);
-        pezziScartatiGiornalieri.push(formattedGraphData[key].pezzi_scartati);
-    });
-
-    return [data_x, pezziTotaliGiornalieri, pezziScartatiGiornalieri];
-};
-
-const graphDateFormat = (rawDate) => {
-    let newDate = new Date(rawDate);
-    let formattedDate = `${newDate.getFullYear()}-${("0" + (newDate.getMonth() + 1)).slice(-2)}-${("0" + newDate.getDate()).slice(-2)}`
     return formattedDate;
 };
 
@@ -409,4 +367,45 @@ const renderGraph = () => {
 
     var chartLine = new ApexCharts(document.querySelector('#graph'), optionsLine);
     chartLine.render();
+};
+
+const formatGraphData = (dati) => {
+    let formattedGraphData = [];
+
+    for (const x of dati) {
+        let data_grafico = formattedGraphData[graphDateFormat(x.data_esecuzione)];
+        let pezziTotali = x.quantita_prodotta;
+        let pezziScartati = x.quantita_scarto_difettoso + x.quantita_scarto_pieno;
+
+        if (data_grafico == undefined) {
+            data_grafico = {
+                "pezzi_totali": pezziTotali,
+                "pezzi_scartati": pezziScartati
+            }
+        } else {
+            data_grafico = {
+                "pezzi_totali": pezziTotali + data_grafico.pezzi_totali,
+                "pezzi_scartati": pezziScartati + data_grafico.pezzi_scartati
+            }
+        }
+        formattedGraphData[graphDateFormat(x.data_esecuzione)] = data_grafico;
+    }
+
+    let data_x = [];
+    let pezziTotaliGiornalieri = [];
+    let pezziScartatiGiornalieri = [];
+
+    Object.keys(formattedGraphData).forEach(function (key) {
+        data_x.push(key);
+        pezziTotaliGiornalieri.push(formattedGraphData[key].pezzi_totali);
+        pezziScartatiGiornalieri.push(formattedGraphData[key].pezzi_scartati);
+    });
+
+    return [data_x, pezziTotaliGiornalieri, pezziScartatiGiornalieri];
+};
+
+const graphDateFormat = (rawDate) => {
+    let newDate = new Date(rawDate);
+    let formattedDate = `${newDate.getFullYear()}-${("0" + (newDate.getMonth() + 1)).slice(-2)}-${("0" + newDate.getDate()).slice(-2)}`
+    return formattedDate;
 };
