@@ -14,4 +14,5 @@ router.delete('/history', historyController.clear);
 router.get('/historyStatus', mainController.getHistoryStatus);
 router.get('/lastCommessaStatus', mainController.getLastCommessaStatus);
 
+
 module.exports = router;
