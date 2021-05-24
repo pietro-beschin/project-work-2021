@@ -1,4 +1,3 @@
-const { now } = require('moment');
 const moment = require('moment');
 const historySchema = require('./history.schema');
 
