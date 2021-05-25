@@ -22,7 +22,7 @@ module.exports.list = async (query) => {
 }
 
 module.exports.store = async (data) => {            //memorizza dati su mongodb
-    console.log("ricevuto: " + data.codice_commessa);
+    /* console.log("ricevuto: " + data.codice_commessa);
     let data_aggiornamento = moment(new Date()).utcOffset(-2, true);
     if(data.codice_commessa == "" && (ultimaInserita = await historySchema.findOne().sort({'_id' : -1}))){
         let stato = (ultimaInserita.quantita_prodotta >= ultimaInserita.quantita_prevista) ? "completata" : "fallita";
@@ -42,10 +42,9 @@ module.exports.store = async (data) => {            //memorizza dati su mongodb
     data.stato = 'in esecuzione';
     console.log("NUOVO");
     return await historySchema.create(data);    //la creo
-}
+} */
 
 
-/* 
     data.data_aggiornamento = moment(new Date()).utcOffset(-2, true);
     if(result = await historySchema.findOne({codice_commessa : data.codice_commessa})){   //se esiste già e codice commessa c'è
         return await historySchema.findByIdAndUpdate(result._id, data); //la aggiorno
@@ -60,7 +59,7 @@ module.exports.store = async (data) => {            //memorizza dati su mongodb
         console.log("NUOVO");
         return await historySchema.create(data);
     }
-} */
+}
 
 module.exports.getLastCommessa = async () => {
     return await historySchema.findOne().sort({'_id' : -1});
