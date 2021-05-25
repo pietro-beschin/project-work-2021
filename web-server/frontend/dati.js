@@ -1,13 +1,40 @@
+// ISTANZIO LE VARIABILI GLOBALI
 const baseURL = 'http://54.85.250.76:3000/api/';
 let datiCommesse;
 let nomeArticolo;
 let graphData;
 
+// METODI RICHIAMATI AL LOAD
 $(document).ready(function () {
     $('#div-nessun-risultato').hide();
     initTable();
     fetchAllData();
 
+    //#region TIMER DI AGGIORNAMENTO DATI
+
+    // timer di aggiornamento della sezione stato macchina
+    setInterval(statusPolling, 1000);
+    function statusPolling() {
+        $.ajax({
+            type: 'GET',
+            url: `${baseURL}lastCommessaStatus`,
+        }).then(commessa => {
+            $('#quadrante-lavorazione').html(`${commessa.history.articolo}`);
+            $('#quadrante-stato').html(`${commessa.status.stato}`);
+            $('#quadrante-progresso').html(`${commessa.history.quantita_prodotta}/${commessa.history.quantita_prevista}`);
+            $('#quadrante-progresso-percentuale').html(`${((commessa.history.quantita_prodotta * 100) / commessa.history.quantita_prevista).toFixed(1)}%`);
+            $('#quadrante-allarmi').html(`${commessa.status.allarme}`);
+        });
+    };
+
+    // timer di aggiornamento della sezione storico commesse
+    setInterval(historyPolling, 2000);
+    function historyPolling() {
+        fetchNewCommesse();
+    };
+    //#endregion
+
+    //#region METODI RELATIVI AGLI EVENTI CLIENT
     $('#btnCerca').click((event) => {
         event.preventDefault();
         let table = $('#dt-commesse').DataTable();
@@ -31,28 +58,24 @@ $(document).ready(function () {
         table.clear().draw();
         datiCommesse = [];
         fetchNewCommesse()
+        toggle404(datiCommesse);
     });
-
-    setInterval(statusPolling, 1000);
-    function statusPolling() {
-        $.ajax({
-            type: 'GET',
-            url: `${baseURL}lastCommessaStatus`,
-        }).then(commessa => {
-            $('#quadrante-lavorazione').html(`${commessa.history.articolo}`);
-            $('#quadrante-stato').html(`${commessa.status.stato}`);
-            $('#quadrante-progresso').html(`${commessa.history.quantita_prodotta}/${commessa.history.quantita_prevista}`);
-            $('#quadrante-progresso-percentuale').html(`${((commessa.history.quantita_prodotta * 100) / commessa.history.quantita_prevista).toFixed(1)}%`);
-            $('#quadrante-allarmi').html(`${commessa.status.allarme}`);
-        });
-    };
-
-    setInterval(historyPolling, 2000);
-    function historyPolling() {
-        fetchNewCommesse();
-    };
+    //#endregion
 });
 
+const toggle404 = (dati) => {
+    if(!dati.length) {
+        $('#dt-commesse_wrapper').hide()
+        $('#div-nessun-risultato').show()
+    } else {
+        $('#div-nessun-risultato').hide()
+        $('#dt-commesse_wrapper').show()
+    };
+};
+
+//#region METODI PER LE CHIAMATE ALLE API
+
+// chiamata API effettuata al caricamento della pagina
 const fetchAllData = () => {
     $.ajax({
         type: 'GET',
@@ -60,8 +83,9 @@ const fetchAllData = () => {
     }).then(result => {
         datiCommesse = result.history;
 
+        // popolo lo storico commesse
         $('#accordion-commesse').empty();
-        result.history.forEach(commessa => {
+        datiCommesse.forEach(commessa => {
             if ($('#switch-completato').is(":checked") === true) {
                 if (commessa.stato === 'fallita') {
                     addCommessaToList(commessa)
@@ -72,21 +96,27 @@ const fetchAllData = () => {
             updateTableRow(commessa);
         });
 
-        let pos = result.history.length - 1;
-        $('#quadrante-lavorazione').html(`${result.history[result.history.length - 1].articolo}`);
+        toggle404(datiCommesse);
+
+        // popolo i dati sulla sezione stato macchina
+        let pos = datiCommesse.length - 1;
+        $('#quadrante-lavorazione').html(`${datiCommesse[datiCommesse.length - 1].articolo}`);
         $('#quadrante-stato').html(`${result.status.stato}`);
-        $('#quadrante-progresso').html(`${result.history[pos].quantita_prodotta}/${result.history[pos].quantita_prevista}`);
-        $('#quadrante-progresso-percentuale').html(`${((result.history[pos].quantita_prodotta * 100) / result.history[pos].quantita_prevista).toFixed(1)}%`);
+        $('#quadrante-progresso').html(`${datiCommesse[pos].quantita_prodotta}/${datiCommesse[pos].quantita_prevista}`);
+        $('#quadrante-progresso-percentuale').html(`${((datiCommesse[pos].quantita_prodotta * 100) / datiCommesse[pos].quantita_prevista).toFixed(1)}%`);
         $('#quadrante-allarmi').html(`${result.status.allarme}`);
 
+        // svuoto la tabella per riempirla dei nuovi dati
         let table = $('#dt-commesse').DataTable();
         table.rows().invalidate().draw(true);
         
-        graphData = formatGraphData(result.history);
+        // renderizzo il grafico
+        graphData = formatGraphData(datiCommesse);
         renderGraph();
     });
 };
 
+// chiamata API per la ricerca delle commesse e aggiornamento dell'elenco commesse
 const fetchNewCommesse = () => {
     nomeArticolo = document.getElementById("nome-articolo").value;
     let startDate = $("#dtp-inizio").val();
@@ -100,6 +130,7 @@ const fetchNewCommesse = () => {
         type: 'GET',
         url: `${baseURL}history?articolo=${nomeArticolo}&from=${startDate}&to=${endDate}`,
     }).then(result => {
+        // confronto le commesse già presenti con la nuova chiamata e aggiungo solo i nuovi elementi all'elenco
         let diff = _.differenceBy(result, datiCommesse, '_id');
 
         diff.forEach(commessa => {
@@ -115,19 +146,17 @@ const fetchNewCommesse = () => {
             updateTableRow(commessa);
         });
         document.getElementById("nome-articolo").value = nomeArticolo;
-        
-        if(!result.length) {
-            $('#dt-commesse_wrapper').hide()
-            $('#div-nessun-risultato').show()
-        } else {
-            $('#div-nessun-risultato').hide()
-            $('#dt-commesse_wrapper').show()
-        };
+
+        toggle404(result);
 
         datiCommesse = result;
     });
 };
+//#endregion
 
+//#region METODI PER LO STORICO COMMESSE
+
+// istanzio l'oggetto datatable per inserire le commesse nell'elenco
 const initTable = (function () {
     let table = $('#dt-commesse');
 
@@ -165,6 +194,7 @@ const initTable = (function () {
         }
     });
 
+    // algoritmi di ordinamento dei risultati nello storico commesse
     $.fn.dataTableExt.oSort["item-desc"] = function(a, b) {
         a = $(a).attr('item-date');
         b = $(b).attr('item-date');
@@ -194,6 +224,7 @@ const initTable = (function () {
     }
 });
 
+// codice html generato dinamicamente per le singole entry nello storico commesse
 const addCommessaToList = (commessa) => {
     const template = $(`
     <tr class="table-item">
@@ -205,15 +236,24 @@ const addCommessaToList = (commessa) => {
                             <div class="row">
                                 <div class="stato-container col-md-auto mt-2"></div>
                                 <div class="col-lg-7 h4 text-light mt-2">${commessa.codice_commessa}</div>
-                                <div class="col-md-auto text-light mt-2 item-data_di_esecuzione">${dateFormat(commessa.data_esecuzione)}</div>       
+                                <div class="col-md-auto text-light mt-2 item-data_di_esecuzione">${dateFormat(commessa.data_aggiornamento)}</div>       
                             </div>
                         </a>
                     </div>
                     <div id="collapse_${commessa._id}" class="collapse med-back" role="tabpanel" aria-labelledby="heading_${commessa._id}" data-parent="accordion-commesse">
                         <div class="card-body">
                             <div class="row">
+                                <div class="col-md-auto"></div>
+                                <div class="col-sm-3"><strong>codice commessa</strong></div>
+                                <div class="col-md-auto">${commessa.codice_commessa}</div>
+                            </div>
+                            <div class="row">
                                 <div class="col-md-auto"></div><div class="col-sm-3"><strong>data ultima esecuzione</strong></div>
-                                <div class="item-data-esecuzione col-md-auto item-data_di_esecuzione">${dateFormat(commessa.data_esecuzione)}</div>
+                                <div class="item-data-esecuzione col-md-auto item-data_di_esecuzione">${dateFormat(commessa.data_aggiornamento)}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-auto"></div><div class="col-sm-3"><strong>data inizio commessa</strong></div>
+                                <div class="item-data-esecuzione col-md-auto">${dateFormat(commessa.data_esecuzione)}</div>
                             </div>
                             <div class="row">
                                 <div class="col-md-auto"></div>
@@ -222,22 +262,8 @@ const addCommessaToList = (commessa) => {
                             </div>
                             <div class="row">
                                 <div class="col-md-auto"></div>
-                                <div class="col-sm-3"><strong>codice commessa</strong></div>
-                                <div class="col-md-auto">${commessa.codice_commessa}</div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-auto"></div>
-                                <div class="col-sm-3"><strong>stato commessa</strong></div>
-                                <div class="col-md-auto item-stato">${commessa.stato}</div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-auto"></div>
                                 <div class="col-sm-3"><strong>quantità prevista</strong></div>
                                 <div class="col-md-auto">${commessa.quantita_prevista}</div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-auto"></div><div class="col-sm-3"><strong>data di consegna</strong></div>
-                                <div class="col-md-auto">${dateFormat(commessa.data_consegna)}</div>
                             </div>
                             <div class="row">
                                 <div class="col-md-auto"></div>
@@ -249,6 +275,15 @@ const addCommessaToList = (commessa) => {
                                 <div class="col-sm-3"><strong>quantità di scarto</strong></div>
                                 <div class="col-md-auto item-scarto">${commessa.quantita_scarto_difettoso + commessa.quantita_scarto_pieno}</div>
                             </div>
+                            <div class="row">
+                                <div class="col-md-auto"></div>
+                                <div class="col-sm-3"><strong>stato commessa</strong></div>
+                                <div class="col-md-auto item-stato">${commessa.stato}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-auto"></div><div class="col-sm-3"><strong>data di consegna</strong></div>
+                                <div class="col-md-auto">${dateFormat(commessa.data_consegna)}</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -257,13 +292,15 @@ const addCommessaToList = (commessa) => {
     </tr>`);
     let table = $('#dt-commesse').DataTable();
     
+    // aggiungo il codice generato dinamicamente all'elenco delle commesse
     table.rows.add(template).data(commessa).draw();
     $(`#table_${commessa._id}`).data(commessa);
 };
 
+// aggiorno i dati nell'elenco delle commesse
 const updateTableRow = (commessa) => {
     commessa.scarto = commessa.quantita_scarto_difettoso + commessa.quantita_scarto_pieno;
-    commessa.data_di_esecuzione = dateFormat(commessa.data_esecuzione);
+    commessa.data_ultima_esecuzione = dateFormat(commessa.data_aggiornamento);
 
     _.forIn(commessa, (value, key) => {
         if($(`#table_${commessa._id} .item-${key}`)) {
@@ -271,7 +308,7 @@ const updateTableRow = (commessa) => {
         }
     });
     
-    $(`#table_${commessa._id}`).attr('item-date', commessa.data_esecuzione);
+    $(`#table_${commessa._id}`).attr('item-date', commessa.data_aggiornamento);
     $(`#table_${commessa._id} .stato-container`).empty();
 
     if (commessa.stato === "completata") {
@@ -293,9 +330,13 @@ const dateFormat = (date) => {
     let formattedDate = `${giorni[newDate.getDay()]} ${("0" + newDate.getDate()).slice(-2)}/${("0" + (newDate.getMonth() + 1)).slice(-2)}/${newDate.getFullYear()} ${("0" + newDate.getUTCHours()).slice(-2)}:${("0" + newDate.getUTCMinutes()).slice(-2)}:${("0" + newDate.getUTCSeconds()).slice(-2)}`
     return formattedDate;
 };
+//#endregion
 
+//#region METODI RELATIVI AL GRAFICO
+
+// istanzio il grafico
 const renderGraph = () => {
-    var optionsLine = {
+    let optionsLine = {
         chart: {
             width: "95%",
             foreColor: "#f8f9fa",
@@ -365,15 +406,16 @@ const renderGraph = () => {
         ]
     }
 
-    var chartLine = new ApexCharts(document.querySelector('#graph'), optionsLine);
+    let chartLine = new ApexCharts(document.querySelector('#graph'), optionsLine);
     chartLine.render();
 };
 
+// metodo per formattare i dati da passare al grafico
 const formatGraphData = (dati) => {
     let formattedGraphData = [];
 
     for (const x of dati) {
-        let data_grafico = formattedGraphData[graphDateFormat(x.data_esecuzione)];
+        let data_grafico = formattedGraphData[graphDateFormat(x.data_aggiornamento)];
         let pezziTotali = x.quantita_prodotta;
         let pezziScartati = x.quantita_scarto_difettoso + x.quantita_scarto_pieno;
 
@@ -388,7 +430,7 @@ const formatGraphData = (dati) => {
                 "pezzi_scartati": pezziScartati + data_grafico.pezzi_scartati
             }
         }
-        formattedGraphData[graphDateFormat(x.data_esecuzione)] = data_grafico;
+        formattedGraphData[graphDateFormat(x.data_aggiornamento)] = data_grafico;
     }
 
     let data_x = [];
@@ -409,3 +451,4 @@ const graphDateFormat = (rawDate) => {
     let formattedDate = `${newDate.getFullYear()}-${("0" + (newDate.getMonth() + 1)).slice(-2)}-${("0" + newDate.getDate()).slice(-2)}`
     return formattedDate;
 };
+//#endregion
