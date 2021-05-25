@@ -28,7 +28,7 @@ let attesa_commesse = [];
 module.exports.store = async (req, res, next) => {
     attesa_commesse.push(req.body);
     try{
-        attesa_commesse.forEach(dati => {
+        attesa_commesse.forEach(async dati => {
             const result = await historyModel.store(dati);
             console.log(dati);
             attesa_commesse.shift();
