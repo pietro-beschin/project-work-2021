@@ -58,7 +58,7 @@ $(document).ready(function () {
         table.clear().draw();
         datiCommesse = [];
         fetchNewCommesse()
-        toggle404(datiCommesse);
+        //toggle404(datiCommesse);
     });
     //#endregion
 });
@@ -96,8 +96,6 @@ const fetchAllData = () => {
             updateTableRow(commessa);
         });
 
-        toggle404(datiCommesse);
-
         // popolo i dati sulla sezione stato macchina
         let pos = datiCommesse.length - 1;
         $('#quadrante-lavorazione').html(`${datiCommesse[datiCommesse.length - 1].articolo}`);
@@ -109,10 +107,18 @@ const fetchAllData = () => {
         // svuoto la tabella per riempirla dei nuovi dati
         let table = $('#dt-commesse').DataTable();
         table.rows().invalidate().draw(true);
-        
+
         // renderizzo il grafico
         graphData = formatGraphData(datiCommesse);
         renderGraph();
+    }).catch(() => {
+        datiCommesse = [];
+        toggle404(datiCommesse);
+        $('#quadrante-lavorazione').html('---');
+        $('#quadrante-stato').html('---');
+        $('#quadrante-progresso').html('---');
+        $('#quadrante-progresso-percentuale').html('---');
+        $('#quadrante-allarmi').html('---');
     });
 };
 
@@ -147,9 +153,15 @@ const fetchNewCommesse = () => {
         });
         document.getElementById("nome-articolo").value = nomeArticolo;
 
-        toggle404(result);
-
         datiCommesse = result;
+    }).catch(() => {
+        datiCommesse = [];
+        toggle404(datiCommesse);
+        $('#quadrante-lavorazione').html('---');
+        $('#quadrante-stato').html('---');
+        $('#quadrante-progresso').html('---');
+        $('#quadrante-progresso-percentuale').html('---');
+        $('#quadrante-allarmi').html('---');
     });
 };
 //#endregion
