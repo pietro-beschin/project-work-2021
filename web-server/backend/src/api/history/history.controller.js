@@ -12,28 +12,11 @@ module.exports.list = async (req, res, next) => {       //restituisce le commess
 
 let attesa_commesse = [];
 
-/*module.exports.store = async (req, res, next) => {
-    
+module.exports.store = async (req, res, next) => {
     try{
-        const result = await historyModel.store(attesa_commesse[0].body);
-        
         const result = await historyModel.store(req.body);   //prova a scrivere il primo elemento della coda
         res.json(result);
         res.status(201);
-    }catch(err){
-        next(err);
-    }
-}*/
-
-module.exports.store = async (req, res, next) => {
-    attesa_commesse.push(req.body);
-    try{
-        attesa_commesse.forEach(async dati => {
-            const result = await historyModel.store(dati);
-            console.log(dati);
-            attesa_commesse.shift();
-            res.json(result);
-        });
     }catch(err){
         next(err);
     }

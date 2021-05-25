@@ -5,14 +5,12 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const errorHandlers = require('./errors');
-const historyController = require('./api/history/history.controller');
 
 //connessione a mongodb
 mongoose.connect("mongodb://10.0.25.202:27017/project-work-2021", {useNewUrlParser: true, useUnifiedTopology: true});
 
 mongoose.connection.on('open', function (ref) {
     console.log('Connected to mongo server.');
-    historyController.store();
 });
 
 mongoose.connection.on('disconnected', function(ref) {
