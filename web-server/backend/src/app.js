@@ -8,6 +8,15 @@ const errorHandlers = require('./errors');
 
 
 mongoose.connect("mongodb://10.0.25.202:27017/project-work-2021", {useNewUrlParser: true, useUnifiedTopology: true});
+
+mongoose.connection.on('open', function (ref) {
+    console.log('Connected to mongo server.');
+});
+
+mongoose.connection.on('disconnected', function(ref) {
+    console.log('Not connected to mongo server.');
+});
+
 mongoose.set('debug', true);
 mongoose.set('useFindAndModify', false);
 

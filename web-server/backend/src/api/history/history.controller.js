@@ -1,4 +1,7 @@
+const mongoose = require('mongoose');
 const historyModel = require('./history.model');
+cons
+const queue = [];
 
 module.exports.list = async (req, res, next) => {
     try{
@@ -8,10 +11,14 @@ module.exports.list = async (req, res, next) => {
         next(err);
     }
 }
+let coda_inserimento = [];
 
 module.exports.store = async (req, res, next) => {
+    coda_inserimento.push(req.body);
     try{
-        const result = await historyModel.store(req.body);
+        const result = await historyModel.store(coda_inserimento[0]);   //prova a scrivere il primo elemento della coda
+        console.log('primo elemento' + coda_inserimento[0]);
+        coda_inserimento.shift();   //rimuove l'elemento inserito dalla coda
         res.json(result);
         res.status(201);
     }catch(err){
