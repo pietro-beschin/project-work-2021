@@ -1,0 +1,12 @@
+C:\Users\corso3\Desktop\ProjectWork_UfficiApp\CommesseDDL\CommesseDDL\bin\Debug\CommesseDDL.dll
+C:\Users\corso3\Desktop\ProjectWork_UfficiApp\CommesseDDL\CommesseDDL\bin\Debug\CommesseDDL.pdb
+C:\Users\corso3\Desktop\ProjectWork_UfficiApp\CommesseDDL\CommesseDDL\obj\Debug\CommesseDDL.csprojAssemblyReference.cache
+C:\Users\corso3\Desktop\ProjectWork_UfficiApp\CommesseDDL\CommesseDDL\obj\Debug\CommesseDDL.csproj.CoreCompileInputs.cache
+C:\Users\corso3\Desktop\ProjectWork_UfficiApp\CommesseDDL\CommesseDDL\obj\Debug\CommesseDDL.dll
+C:\Users\corso3\Desktop\ProjectWork_UfficiApp\CommesseDDL\CommesseDDL\obj\Debug\CommesseDDL.pdb
+C:\Users\corso3\Desktop\ProjectWork_UfficiApp - Versione Grafica\CommesseDDL\CommesseDDL\bin\Debug\CommesseDDL.dll
+C:\Users\corso3\Desktop\ProjectWork_UfficiApp - Versione Grafica\CommesseDDL\CommesseDDL\bin\Debug\CommesseDDL.pdb
+C:\Users\corso3\Desktop\ProjectWork_UfficiApp - Versione Grafica\CommesseDDL\CommesseDDL\obj\Debug\CommesseDDL.csprojAssemblyReference.cache
+C:\Users\corso3\Desktop\ProjectWork_UfficiApp - Versione Grafica\CommesseDDL\CommesseDDL\obj\Debug\CommesseDDL.csproj.CoreCompileInputs.cache
+C:\Users\corso3\Desktop\ProjectWork_UfficiApp - Versione Grafica\CommesseDDL\CommesseDDL\obj\Debug\CommesseDDL.dll
+C:\Users\corso3\Desktop\ProjectWork_UfficiApp - Versione Grafica\CommesseDDL\CommesseDDL\obj\Debug\CommesseDDL.pdb

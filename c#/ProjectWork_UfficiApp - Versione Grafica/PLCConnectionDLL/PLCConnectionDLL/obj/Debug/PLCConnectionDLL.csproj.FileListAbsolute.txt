@@ -1,0 +1,6 @@
+C:\Users\corso3\Desktop\ProjectWork_UfficiApp\PLCConnectionDLL\PLCConnectionDLL\bin\Debug\PLCConnectionDLL.dll
+C:\Users\corso3\Desktop\ProjectWork_UfficiApp\PLCConnectionDLL\PLCConnectionDLL\bin\Debug\PLCConnectionDLL.pdb
+C:\Users\corso3\Desktop\ProjectWork_UfficiApp\PLCConnectionDLL\PLCConnectionDLL\obj\Debug\PLCConnectionDLL.csprojAssemblyReference.cache
+C:\Users\corso3\Desktop\ProjectWork_UfficiApp\PLCConnectionDLL\PLCConnectionDLL\obj\Debug\PLCConnectionDLL.csproj.CoreCompileInputs.cache
+C:\Users\corso3\Desktop\ProjectWork_UfficiApp\PLCConnectionDLL\PLCConnectionDLL\obj\Debug\PLCConnectionDLL.dll
+C:\Users\corso3\Desktop\ProjectWork_UfficiApp\PLCConnectionDLL\PLCConnectionDLL\obj\Debug\PLCConnectionDLL.pdb

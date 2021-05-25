@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<CDataBlock xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <DBName>DB_PC-PLC</DBName>
+  <Word01>0</Word01>
+  <Word02>0</Word02>
+  <Word03>0</Word03>
+  <Word04>0</Word04>
+  <Word05>0</Word05>
+</CDataBlock>

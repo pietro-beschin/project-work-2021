@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dbProjectWork2021DataSet1" targetNamespace="http://tempuri.org/dbProjectWork2021DataSet1.xsd" xmlns:mstns="http://tempuri.org/dbProjectWork2021DataSet1.xsd" xmlns="http://tempuri.org/dbProjectWork2021DataSet1.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="dbProjectWork2021ConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="dbProjectWork2021ConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.PLC_Manager.Properties.Settings.GlobalReference.Default.dbProjectWork2021ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="storicoCommesseTableAdapter" GeneratorDataComponentClassName="storicoCommesseTableAdapter" Name="storicoCommesse" UserDataComponentName="storicoCommesseTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="dbProjectWork2021ConnectionString (Settings)" DbObjectName="dbProjectWork2021.dbo.storicoCommesse" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT codiceCommessa, prodotto, pezziDaProdurre, stato, dataCreazione, dataConsegna, cliente FROM dbo.storicoCommesse</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="codiceCommessa" DataSetColumn="codiceCommessa" />
+              <Mapping SourceColumn="prodotto" DataSetColumn="prodotto" />
+              <Mapping SourceColumn="pezziDaProdurre" DataSetColumn="pezziDaProdurre" />
+              <Mapping SourceColumn="stato" DataSetColumn="stato" />
+              <Mapping SourceColumn="dataCreazione" DataSetColumn="dataCreazione" />
+              <Mapping SourceColumn="dataConsegna" DataSetColumn="dataConsegna" />
+              <Mapping SourceColumn="cliente" DataSetColumn="cliente" />
+            </Mappings>
+            <Sources>
+              <DbSource ConnectionRef="dbProjectWork2021ConnectionString (Settings)" DbObjectName="dbProjectWork2021.dbo.storicoCommesse" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillBy" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="FillBy" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy2" UserSourceName="FillBy">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT codiceCommessa, prodotto, pezziDaProdurre, stato, dataCreazione, dataConsegna, cliente FROM dbo.storicoCommesse</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="dbProjectWork2021ConnectionString (Settings)" DbObjectName="dbProjectWork2021.dbo.storicoCommesse" DbObjectType="View" FillMethodModifier="Public" FillMethodName="ordina_per_data_creazione" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="ordina_per_data_creazione" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="ordina_per_data_creazione">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT codiceCommessa, prodotto, pezziDaProdurre, stato, dataCreazione, dataConsegna, cliente FROM dbo.storicoCommesse
+ORDER BY dataCreazione ASC</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="dbProjectWork2021ConnectionString (Settings)" DbObjectName="dbProjectWork2021.dbo.storicoCommesse" DbObjectType="View" FillMethodModifier="Public" FillMethodName="storicoOrdinatoPerDataCreazione" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="storicoOrdinatoPerDataCreazione" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="storicoOrdinatoPerDataCreazione">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT codiceCommessa, prodotto, pezziDaProdurre, stato, dataCreazione, dataConsegna, cliente FROM dbo.storicoCommesse
+ORDER BY dataCreazione DESC</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </Sources>
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="dbProjectWork2021DataSet1" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="dbProjectWork2021DataSet1" msprop:Generator_UserDSName="dbProjectWork2021DataSet1">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="storicoCommesse" msprop:Generator_TableClassName="storicoCommesseDataTable" msprop:Generator_TableVarName="tablestoricoCommesse" msprop:Generator_TablePropName="storicoCommesse" msprop:Generator_RowDeletingName="storicoCommesseRowDeleting" msprop:Generator_RowChangingName="storicoCommesseRowChanging" msprop:Generator_RowEvHandlerName="storicoCommesseRowChangeEventHandler" msprop:Generator_RowDeletedName="storicoCommesseRowDeleted" msprop:Generator_UserTableName="storicoCommesse" msprop:Generator_RowChangedName="storicoCommesseRowChanged" msprop:Generator_RowEvArgName="storicoCommesseRowChangeEvent" msprop:Generator_RowClassName="storicoCommesseRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="codiceCommessa" msprop:Generator_ColumnVarNameInTable="columncodiceCommessa" msprop:Generator_ColumnPropNameInRow="codiceCommessa" msprop:Generator_ColumnPropNameInTable="codiceCommessaColumn" msprop:Generator_UserColumnName="codiceCommessa">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="prodotto" msprop:Generator_ColumnVarNameInTable="columnprodotto" msprop:Generator_ColumnPropNameInRow="prodotto" msprop:Generator_ColumnPropNameInTable="prodottoColumn" msprop:Generator_UserColumnName="prodotto" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="pezziDaProdurre" msprop:Generator_ColumnVarNameInTable="columnpezziDaProdurre" msprop:Generator_ColumnPropNameInRow="pezziDaProdurre" msprop:Generator_ColumnPropNameInTable="pezziDaProdurreColumn" msprop:Generator_UserColumnName="pezziDaProdurre" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="stato" msprop:Generator_ColumnVarNameInTable="columnstato" msprop:Generator_ColumnPropNameInRow="stato" msprop:Generator_ColumnPropNameInTable="statoColumn" msprop:Generator_UserColumnName="stato" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="dataCreazione" msprop:Generator_ColumnVarNameInTable="columndataCreazione" msprop:Generator_ColumnPropNameInRow="dataCreazione" msprop:Generator_ColumnPropNameInTable="dataCreazioneColumn" msprop:Generator_UserColumnName="dataCreazione" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="dataConsegna" msprop:Generator_ColumnVarNameInTable="columndataConsegna" msprop:Generator_ColumnPropNameInRow="dataConsegna" msprop:Generator_ColumnPropNameInTable="dataConsegnaColumn" msprop:Generator_UserColumnName="dataConsegna" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="cliente" msprop:Generator_ColumnVarNameInTable="columncliente" msprop:Generator_ColumnPropNameInRow="cliente" msprop:Generator_ColumnPropNameInTable="clienteColumn" msprop:Generator_UserColumnName="cliente" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:storicoCommesse" />
+      <xs:field xpath="mstns:codiceCommessa" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

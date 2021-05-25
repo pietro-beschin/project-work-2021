@@ -1,0 +1,18 @@
+C:\Users\corso3\Desktop\ProjectWork_UfficiApp\DBManagerDLL\DBManagerDLL\bin\Debug\DBManagerDLL.dll
+C:\Users\corso3\Desktop\ProjectWork_UfficiApp\DBManagerDLL\DBManagerDLL\bin\Debug\DBManagerDLL.pdb
+C:\Users\corso3\Desktop\ProjectWork_UfficiApp\DBManagerDLL\DBManagerDLL\obj\Debug\DBManagerDLL.csprojAssemblyReference.cache
+C:\Users\corso3\Desktop\ProjectWork_UfficiApp\DBManagerDLL\DBManagerDLL\obj\Debug\DBManagerDLL.csproj.CoreCompileInputs.cache
+C:\Users\corso3\Desktop\ProjectWork_UfficiApp\DBManagerDLL\DBManagerDLL\obj\Debug\DBManagerDLL.dll
+C:\Users\corso3\Desktop\ProjectWork_UfficiApp\DBManagerDLL\DBManagerDLL\obj\Debug\DBManagerDLL.pdb
+C:\Users\corso3\Desktop\ProjectWork_UfficiApp\DBManagerDLL\DBManagerDLL\bin\Debug\CommesseDDL.dll
+C:\Users\corso3\Desktop\ProjectWork_UfficiApp\DBManagerDLL\DBManagerDLL\bin\Debug\CommesseDDL.pdb
+C:\Users\corso3\Desktop\ProjectWork_UfficiApp\DBManagerDLL\DBManagerDLL\obj\Debug\DBManagerDLL.csproj.CopyComplete
+C:\Users\corso3\Desktop\ProjectWork_UfficiApp - Versione Grafica\DBManagerDLL\DBManagerDLL\bin\Debug\DBManagerDLL.dll
+C:\Users\corso3\Desktop\ProjectWork_UfficiApp - Versione Grafica\DBManagerDLL\DBManagerDLL\bin\Debug\DBManagerDLL.pdb
+C:\Users\corso3\Desktop\ProjectWork_UfficiApp - Versione Grafica\DBManagerDLL\DBManagerDLL\bin\Debug\CommesseDDL.dll
+C:\Users\corso3\Desktop\ProjectWork_UfficiApp - Versione Grafica\DBManagerDLL\DBManagerDLL\bin\Debug\CommesseDDL.pdb
+C:\Users\corso3\Desktop\ProjectWork_UfficiApp - Versione Grafica\DBManagerDLL\DBManagerDLL\obj\Debug\DBManagerDLL.csprojAssemblyReference.cache
+C:\Users\corso3\Desktop\ProjectWork_UfficiApp - Versione Grafica\DBManagerDLL\DBManagerDLL\obj\Debug\DBManagerDLL.csproj.CoreCompileInputs.cache
+C:\Users\corso3\Desktop\ProjectWork_UfficiApp - Versione Grafica\DBManagerDLL\DBManagerDLL\obj\Debug\DBManagerDLL.csproj.CopyComplete
+C:\Users\corso3\Desktop\ProjectWork_UfficiApp - Versione Grafica\DBManagerDLL\DBManagerDLL\obj\Debug\DBManagerDLL.dll
+C:\Users\corso3\Desktop\ProjectWork_UfficiApp - Versione Grafica\DBManagerDLL\DBManagerDLL\obj\Debug\DBManagerDLL.pdb

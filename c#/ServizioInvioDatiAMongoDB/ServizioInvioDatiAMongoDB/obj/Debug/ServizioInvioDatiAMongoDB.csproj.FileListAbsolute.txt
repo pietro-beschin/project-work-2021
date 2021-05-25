@@ -1,0 +1,14 @@
+C:\Users\corso3\Desktop\ServizioInvioDatiAMongoDB\ServizioInvioDatiAMongoDB\bin\Debug\ServizioInvioDatiAMongoDB.exe.config
+C:\Users\corso3\Desktop\ServizioInvioDatiAMongoDB\ServizioInvioDatiAMongoDB\bin\Debug\ServizioInvioDatiAMongoDB.exe
+C:\Users\corso3\Desktop\ServizioInvioDatiAMongoDB\ServizioInvioDatiAMongoDB\bin\Debug\ServizioInvioDatiAMongoDB.pdb
+C:\Users\corso3\Desktop\ServizioInvioDatiAMongoDB\ServizioInvioDatiAMongoDB\bin\Debug\Newtonsoft.Json.dll
+C:\Users\corso3\Desktop\ServizioInvioDatiAMongoDB\ServizioInvioDatiAMongoDB\bin\Debug\PLCConnectionDLL.dll
+C:\Users\corso3\Desktop\ServizioInvioDatiAMongoDB\ServizioInvioDatiAMongoDB\bin\Debug\Sharp7Library.dll
+C:\Users\corso3\Desktop\ServizioInvioDatiAMongoDB\ServizioInvioDatiAMongoDB\bin\Debug\Newtonsoft.Json.xml
+C:\Users\corso3\Desktop\ServizioInvioDatiAMongoDB\ServizioInvioDatiAMongoDB\obj\Debug\ServizioInvioDatiAMongoDB.ProjectInstaller.resources
+C:\Users\corso3\Desktop\ServizioInvioDatiAMongoDB\ServizioInvioDatiAMongoDB\obj\Debug\ServizioInvioDatiAMongoDB.csproj.GenerateResource.cache
+C:\Users\corso3\Desktop\ServizioInvioDatiAMongoDB\ServizioInvioDatiAMongoDB\obj\Debug\ServizioInvioDatiAMongoDB.csproj.CoreCompileInputs.cache
+C:\Users\corso3\Desktop\ServizioInvioDatiAMongoDB\ServizioInvioDatiAMongoDB\obj\Debug\ServizioInvioDatiAMongoDB.csproj.CopyComplete
+C:\Users\corso3\Desktop\ServizioInvioDatiAMongoDB\ServizioInvioDatiAMongoDB\obj\Debug\ServizioInvioDatiAMongoDB.exe
+C:\Users\corso3\Desktop\ServizioInvioDatiAMongoDB\ServizioInvioDatiAMongoDB\obj\Debug\ServizioInvioDatiAMongoDB.pdb
+C:\Users\corso3\Desktop\ServizioInvioDatiAMongoDB\ServizioInvioDatiAMongoDB\obj\Debug\ServizioInvioDatiAMongoDB.csprojAssemblyReference.cache
