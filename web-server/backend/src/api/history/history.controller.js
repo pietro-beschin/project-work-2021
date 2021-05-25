@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
 const historyModel = require('./history.model');
-cons
-const queue = [];
 
 module.exports.list = async (req, res, next) => {
     try{
