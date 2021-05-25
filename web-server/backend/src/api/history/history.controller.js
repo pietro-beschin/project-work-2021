@@ -1,4 +1,5 @@
 const historyModel = require('./history.model');
+const mongoose = require('mongoose');
 
 module.exports.list = async (req, res, next) => {       //restituisce le commesse secondo i filtri
     try{
@@ -9,11 +10,30 @@ module.exports.list = async (req, res, next) => {       //restituisce le commess
     }
 }
 
-module.exports.store = async (req, res, next) => {
+let attesa_commesse = [];
+
+/*module.exports.store = async (req, res, next) => {
+    
     try{
+        const result = await historyModel.store(attesa_commesse[0].body);
+        
         const result = await historyModel.store(req.body);   //prova a scrivere il primo elemento della coda
         res.json(result);
         res.status(201);
+    }catch(err){
+        next(err);
+    }
+}*/
+
+module.exports.store = async (req, res, next) => {
+    attesa_commesse.push(req.body);
+    try{
+        attesa_commesse.forEach(dati => {
+            const result = await historyModel.store(dati);
+            console.log(dati);
+            attesa_commesse.shift();
+            res.json(result);
+        });
     }catch(err){
         next(err);
     }
