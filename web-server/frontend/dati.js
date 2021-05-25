@@ -152,8 +152,10 @@ const fetchNewCommesse = () => {
             updateTableRow(commessa);
         });
         document.getElementById("nome-articolo").value = nomeArticolo;
-
+        
         datiCommesse = result;
+
+        toggle404(result);
     }).catch(() => {
         datiCommesse = [];
         toggle404(datiCommesse);
