@@ -50,7 +50,7 @@ module.exports.store = async (data) => {            //memorizza dati su mongodb
         return await historySchema.findByIdAndUpdate(result._id, data); //la aggiorno
     }else if(ultimaInserita = await historySchema.findOne().sort({'_id' : -1})){      //modifico precedente
         let stato = (ultimaInserita.quantita_prodotta >= ultimaInserita.quantita_prevista) ? "completata" : "fallita";
-            await historySchema.findByIdAndUpdate(ultimaInserita._id, {"stato" : stato}, {"data_aggiornamento" : data_aggiornamento});  
+        await historySchema.findByIdAndUpdate(ultimaInserita._id, {"stato" : stato}, {"data_aggiornamento" : data.data_aggiornamento});  
     }
 
     if(data.codice_commessa != ""){
