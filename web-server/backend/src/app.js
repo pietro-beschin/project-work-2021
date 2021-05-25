@@ -12,6 +12,7 @@ mongoose.connect("mongodb://10.0.25.202:27017/project-work-2021", {useNewUrlPars
 
 mongoose.connection.on('open', function (ref) {
     console.log('Connected to mongo server.');
+    historyController.store();
 });
 
 mongoose.connection.on('disconnected', function(ref) {
