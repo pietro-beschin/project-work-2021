@@ -11,20 +11,22 @@ module.exports.list = async (req, res, next) => {
         next(err);
     }
 }
+
 let coda_inserimento = [];
 
 module.exports.store = async (req, res, next) => {
-    coda_inserimento.push(req.body);
     try{
-        const result = await historyModel.store(coda_inserimento[0]);   //prova a scrivere il primo elemento della coda
-        console.log('primo elemento' + coda_inserimento[0]);
-        coda_inserimento.shift();   //rimuove l'elemento inserito dalla coda
+        const result = await historyModel.store(req.body);   //prova a scrivere il primo elemento della coda
         res.json(result);
         res.status(201);
     }catch(err){
+        coda_inserimento.push(req.body);
+        console.log('primo elemento : ' + coda_inserimento[0]);
         next(err);
     }
 }
+
+exports.coda_inserimento;
 
 module.exports.getLastCommessa = async(req, res, next) => {
     try{
