@@ -21,7 +21,7 @@ module.exports.list = async (query) => {
         return await historySchema.find(q);
 }
 
-module.exports.store = async (data) => {  
+module.exports.store = async (data) => {            //memorizza dati su mongodb
     console.log("ricevuto: " + data.codice_commessa);
     let data_aggiornamento = moment(new Date()).utcOffset(-2, true);
     if(data.codice_commessa == "" && (ultimaInserita = await historySchema.findOne().sort({'_id' : -1}))){

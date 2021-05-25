@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const errorHandlers = require('./errors');
 
-
+//connessione a mongodb
 mongoose.connect("mongodb://10.0.25.202:27017/project-work-2021", {useNewUrlParser: true, useUnifiedTopology: true});
 
 mongoose.connection.on('open', function (ref) {

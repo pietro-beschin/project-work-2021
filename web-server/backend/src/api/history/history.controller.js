@@ -1,6 +1,6 @@
 const historyModel = require('./history.model');
 
-module.exports.list = async (req, res, next) => {
+module.exports.list = async (req, res, next) => {       //restituisce le commesse secondo i filtri
     try{
         const list = await historyModel.list(req.query);
         res.json(list);
