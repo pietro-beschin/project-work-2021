@@ -112,6 +112,7 @@ const fetchAllData = () => {
         graphData = formatGraphData(datiCommesse);
         renderGraph();
     }).catch(() => {
+        //gestione della pagina in caso di mancanza di connessione al server
         datiCommesse = [];
         toggle404(datiCommesse);
         $('#quadrante-lavorazione').html('---');
