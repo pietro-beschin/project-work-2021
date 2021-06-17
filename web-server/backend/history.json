@@ -1,0 +1,484 @@
+[{
+  "_id": {
+    "$oid": "60acacf46a9daf05ba415b2d"
+  },
+  "articolo": "flaconcino 30ml",
+  "codice_commessa": "20210517_LU_101",
+  "data_consegna": {
+    "$date": "2021-05-30T14:30:00Z"
+  },
+  "data_esecuzione": {
+    "$date": "2021-05-17T15:09:32Z"
+  },
+  "data_aggiornamento": {
+    "$date": "2021-05-17T15:11:07Z"
+  },
+  "quantita_prevista": 200,
+  "quantita_prodotta": 200,
+  "quantita_scarto_difettoso": 2,
+  "quantita_scarto_pieno": 0,
+  "stato": "completata",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60acae306a9daf05ba415b2f"
+  },
+  "articolo": "flacone 60ml",
+  "codice_commessa": "20210517_LU_100",
+  "data_consegna": {
+    "$date": "2021-05-30T14:30:00Z"
+  },
+  "data_esecuzione": {
+    "$date": "2021-05-17T15:06:14Z"
+  },
+  "data_aggiornamento": {
+    "$date": "2021-05-17T15:08:02Z"
+  },
+  "quantita_prevista": 10,
+  "quantita_prodotta": 10,
+  "quantita_scarto_difettoso": 1,
+  "quantita_scarto_pieno": 0,
+  "stato": "completata",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60acaed06a9daf05ba415b30"
+  },
+  "articolo": "flaconcino 20ml",
+  "codice_commessa": "20210517_LU_102",
+  "data_consegna": {
+    "$date": "2021-05-30T14:30:00Z"
+  },
+  "data_esecuzione": {
+    "$date": "2021-05-17T15:12:20Z"
+  },
+  "data_aggiornamento": {
+    "$date": "2021-05-17T15:14:56Z"
+  },
+  "quantita_prevista": 50,
+  "quantita_prodotta": 50,
+  "quantita_scarto_difettoso": 0,
+  "quantita_scarto_pieno": 0,
+  "stato": "completata",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60acaf766a9daf05ba415b31"
+  },
+  "articolo": "flaconcino 20ml",
+  "codice_commessa": "20210518_MA_103",
+  "data_consegna": {
+    "$date": "2021-05-31T16:20:00Z"
+  },
+  "data_esecuzione": {
+    "$date": "2021-05-18T09:00:00Z"
+  },
+  "data_aggiornamento": {
+    "$date": "2021-05-18T09:01:52Z"
+  },
+  "quantita_prevista": 20,
+  "quantita_prodotta": 18,
+  "quantita_scarto_difettoso": 10,
+  "quantita_scarto_pieno": 0,
+  "stato": "fallita",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60acafd96a9daf05ba415b33"
+  },
+  "articolo": "flaconcino 20ml",
+  "codice_commessa": "20210518_MA_104",
+  "data_consegna": {
+    "$date": "2021-05-31T16:20:00Z"
+  },
+  "data_esecuzione": {
+    "$date": "2021-05-18T10:00:00Z"
+  },
+  "data_aggiornamento": {
+    "$date": "2021-05-18T10:02:27Z"
+  },
+  "quantita_prevista": 20,
+  "quantita_prodotta": 20,
+  "quantita_scarto_difettoso": 0,
+  "quantita_scarto_pieno": 0,
+  "stato": "completata",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60acb02e6a9daf05ba415b34"
+  },
+  "articolo": "flaconcino 30ml",
+  "codice_commessa": "20210518_MA_105",
+  "data_consegna": {
+    "$date": "2021-05-31T17:00:00Z"
+  },
+  "data_esecuzione": {
+    "$date": "2021-05-18T15:00:00Z"
+  },
+  "data_aggiornamento": {
+    "$date": "2021-05-18T15:04:01Z"
+  },
+  "quantita_prevista": 110,
+  "quantita_prodotta": 110,
+  "quantita_scarto_difettoso": 1,
+  "quantita_scarto_pieno": 2,
+  "stato": "completata",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60acb0806a9daf05ba415b35"
+  },
+  "articolo": "flacone 60ml",
+  "codice_commessa": "20210518_MA_106",
+  "data_consegna": {
+    "$date": "2021-05-31T17:00:00Z"
+  },
+  "data_esecuzione": {
+    "$date": "2021-05-18T15:10:00Z"
+  },
+  "data_aggiornamento": {
+    "$date": "2021-05-18T15:13:31Z"
+  },
+  "quantita_prevista": 80,
+  "quantita_prodotta": 80,
+  "quantita_scarto_difettoso": 0,
+  "quantita_scarto_pieno": 0,
+  "stato": "completata",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60acb1196a9daf05ba415b37"
+  },
+  "articolo": "flaconcino 20ml",
+  "codice_commessa": "20210519_ME_107",
+  "data_consegna": {
+    "$date": "2021-06-01T12:00:00Z"
+  },
+  "data_esecuzione": {
+    "$date": "2021-05-19T09:00:00Z"
+  },
+  "data_aggiornamento": {
+    "$date": "2021-05-19T09:06:51Z"
+  },
+  "quantita_prevista": 300,
+  "quantita_prodotta": 300,
+  "quantita_scarto_difettoso": 2,
+  "quantita_scarto_pieno": 4,
+  "stato": "completata",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60acb24a6a9daf05ba415b38"
+  },
+  "articolo": "flacone 60ml",
+  "codice_commessa": "20210520_GI_108",
+  "data_consegna": {
+    "$date": "2021-06-01T12:00:00Z"
+  },
+  "data_esecuzione": {
+    "$date": "2021-05-20T09:30:00Z"
+  },
+  "data_aggiornamento": {
+    "$date": "2021-05-20T09:33:18Z"
+  },
+  "quantita_prevista": 65,
+  "quantita_prodotta": 65,
+  "quantita_scarto_difettoso": 0,
+  "quantita_scarto_pieno": 0,
+  "stato": "completata",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60acb2906a9daf05ba415b39"
+  },
+  "articolo": "flacone 50ml",
+  "codice_commessa": "20210520_GI_109",
+  "data_consegna": {
+    "$date": "2021-06-01T12:00:00Z"
+  },
+  "data_esecuzione": {
+    "$date": "2021-05-20T10:00:00Z"
+  },
+  "data_aggiornamento": {
+    "$date": "2021-05-20T10:05:04Z"
+  },
+  "quantita_prevista": 100,
+  "quantita_prodotta": 100,
+  "quantita_scarto_difettoso": 1,
+  "quantita_scarto_pieno": 1,
+  "stato": "completata",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60acb3cc4c7ff90632278c37"
+  },
+  "articolo": "flaconcino 20ml",
+  "codice_commessa": "20210521_VE_110",
+  "data_consegna": {
+    "$date": "2021-06-03T10:00:00Z"
+  },
+  "data_esecuzione": {
+    "$date": "2021-05-21T08:45:00Z"
+  },
+  "data_aggiornamento": {
+    "$date": "2021-05-21T08:54:37Z"
+  },
+  "quantita_prevista": 75,
+  "quantita_prodotta": 14,
+  "quantita_scarto_difettoso": 23,
+  "quantita_scarto_pieno": 0,
+  "stato": "fallita",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60acb4044c7ff90632278c38"
+  },
+  "articolo": "flaconcino 20ml",
+  "codice_commessa": "20210521_VE_111",
+  "data_consegna": {
+    "$date": "2021-06-03T10:00:00Z"
+  },
+  "data_esecuzione": {
+    "$date": "2021-05-21T09:15:00Z"
+  },
+  "data_aggiornamento": {
+    "$date": "2021-05-21T09:19:20Z"
+  },
+  "quantita_prevista": 75,
+  "quantita_prodotta": 75,
+  "quantita_scarto_difettoso": 2,
+  "quantita_scarto_pieno": 0,
+  "stato": "completata",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60acb4764c7ff90632278c39"
+  },
+  "articolo": "flaconcino 30ml",
+  "codice_commessa": "20210521_VE_112",
+  "data_consegna": {
+    "$date": "2021-06-03T12:00:00Z"
+  },
+  "data_esecuzione": {
+    "$date": "2021-05-21T14:00:00Z"
+  },
+  "data_aggiornamento": {
+    "$date": "2021-05-21T14:06:11Z"
+  },
+  "quantita_prevista": 150,
+  "quantita_prodotta": 150,
+  "quantita_scarto_difettoso": 6,
+  "quantita_scarto_pieno": 3,
+  "stato": "completata",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60acb5324c7ff90632278c3a"
+  },
+  "articolo": "flacone 50ml",
+  "codice_commessa": "20210524_LU_113",
+  "data_consegna": {
+    "$date": "2021-06-06T18:00:00Z"
+  },
+  "data_esecuzione": {
+    "$date": "2021-05-24T10:00:00Z"
+  },
+  "data_aggiornamento": {
+    "$date": "2021-05-24T10:06:24Z"
+  },
+  "quantita_prevista": 230,
+  "quantita_prodotta": 230,
+  "quantita_scarto_difettoso": 6,
+  "quantita_scarto_pieno": 0,
+  "stato": "completata",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60acb5ba4c7ff90632278c3b"
+  },
+  "articolo": "flacone 60ml",
+  "codice_commessa": "20210524_LU_114",
+  "data_consegna": {
+    "$date": "2021-06-06T18:00:00Z"
+  },
+  "data_esecuzione": {
+    "$date": "2021-05-24T13:00:00Z"
+  },
+  "data_aggiornamento": {
+    "$date": "2021-05-24T13:03:47Z"
+  },
+  "quantita_prevista": 75,
+  "quantita_prodotta": 75,
+  "quantita_scarto_difettoso": 2,
+  "quantita_scarto_pieno": 2,
+  "stato": "completata",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60acb5f84c7ff90632278c3c"
+  },
+  "articolo": "flaconcino 20ml",
+  "codice_commessa": "20210524_LU_115",
+  "data_consegna": {
+    "$date": "2021-06-06T18:00:00Z"
+  },
+  "data_esecuzione": {
+    "$date": "2021-05-24T14:00:00Z"
+  },
+  "data_aggiornamento": {
+    "$date": "2021-05-24T14:05:02Z"
+  },
+  "quantita_prevista": 100,
+  "quantita_prodotta": 100,
+  "quantita_scarto_difettoso": 10,
+  "quantita_scarto_pieno": 0,
+  "stato": "completata",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60acb66c4c7ff90632278c3d"
+  },
+  "articolo": "flacone 50ml",
+  "codice_commessa": "20210524_LU_116",
+  "data_consegna": {
+    "$date": "2021-06-07T15:00:00Z"
+  },
+  "data_esecuzione": {
+    "$date": "2021-05-24T15:00:00Z"
+  },
+  "data_aggiornamento": {
+    "$date": "2021-05-24T15:02:08Z"
+  },
+  "quantita_prevista": 30,
+  "quantita_prodotta": 30,
+  "quantita_scarto_difettoso": 16,
+  "quantita_scarto_pieno": 0,
+  "stato": "fallita",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60acb6914c7ff90632278c3e"
+  },
+  "articolo": "flacone 50ml",
+  "codice_commessa": "20210524_LU_117",
+  "data_consegna": {
+    "$date": "2021-06-07T15:00:00Z"
+  },
+  "data_esecuzione": {
+    "$date": "2021-05-24T15:10:00Z"
+  },
+  "data_aggiornamento": {
+    "$date": "2021-05-24T15:11:34Z"
+  },
+  "quantita_prevista": 30,
+  "quantita_prodotta": 30,
+  "quantita_scarto_difettoso": 0,
+  "quantita_scarto_pieno": 0,
+  "stato": "completata",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60acbab587d8a8068f798ea8"
+  },
+  "articolo": "flaconcino 20ml",
+  "codice_commessa": "20210525_MA_119",
+  "quantita_prevista": 5,
+  "quantita_prodotta": 5,
+  "quantita_scarto_difettoso": 0,
+  "quantita_scarto_pieno": 0,
+  "data_consegna": {
+    "$date": "2021-06-15T09:00:05Z"
+  },
+  "data_esecuzione": {
+    "$date": "2021-05-25T10:52:03Z"
+  },
+  "data_aggiornamento": {
+    "$date": "2021-05-25T11:01:36.277Z"
+  },
+  "stato": "completata",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60acbd1287d8a8068f798ea9"
+  },
+  "articolo": "flaconcino 30ml",
+  "codice_commessa": "20210525_MA_120",
+  "quantita_prevista": 2,
+  "quantita_prodotta": 2,
+  "quantita_scarto_difettoso": 0,
+  "quantita_scarto_pieno": 0,
+  "data_consegna": {
+    "$date": "2021-05-25T11:00:32Z"
+  },
+  "data_esecuzione": {
+    "$date": "2021-05-25T11:02:09Z"
+  },
+  "data_aggiornamento": {
+    "$date": "2021-05-25T11:04:41.111Z"
+  },
+  "stato": "completata",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60acbf5487d8a8068f798eaa"
+  },
+  "articolo": "flaconcino 20ml",
+  "codice_commessa": "20210525_MA_121",
+  "quantita_prevista": 2,
+  "quantita_prodotta": 2,
+  "quantita_scarto_difettoso": 0,
+  "quantita_scarto_pieno": 0,
+  "data_consegna": {
+    "$date": "2021-05-25T11:11:25Z"
+  },
+  "data_esecuzione": {
+    "$date": "2021-05-25T11:11:47Z"
+  },
+  "data_aggiornamento": {
+    "$date": "2021-05-25T11:13:02.155Z"
+  },
+  "stato": "completata",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60ae423d6c894705ff881c21"
+  },
+  "articolo": "flacone 60ml",
+  "codice_commessa": "20210526_ME_125",
+  "quantita_prevista": 3,
+  "quantita_prodotta": 2,
+  "quantita_scarto_difettoso": 0,
+  "quantita_scarto_pieno": 1,
+  "data_consegna": {
+    "$date": "2021-05-27T13:35:18Z"
+  },
+  "data_esecuzione": {
+    "$date": "2021-05-26T14:39:23Z"
+  },
+  "data_aggiornamento": {
+    "$date": "2021-05-26T14:44:13.329Z"
+  },
+  "stato": "fallita",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60ae42cc6c894705ff881c22"
+  },
+  "articolo": "flaconcino 20ml",
+  "codice_commessa": "20210526_ME_126",
+  "quantita_prevista": 2,
+  "quantita_prodotta": 1,
+  "quantita_scarto_difettoso": 0,
+  "quantita_scarto_pieno": 0,
+  "data_consegna": {
+    "$date": "2021-05-26T13:35:18Z"
+  },
+  "data_esecuzione": {
+    "$date": "2021-05-26T14:44:59Z"
+  },
+  "data_aggiornamento": {
+    "$date": "2021-05-26T14:48:57.283Z"
+  },
+  "stato": "in esecuzione",
+  "__v": 0
+}]

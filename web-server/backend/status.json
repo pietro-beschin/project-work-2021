@@ -1,0 +1,9 @@
+[{
+  "_id": {
+    "$oid": "609b89e95cc3bd0638bb86bc"
+  },
+  "stato": "MANUALE",
+  "allarme": "NESSUN ALLARME",
+  "velocita": 149,
+  "__v": 0
+}]
